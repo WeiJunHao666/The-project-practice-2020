@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ViewServiceActivity"
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+    <!--导航栏-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <ImageView
+                    android:id="@+id/service_back"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/service_back"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/view_service_img"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="#C5C1C1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/service_back"/>
+
+                <TextView
+                    android:id="@+id/view_service_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textSize="20sp"
+                    android:layout_toRightOf="@+id/view_service_img"
+                    android:layout_marginLeft="10dp"/>
+
+                <ImageView
+                    android:id="@+id/service_more"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@mipmap/service_more"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dp"/>
+
+            </RelativeLayout>
+    <!--图片排列-->
+            <GridLayout
+                android:id="@+id/gridLayout_post"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:paddingLeft="-4.5dp"
+                android:paddingRight="-4.5dp"
+                android:columnCount="3"
+                android:layout_margin="5dp">
+
+            </GridLayout>
+    <!--动态内容-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:id="@+id/shout_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="3"
+                    android:textSize="20sp"
+                    android:ellipsize="end"
+                    android:visibility="visible"/>
+
+                <TextView
+                    android:id="@+id/content_spread"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="展开"
+                    android:textSize="20sp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/shout_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#0000FF"
+                    android:visibility="visible"/>
+
+                <TextView
+                    android:id="@+id/whole_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/content_retract"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="收起"
+                    android:textSize="20sp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/whole_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#0000FF"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+    <!--点赞浏览量-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:id="@+id/view_service_pageview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:id="@+id/view_num_thump_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_alignParentRight="true"
+                    android:paddingTop="2dp"
+                    android:layout_marginRight="15dp"
+                    android:textSize="15sp"/>
+                <ImageView
+                    android:id="@+id/view_service_thump_up"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/view_num_thump_up"
+                    android:src="@drawable/ex_thump_up"/>
+
+            </RelativeLayout>
+
+    <!--        发布评论-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <Button
+                    android:id="@+id/service_discuss_submit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="发布"
+                    android:layout_alignParentRight="true"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/rounded_corner_button"/>
+
+                <EditText
+                    android:id="@+id/service_discuss_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="说点什么吧~"
+                    android:layout_toLeftOf="@+id/service_discuss_submit"/>
+
+            </RelativeLayout>
+    <!--无评论时出现-->
+            <RelativeLayout
+                android:id="@+id/theres_no_comment"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="还没人评论，快来评论吧~"
+                    android:textSize="25sp"
+                    android:textColor="#000000"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+    <!--评论区-->
+
+    <ListView
+        android:id="@+id/service_comment_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+    </ListView>
+</LinearLayout>
