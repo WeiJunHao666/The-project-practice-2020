@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:background="@drawable/rounded_corner_service_box">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/service_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:civ_border_width="1dp"
+            app:civ_border_color="#C5C1C1"
+            android:layout_alignParentLeft="true"/>
+        <TextView
+            android:id="@+id/service_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/service_img"
+            android:layout_centerVertical="true"
+            android:textSize="15sp"
+            android:layout_marginLeft="25dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textview_border">
+        <ImageView
+            android:id="@+id/service_small_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"/>
+        <TextView
+            android:id="@+id/service_content"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:textSize="15sp"
+            android:padding="5dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/service_small_img"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/num_pageviews"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:paddingTop="2dp"
+            android:textSize="15sp"/>
+        <ImageView
+            android:id="@+id/service_pageviews"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_toLeftOf="@+id/num_pageviews"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/pageviews"/>
+
+        <ImageView
+            android:id="@+id/service_discuss"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:layout_toLeftOf="@+id/service_pageviews"
+            android:src="@drawable/discuss"/>
+
+        <TextView
+        android:id="@+id/num_thump_up"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_toLeftOf="@+id/service_discuss"
+        android:paddingTop="2dp"
+        android:textSize="15sp"/>
+        <ImageView
+            android:id="@+id/service_thump_up"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_toLeftOf="@+id/num_thump_up"
+            android:src="@drawable/ex_thump_up"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

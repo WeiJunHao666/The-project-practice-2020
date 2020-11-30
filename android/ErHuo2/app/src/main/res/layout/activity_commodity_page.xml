@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <ImageView
+        android:id = "@+id/back1"
+        android:layout_width = "40dp"
+        android:layout_height = "40dp"
+        android:paddingLeft = "14dp"
+        android:paddingRight = "14dp"
+        android:src = "@drawable/back" />
+    <EditText
+        android:id = "@+id/search_keyword"
+        android:layout_width = "280dp"
+        android:layout_height = "40dp"
+        android:layout_toRightOf="@+id/back1"
+        android:layout_centerVertical = "true"
+        android:layout_marginLeft = "10dp"
+        android:hint = "输入商品名或者店铺名称"
+        android:imeOptions = "actionSearch"
+        android:singleLine = "true"
+        android:textSize = "14sp" />
+    <Button
+        android:id="@+id/search_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="搜索"
+        android:layout_toRightOf="@id/search_keyword"
+        android:textSize="20sp"
+        android:background="@null"/>
+    </RelativeLayout>
+    <com.example.erhuo2.view.RefreshableView1
+        android:id="@+id/refreshable_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="45dp">
+        <ListView
+            android:id="@+id/list_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"/>
+
+    </com.example.erhuo2.view.RefreshableView1>
+</RelativeLayout>

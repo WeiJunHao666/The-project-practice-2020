@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="6dp"
+    android:paddingTop="6dp">
+
+    <ImageView
+        android:id = "@+id/iv_back"
+        android:layout_width = "40dp"
+        android:layout_height = "wrap_content"
+        android:paddingLeft = "14dp"
+        android:paddingRight = "14dp"
+        android:src = "@drawable/back" />
+
+    <RelativeLayout
+        android:id = "@+id/rl_search_layout"
+        android:layout_width = "0dp"
+        android:layout_weight = "1"
+        android:layout_height = "wrap_content"
+        android:gravity = "center"
+        android:orientation = "horizontal" >
+
+        <!--      <ImageView
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/icon_black_search" />-->
+
+        <EditText
+            android:id = "@+id/et_search"
+            android:layout_width = "match_parent"
+            android:layout_height = "30dp"
+            android:layout_centerVertical = "true"
+            android:layout_marginLeft = "10dp"
+            android:background = "@null"
+            android:hint = "输入商品名或者店铺名称"
+            android:imeOptions = "actionSearch"
+            android:singleLine = "true"
+            android:textSize = "14sp" />
+
+
+        <!--      <ImageView
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:id="@+id/clear_search"
+                android:background="@drawable/icon_dialog_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="18sp" />-->
+
+    </RelativeLayout >
+
+    <TextView
+        android:id = "@+id/tv_cancel"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:layout_marginLeft = "14dp"
+        android:layout_marginRight = "14dp"
+        android:gravity = "center_vertical"
+        android:text = "取消"
+        android:textSize = "18sp" />
+
+</LinearLayout>

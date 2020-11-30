@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="20dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <ImageView
+        android:id="@+id/search_img"
+        android:layout_width="150dp"
+        android:layout_height="150dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!--
+        <TextView
+            android:id="@+id/search_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="名字"
+            android:textSize="30sp"/>
+            -->
+        <TextView
+            android:id="@+id/search_describe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="描述"
+            android:textSize="25sp"/>
+        <TextView
+            android:layout_marginTop="20dp"
+            android:id="@+id/search_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="价格"
+            android:textSize="25sp"
+            android:textColor="@color/tomato"/>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/search_seller"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="商家"
+                android:textColor="@color/gainsboro"
+                android:textSize="15sp"/>
+            <TextView
+                android:id="@+id/search_position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="地点"
+                android:textSize="15sp" />
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
