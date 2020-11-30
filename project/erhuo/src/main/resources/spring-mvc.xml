@@ -18,4 +18,6 @@
         <property name="suffix" value=".jsp"/>
         <property name="prefix" value="/jsp/"/>
     </bean>
+
+    <mvc:default-servlet-handler/>
 </beans>
