@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -16,6 +17,7 @@ public class Comment {
     private int postId;
     private int lastId;
     private String message;
-
-    private List<Comment> nextComments;
+    private String lastUser;
+    private String comUser;
+    private List<Comment> nextComments = new ArrayList<Comment>();
 }

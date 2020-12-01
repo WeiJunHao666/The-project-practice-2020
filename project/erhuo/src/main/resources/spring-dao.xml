@@ -21,6 +21,8 @@
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
     </bean>
 
-
+    <bean id="commentDao" class="com.erhuo.dao.CommentMapperImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
 
 </beans>

@@ -3,5 +3,17 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
+    
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    
+    <typeAliases>
+        <package name="com.erhuo.pojo"/>
+    </typeAliases>
+    
+    <mappers>
+        <mapper class="com.erhuo.dao.CommentMapper"/>
+        <mapper class="com.erhuo.dao.UserMapper"/>
+    </mappers>
 </configuration>

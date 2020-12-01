@@ -20,6 +20,10 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <bean id="commentService" class="com.erhuo.service.CommentService">
+
+    </bean>
+
     <tx:advice id="txadvice" transaction-manager="transactionManager">
         <tx:attributes>
             <tx:method name="*" propagation="REQUIRED"/>
@@ -29,7 +33,5 @@
     <aop:config>
         <aop:advisor advice-ref="txadvice" pointcut="execution(* com.erhuo.dao.*.*(..)))"/>
     </aop:config>
-
-
 
 </beans>
