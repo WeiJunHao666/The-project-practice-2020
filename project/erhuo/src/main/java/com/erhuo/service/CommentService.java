@@ -29,4 +29,19 @@ public class CommentService {
 
         return comList;
     }
+
+    public List<Integer> getLikeList(int userId){
+        List<Integer> likeList = commentMapper.queryLikeCom(userId);
+        return likeList;
+    }
+
+    public void like(int userId,int comId){
+        commentMapper.addLike(comId);
+        commentMapper.addUserLike(userId, comId);
+    }
+
+    public void unLike(int userId,int comId){
+        commentMapper.delLike(comId);
+        commentMapper.delUserLike(userId,comId);
+    }
 }

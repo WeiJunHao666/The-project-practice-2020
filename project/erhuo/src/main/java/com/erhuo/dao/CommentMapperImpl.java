@@ -19,4 +19,34 @@ public class CommentMapperImpl extends SqlSessionDaoSupport implements CommentMa
         List<Comment> commentList = commentMapper.queryLastIdNull(postId);
         return commentList;
     }
+
+    public List<Integer> queryLikeCom(int userId) {
+        CommentMapper commentMapper = getSqlSession().getMapper(CommentMapper.class);
+        List<Integer> likeList = commentMapper.queryLikeCom(userId);
+        return likeList;
+    }
+
+    public int addLike(int comId) {
+        CommentMapper commentMapper = getSqlSession().getMapper(CommentMapper.class);
+        int result = commentMapper.addLike(comId);
+        return result;
+    }
+
+    public int addUserLike(int userId, int comId) {
+        CommentMapper commentMapper = getSqlSession().getMapper(CommentMapper.class);
+        int result = commentMapper.addUserLike(userId,comId);
+        return result;
+    }
+
+    public int delLike(int comId) {
+        CommentMapper commentMapper = getSqlSession().getMapper(CommentMapper.class);
+        int result = commentMapper.delLike(comId);
+        return result;
+    }
+
+    public int delUserLike(int userId, int comId) {
+        CommentMapper commentMapper = getSqlSession().getMapper(CommentMapper.class);
+        int result = commentMapper.delUserLike(userId,comId);
+        return result;
+    }
 }
