@@ -19,13 +19,13 @@ public class CommodityDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_commodity_details);
         Banner banner = (Banner) findViewById(R.id.banner1);
         List images = new ArrayList();
-        images.add(R.drawable.a);
-        images.add(R.drawable.b);
-        images.add(R.drawable.c);
-        images.add(R.drawable.d);
-        images.add(R.drawable.e);
-        images.add(R.drawable.f);
-        images.add(R.drawable.g);
+        images.add(R.drawable.aa);
+        images.add(R.drawable.bb);
+        images.add(R.drawable.cc);
+        images.add(R.drawable.dd);
+        images.add(R.drawable.ee);
+        images.add(R.drawable.ff);
+        images.add(R.drawable.gg);
         //设置图片加载器
         banner.setImageLoader(new GlideImageLoader());
         //设置图片集合

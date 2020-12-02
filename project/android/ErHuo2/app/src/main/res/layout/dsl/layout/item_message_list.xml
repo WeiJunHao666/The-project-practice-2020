@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:gravity="center_vertical"
+    android:background="@drawable/message_item"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:padding="5dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_message_head"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/d" />
+        <LinearLayout
+            android:id="@+id/box"
+            android:layout_toRightOf="@id/iv_message_head"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/message_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="张树林"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="3dp"/>
+            <TextView
+                android:id="@+id/message_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="你好"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/message_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="刚刚"
+            android:layout_below="@id/box"
+            android:layout_toRightOf="@id/iv_message_head"
+            android:layout_marginLeft="10dp"
+            android:textSize="12sp"/>
+        <ImageView
+            android:id="@+id/message_commodity"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/a"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -127,7 +127,7 @@
                         android:id="@+id/img_image1"
                         android:layout_width="180dp"
                         android:layout_height="150dp"
-                        android:src="@drawable/f" />
+                        android:src="@drawable/ff" />
                     <TextView
                         android:id="@+id/txt_describe1"
                         android:layout_width="wrap_content"
@@ -154,7 +154,7 @@
                         android:id="@+id/img_image2"
                         android:layout_width="180dp"
                         android:layout_height="150dp"
-                        android:src="@drawable/f" />
+                        android:src="@drawable/ff" />
                     <TextView
                         android:id="@+id/txt_describe2"
                         android:layout_width="wrap_content"
@@ -183,7 +183,7 @@
                         android:id="@+id/img_image3"
                         android:layout_width="180dp"
                         android:layout_height="150dp"
-                        android:src="@drawable/f" />
+                        android:src="@drawable/ff" />
                     <TextView
                         android:id="@+id/txt_describe3"
                         android:layout_width="wrap_content"
@@ -207,7 +207,7 @@
                         android:id="@+id/img_image4"
                         android:layout_width="180dp"
                         android:layout_height="150dp"
-                        android:src="@drawable/f" />
+                        android:src="@drawable/ff" />
                     <TextView
                         android:id="@+id/txt_describe4"
                         android:layout_width="wrap_content"
@@ -236,7 +236,7 @@
                         android:id="@+id/img_image5"
                         android:layout_width="180dp"
                         android:layout_height="150dp"
-                        android:src="@drawable/f" />
+                        android:src="@drawable/ff" />
                     <TextView
                         android:id="@+id/txt_describe5"
                         android:layout_width="wrap_content"
@@ -260,7 +260,7 @@
                         android:id="@+id/img_image6"
                         android:layout_width="180dp"
                         android:layout_height="150dp"
-                        android:src="@drawable/f" />
+                        android:src="@drawable/ff" />
                     <TextView
                         android:id="@+id/txt_describe6"
                         android:layout_width="wrap_content"
@@ -289,7 +289,7 @@
                         android:id="@+id/img_image7"
                         android:layout_width="180dp"
                         android:layout_height="150dp"
-                        android:src="@drawable/f" />
+                        android:src="@drawable/ff" />
                     <TextView
                         android:id="@+id/txt_describe7"
                         android:layout_width="wrap_content"
@@ -313,7 +313,7 @@
                         android:id="@+id/img_image8"
                         android:layout_width="180dp"
                         android:layout_height="150dp"
-                        android:src="@drawable/f" />
+                        android:src="@drawable/ff" />
                     <TextView
                         android:id="@+id/txt_describe8"
                         android:layout_width="wrap_content"
@@ -342,7 +342,7 @@
                         android:id="@+id/img_image9"
                         android:layout_width="180dp"
                         android:layout_height="150dp"
-                        android:src="@drawable/f" />
+                        android:src="@drawable/ff" />
                     <TextView
                         android:id="@+id/txt_describe9"
                         android:layout_width="wrap_content"
@@ -366,7 +366,7 @@
                         android:id="@+id/img_image10"
                         android:layout_width="180dp"
                         android:layout_height="150dp"
-                        android:src="@drawable/f" />
+                        android:src="@drawable/ff" />
                     <TextView
                         android:id="@+id/txt_describe10"
                         android:layout_width="wrap_content"

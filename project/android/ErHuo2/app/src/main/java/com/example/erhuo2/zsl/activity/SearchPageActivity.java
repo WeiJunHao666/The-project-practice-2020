@@ -58,8 +58,8 @@ public class SearchPageActivity extends AppCompatActivity {
 //            public void onRefresh() {
 //                try {
 //                    Thread.sleep(3000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
+//                } catch (InterruptedException ee) {
+//                    ee.printStackTrace();
 //                }
 //                refreshableView1.finishRefreshing();
 //            }

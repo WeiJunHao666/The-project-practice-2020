@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.erhuo2.wjh.SrcScrollFrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:scrollOrientation="vertical"
+    android:foregroundGravity="center"
+    app:src="@drawable/kk"
+    app:isScroll="true"
+    app:maskLayerColor="#80000000"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:background="@drawable/circular">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_login_head_img"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/c"/>
+
+            <EditText
+                android:id="@+id/et_login_user"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:hint="手机号/邮箱"
+                android:layout_marginLeft="10dp"
+                android:background="@null"/>
+
+            <ImageView
+                android:id="@+id/iv_login_user_cancle"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/circular"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:layout_marginLeft="20dp">
+
+                <ImageView
+                    android:id="@+id/hide_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/et_login_password"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:inputType="textPassword"
+                android:layout_marginLeft="10dp"
+                android:background="@null"
+                android:hint="请输入密码" />
+
+
+            <ImageView
+                android:id="@+id/iv_login_password_cancle"
+                android:layout_width="20dp"
+                android:layout_marginRight="30dp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_login_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="注册"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="270dp"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="登录"
+            android:textColor="#ffffff"
+            android:background="@drawable/btn"/>
+
+    </LinearLayout>
+
+</com.example.erhuo2.wjh.SrcScrollFrameLayout>

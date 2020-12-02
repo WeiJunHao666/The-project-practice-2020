@@ -19,7 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.erhuo2.R;
-import com.example.erhuo2.zsl.activity.AllKindActivity;
+import com.example.erhuo2.wjh.allKind.AllKindActivity;
 import com.example.erhuo2.zsl.activity.SearchPageActivity;
 import com.example.erhuo2.zsl.adapter.ProductAdapter;
 import com.example.erhuo2.zsl.loder.GlideImageLoader;
@@ -69,13 +69,13 @@ public class HomePageFragment extends Fragment {
         root = inflater.inflate(R.layout.home_page_fragment, container, false);
 
         List images = new ArrayList();
-        images.add(R.drawable.a);
-        images.add(R.drawable.b);
-        images.add(R.drawable.c);
-        images.add(R.drawable.d);
-        images.add(R.drawable.e);
-        images.add(R.drawable.f);
-        images.add(R.drawable.g);
+        images.add(R.drawable.aa);
+        images.add(R.drawable.bb);
+        images.add(R.drawable.cc);
+        images.add(R.drawable.dd);
+        images.add(R.drawable.ee);
+        images.add(R.drawable.ff);
+        images.add(R.drawable.gg);
         getViews();
         setOnClickListener();
         downloadStr(Util.SERVER_ADDR+"HomeFragmentServlet");

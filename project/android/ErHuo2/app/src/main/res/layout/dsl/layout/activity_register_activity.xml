@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:mipmap/sym_def_app_icon" />
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:background="@drawable/circular">
+
+        <EditText
+            android:id="@+id/et_register_user"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:hint="手机号/邮箱"
+            android:layout_marginLeft="10dp"
+            android:background="@null"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/circular"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/et_register_password"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:inputType="textPassword"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:hint="请输入密码" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="注册"/>
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp">
+
+            <CheckBox
+                android:id="@+id/cb_register_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tv_protocol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已阅读并同意以下协议：二货平台服务协议、隐私权政策"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
