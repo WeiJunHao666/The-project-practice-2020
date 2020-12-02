@@ -3,6 +3,9 @@ package com.example.erhuo2.dsl.services;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -21,11 +24,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.erhuo2.R;
 import com.example.erhuo2.dsl.services.adapter.CommentAdapter;
+import com.example.erhuo2.dsl.services.entities.ComInfoEntity;
 import com.example.erhuo2.dsl.services.entities.CommentEntity;
 import com.example.erhuo2.dsl.services.entities.ReplyEntity;
 import com.example.erhuo2.dsl.services.view.SquareImageView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.jaren.lib.view.LikeView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +70,23 @@ public class ViewServiceActivity extends AppCompatActivity {
     private RelativeLayout theres_no_comment;
     private ListView service_comment_list;
     private List<CommentEntity> commentList = new ArrayList<>();
+    private List<ComInfoEntity> comInfos = new ArrayList<>();
+
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case 1:
+                    if(commentList.size() > 0){
+                        theres_no_comment.setVisibility(View.GONE);
+                        CommentAdapter ca = new CommentAdapter(getApplicationContext(),commentList, R.layout.comment_list);
+                        service_comment_list.setAdapter(ca);
+                    }
+            }
+        }
+    };
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -97,26 +128,7 @@ public class ViewServiceActivity extends AppCompatActivity {
     private void addComment() {
 
         //请求评论数据
-
-        //请求回复数据
-
-        //判断
-        theres_no_comment.setVisibility(View.GONE);
-
-        //绑定Adapter
-        ReplyEntity r1 = new ReplyEntity("张树林","12","我是张树林");
-        ReplyEntity r2 = new ReplyEntity("树林张","21","我是树林张");
-        List<ReplyEntity> rl = new ArrayList<>();
-        List<ReplyEntity> rl2 = new ArrayList<>();
-        rl.add(r1);
-        rl.add(r2);
-        CommentEntity comment = new CommentEntity("树林张", R.drawable.first,"123","内容",rl);
-        CommentEntity comment2 = new CommentEntity("张shulin", R.drawable.second,"321","内容",rl2);
-        commentList.add(comment);
-        commentList.add(comment2);
-
-        CommentAdapter ca = new CommentAdapter(this,commentList, R.layout.comment_list);
-        service_comment_list.setAdapter(ca);
+        getCommentData();
 
         //回复
         service_comment_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -125,6 +137,63 @@ public class ViewServiceActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    //获取评论信息
+    private void getCommentData() {
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    String s = "http://10.7.89.229:8080/erhuo/comment/getCom?postId=1";
+                    URL url = new URL(s);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                    InputStream in = conn.getInputStream();
+                    //使用字符流读取
+                    BufferedReader reader = new BufferedReader(
+                            new InputStreamReader(in, "utf-8"));
+                    //读取字符信息
+                    String str = reader.readLine();
+                    //关闭流
+                    reader.close();
+                    in.close();
+
+                    Gson gson = new Gson();
+                    comInfos = gson.fromJson(str,new TypeToken<List<List<ComInfoEntity>>>(){}.getType());
+
+                    //回复列表
+                    List<ReplyEntity> rl = new ArrayList<>();
+                    for(int i = 1; i < comInfos.size(); i++){
+                        ReplyEntity re = new ReplyEntity(comInfos.get(i).getComId(),
+                                comInfos.get(i).getUserId(),
+                                comInfos.get(i).getComUser()+" 回复 "+comInfos.get(i).getLastUser(),
+                                comInfos.get(i).getLikeNum()+"",
+                                comInfos.get(i).getMessage());
+                        rl.add(re);
+                    }
+
+                    CommentEntity com = new CommentEntity(comInfos.get(0).getComId(),
+                            comInfos.get(0).getUserId(),
+                            comInfos.get(0).getComUser(),
+                            R.drawable.back,
+                            comInfos.get(0).getLikeNum()+"",
+                            comInfos.get(0).getMessage(),
+                            rl);
+                    //评论列表
+                    commentList.add(com);
+
+                    Message msg = new Message();
+                    msg.what = 1;
+                    handler.sendMessage(msg);
+
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
     private void toMore() {

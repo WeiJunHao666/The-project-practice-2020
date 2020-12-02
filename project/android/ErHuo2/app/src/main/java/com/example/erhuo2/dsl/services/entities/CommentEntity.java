@@ -4,23 +4,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommentEntity {
+    private int comId;
+    private int userId;
     private String name;
     private int img;
     private String prizes;
     private String content;
     private List<ReplyEntity> list = new ArrayList<>();
 
-
-    public String getContent() {
-        return content;
-    }
-
-    public CommentEntity(String name, int img, String prizes, String content, List<ReplyEntity> list) {
+    public CommentEntity(int comId, int userId, String name, int img, String prizes, String content, List<ReplyEntity> list) {
+        this.comId = comId;
+        this.userId = userId;
         this.name = name;
         this.img = img;
         this.prizes = prizes;
         this.content = content;
         this.list = list;
+    }
+
+    public int getComId() {
+        return comId;
+    }
+
+    public void setComId(int comId) {
+        this.comId = comId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getContent() {
+        return content;
     }
 
     public void setContent(String content) {
