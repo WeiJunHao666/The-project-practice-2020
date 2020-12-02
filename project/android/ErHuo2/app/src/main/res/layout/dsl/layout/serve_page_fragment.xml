@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
     android:orientation="vertical"
     android:background="#F1F0F0">
 
@@ -56,7 +54,7 @@
         </LinearLayout>
     !-->
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/srl"
+        android:id="@+id/service_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <com.scwang.smartrefresh.layout.header.ClassicsHeader
@@ -77,7 +75,7 @@
             android:dividerHeight="8dp">
 
         </ListView>
-        <com.scwang.smartrefresh.layout.footer.BallPulseFooter
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

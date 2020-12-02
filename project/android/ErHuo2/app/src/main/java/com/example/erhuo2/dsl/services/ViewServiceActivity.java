@@ -3,9 +3,9 @@ package com.example.erhuo2.dsl.services;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
@@ -24,6 +24,7 @@ import com.example.erhuo2.dsl.services.adapter.CommentAdapter;
 import com.example.erhuo2.dsl.services.entities.CommentEntity;
 import com.example.erhuo2.dsl.services.entities.ReplyEntity;
 import com.example.erhuo2.dsl.services.view.SquareImageView;
+import com.jaren.lib.view.LikeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,7 @@ public class ViewServiceActivity extends AppCompatActivity {
     private TextView content_spread;
     private TextView content_retract;
     private TextView view_service_pageview;
-    private ImageView view_service_thump;
+    private LikeView view_service_thump;
     private TextView view_num_thump;
 
     private boolean status = false;
@@ -109,13 +110,20 @@ public class ViewServiceActivity extends AppCompatActivity {
         List<ReplyEntity> rl2 = new ArrayList<>();
         rl.add(r1);
         rl.add(r2);
-        CommentEntity comment = new CommentEntity("树林张",R.drawable.first,"123","内容",rl);
-        CommentEntity comment2 = new CommentEntity("张shulin",R.drawable.second,"321","内容",rl2);
+        CommentEntity comment = new CommentEntity("树林张", R.drawable.first,"123","内容",rl);
+        CommentEntity comment2 = new CommentEntity("张shulin", R.drawable.second,"321","内容",rl2);
         commentList.add(comment);
         commentList.add(comment2);
 
-        CommentAdapter ca = new CommentAdapter(this,commentList,R.layout.comment_list);
+        CommentAdapter ca = new CommentAdapter(this,commentList, R.layout.comment_list);
         service_comment_list.setAdapter(ca);
+
+        //回复
+        service_comment_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            }
+        });
 
     }
 
@@ -142,6 +150,13 @@ public class ViewServiceActivity extends AppCompatActivity {
 
     private void viewPages() {
         view_service_pageview.setText("123456 次浏览");
+        view_num_thump.setText("123");
+        if(status){
+            view_service_thump.setCheckedWithoutAnimator(true);
+        }else{
+            view_service_thump.setCheckedWithoutAnimator(false);
+        }
+
     }
 
     private void getimgs() {
@@ -186,6 +201,7 @@ public class ViewServiceActivity extends AppCompatActivity {
         content_spread.setOnClickListener(listener);
         content_retract.setOnClickListener(listener);
         view_service_thump.setOnClickListener(listener);
+        service_discuss_submit.setOnClickListener(listener);
     }
 
     private void findView() {
@@ -239,15 +255,13 @@ public class ViewServiceActivity extends AppCompatActivity {
                 //点赞
                 case R.id.view_service_thump_up:
                     if(!status){
-                        view_service_thump.setImageResource(R.drawable.ed_thump_up);
-                        view_num_thump.setText("123");
+                        view_service_thump.toggle();
+                        view_num_thump.setText(Integer.parseInt(view_num_thump.getText().toString())+1+"");
                         status = true;
-                        Log.e("dsl","thump up !!!");
                     }else{
-                        view_service_thump.setImageResource(R.drawable.ex_thump_up);
-                        view_num_thump.setText("122");
+                        view_service_thump.toggle();
+                        view_num_thump.setText(Integer.parseInt(view_num_thump.getText().toString())-1+"");
                         status = false;
-                        Log.e("dsl","thump down !!!");
                     }
                     break;
                 //提交评论

@@ -66,7 +66,7 @@ public class CommentAdapter extends BaseAdapter {
         prizes.setText(listComment.get(position).getPrizes());
         data.setText(listComment.get(position).getContent());
 
-        ReplyAdapter ra = new ReplyAdapter(context,listComment.get(position).getList(),R.layout.reply_list);
+        ReplyAdapter ra = new ReplyAdapter(context,listComment.get(position).getList(), R.layout.reply_list);
         service_reply_list.setAdapter(ra);
 
         final boolean[] status = {false};
