@@ -11,4 +11,5 @@ public class CommentLite {
     private String message;
     private String lastUser;
     private String comUser;
+    private int LikeNum;
 }
