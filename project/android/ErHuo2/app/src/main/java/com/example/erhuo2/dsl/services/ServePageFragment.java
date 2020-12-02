@@ -54,6 +54,7 @@ public class ServePageFragment extends Fragment {
                 startActivity(i);
             }
         });
+
         return root;
     }
 
@@ -65,6 +66,7 @@ public class ServePageFragment extends Fragment {
         list.add(s1);
         list.add(s2);
         list.add(s1);
+        list.add(s2);
     }
 
     private void findView() {

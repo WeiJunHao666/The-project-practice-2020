@@ -102,6 +102,7 @@ public class ServicesAdapter extends BaseAdapter {
                         i.putExtra("name",name);
                         i.putExtra("img",""+img);
                         i.setClass(context, ViewServiceActivity.class);
+                        i.setFlags(i.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(i);
                         break;
                 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ViewServiceActivity"
+    tools:context=".dsl.services.ViewServiceActivity"
     android:orientation="vertical">
     <ScrollView
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-    <!--导航栏-->
+            <!--导航栏-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
@@ -55,7 +55,7 @@
                     android:layout_marginRight="5dp"/>
 
             </RelativeLayout>
-    <!--图片排列-->
+            <!--图片排列-->
             <GridLayout
                 android:id="@+id/gridLayout_post"
                 android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                 android:layout_margin="5dp">
 
             </GridLayout>
-    <!--动态内容-->
+            <!--动态内容-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
                     android:visibility="gone"/>
 
             </RelativeLayout>
-    <!--点赞浏览量-->
+            <!--点赞浏览量-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -146,7 +146,7 @@
 
             </RelativeLayout>
 
-    <!--        发布评论-->
+            <!--        发布评论-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -169,7 +169,7 @@
                     android:layout_toLeftOf="@+id/service_discuss_submit"/>
 
             </RelativeLayout>
-    <!--无评论时出现-->
+            <!--无评论时出现-->
             <RelativeLayout
                 android:id="@+id/theres_no_comment"
                 android:layout_width="match_parent"
@@ -185,16 +185,17 @@
                     android:textColor="#000000"/>
 
             </RelativeLayout>
+            <!--评论区-->
+
+            <com.example.erhuo2.dsl.services.view.UnScrollListView
+                android:id="@+id/service_comment_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp">
+
+            </com.example.erhuo2.dsl.services.view.UnScrollListView>
 
         </LinearLayout>
+
     </ScrollView>
-    <!--评论区-->
-
-    <ListView
-        android:id="@+id/service_comment_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp">
-
-    </ListView>
 </LinearLayout>

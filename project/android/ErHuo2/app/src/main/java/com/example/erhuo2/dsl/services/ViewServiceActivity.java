@@ -23,6 +23,7 @@ import com.example.erhuo2.R;
 import com.example.erhuo2.dsl.services.adapter.CommentAdapter;
 import com.example.erhuo2.dsl.services.entities.CommentEntity;
 import com.example.erhuo2.dsl.services.entities.ReplyEntity;
+import com.example.erhuo2.dsl.services.view.SquareImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -215,9 +216,11 @@ public class ViewServiceActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
+                //返回
                 case R.id.service_back:
                     onBackPressed();
                     break;
+                //展开
                 case R.id.content_spread:
                     content_spread.setVisibility(View.GONE);
                     shout_content.setVisibility(View.GONE);
@@ -225,6 +228,7 @@ public class ViewServiceActivity extends AppCompatActivity {
                     content_retract.setVisibility(View.VISIBLE);
                     whole_content.setVisibility(View.VISIBLE);
                     break;
+                //收起
                 case R.id.content_retract:
                     content_spread.setVisibility(View.VISIBLE);
                     shout_content.setVisibility(View.VISIBLE);
@@ -232,6 +236,7 @@ public class ViewServiceActivity extends AppCompatActivity {
                     content_retract.setVisibility(View.GONE);
                     whole_content.setVisibility(View.GONE);
                     break;
+                //点赞
                 case R.id.view_service_thump_up:
                     if(!status){
                         view_service_thump.setImageResource(R.drawable.ed_thump_up);
@@ -245,6 +250,7 @@ public class ViewServiceActivity extends AppCompatActivity {
                         Log.e("dsl","thump down !!!");
                     }
                     break;
+                //提交评论
                 case R.id.service_discuss_submit:
 
                     break;
