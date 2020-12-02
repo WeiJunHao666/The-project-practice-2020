@@ -1,0 +1,57 @@
+package com.erhuo.service;
+
+import com.erhuo.dao.CommentMapper;
+import com.erhuo.pojo.Comment;
+import com.erhuo.pojo.CommentLite;
+import com.erhuo.util.CommentUtil;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class CommentService {
+
+    private CommentMapper commentMapper;
+
+    public void setCommentMapper(CommentMapper commentMapper) {
+        this.commentMapper = commentMapper;
+    }
+
+    public List<List<CommentLite>>  getComment(int postId) {
+        List<Comment> firstComment = commentMapper.queryLastIdNull(postId);
+        List<Comment> thencomment = commentMapper.queryLastIdNotNull(postId);
+
+        List<Comment> comments = CommentUtil.addAllNode(firstComment, thencomment);
+        List<CommentLite> comList = new ArrayList<CommentLite>();
+        CommentUtil.getLite(comments,comList);
+        List<List<CommentLite>> comLiteList = new ArrayList<List<CommentLite>>();
+        int i = 0,len = comList.size();
+        while(i < len){
+            List<CommentLite> lites = new ArrayList<CommentLite>();
+            lites.add(comList.get(i));
+            i++;
+            while(i < len && comList.get(i).getLastUser() != null){
+                lites.add(comList.get(i));
+                i++;
+            }
+            comLiteList.add(lites);
+        }
+        return comLiteList;
+    }
+
+    public List<Integer> getLikeList(int userId){
+        List<Integer> likeList = commentMapper.queryLikeCom(userId);
+        return likeList;
+    }
+
+    public void like(int userId,int comId){
+        commentMapper.addLike(comId);
+        commentMapper.addUserLike(userId, comId);
+    }
+
+    public void unLike(int userId,int comId){
+        commentMapper.delLike(comId);
+        commentMapper.delUserLike(userId,comId);
+    }
+}

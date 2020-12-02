@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    
+    <typeAliases>
+        <package name="com.erhuo.pojo"/>
+    </typeAliases>
+
+    <typeHandlers>
+        <typeHandler handler="com.erhuo.handler.DateTypeHandler"/>
+    </typeHandlers>
+    <mappers>
+        <mapper class="com.erhuo.dao.UserMapper"/>
+        <mapper class="com.erhuo.dao.AdvertisementMapper"/>
+    </mappers>
+</configuration>
