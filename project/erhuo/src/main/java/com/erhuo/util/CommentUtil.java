@@ -1,6 +1,7 @@
 package com.erhuo.util;
 
 import com.erhuo.pojo.Comment;
+import com.erhuo.pojo.CommentLite;
 
 import java.util.List;
 
@@ -41,11 +42,17 @@ public class CommentUtil {
         return firstList;
     }
 
-    public static void show(List<Comment> list){
+    public static void getLite(List<Comment> list, List<CommentLite> comList){
         for (Comment node : list) {
-            System.out.println(node.getUserId()+" 用户回复了你："+node.getMessage());
+            CommentLite commentLite = new CommentLite();
+            commentLite.setComId(node.getComId());
+            commentLite.setComUser(node.getComUser());
+            commentLite.setLastUser(node.getLastUser());
+            commentLite.setMessage(node.getMessage());
+            commentLite.setUserId(node.getUserId());
+            comList.add(commentLite);
             if (node.getNextComments().size()!=0){
-                show(node.getNextComments());
+                getLite(node.getNextComments(),comList);
             }
         }
     }

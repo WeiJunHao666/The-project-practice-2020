@@ -3,13 +3,23 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.erhuo.dao.CommentMapper">
-    
+
     <select id="queryLastIdNotNull" parameterType="Integer" resultMap="comment">
-        select * from comment where post_id = #{postId} and last_id is not null
+        SELECT comment.*,user.username comuser,u.username lastuser
+        FROM comment LEFT JOIN user
+        ON comment.`user_id` = user.`user_id`
+        LEFT JOIN user u
+        ON comment.`last_user_id` = u.`user_id`
+        WHERE last_id IS NOT NULL
     </select>
 
     <select id="queryLastIdNull" parameterType="Integer" resultMap="comment">
-        select * from comment where post_id = #{postId} and last_id is null
+        SELECT comment.*,user.username comuser,u.username lastuser
+        FROM comment LEFT JOIN user
+        ON comment.`user_id` = user.`user_id`
+        LEFT JOIN user u
+        ON comment.`last_user_id` = u.`user_id`
+        WHERE last_id IS NULL
     </select>
 
     <resultMap id="comment" type="comment">
@@ -17,6 +27,7 @@
         <result property="userId" column="user_id"/>
         <result property="postId" column="post_id"/>
         <result property="lastId" column="last_id"/>
+        <result property="lastUserId" column="last_user_id"/>
     </resultMap>
 
 

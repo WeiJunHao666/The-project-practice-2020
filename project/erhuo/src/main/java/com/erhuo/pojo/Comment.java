@@ -19,5 +19,6 @@ public class Comment {
     private String message;
     private String lastUser;
     private String comUser;
+    private String lastUserId;
     private List<Comment> nextComments = new ArrayList<Comment>();
 }

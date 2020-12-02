@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -15,23 +15,24 @@
 
     <context:component-scan base-package="com.erhuo.service"/>
 
+    <bean id="commentService" class="com.erhuo.service.CommentService">
+        <property name="commentMapper" ref="commentDao"/>
+    </bean>
+    <!--    事务配置-->
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="commentService" class="com.erhuo.service.CommentService">
-
-    </bean>
-
-    <tx:advice id="txadvice" transaction-manager="transactionManager">
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <tx:method name="*" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
 
     <aop:config>
-        <aop:advisor advice-ref="txadvice" pointcut="execution(* com.erhuo.dao.*.*(..)))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.erhuo.dao.*.*(..))"/>
     </aop:config>
+
 
 </beans>
