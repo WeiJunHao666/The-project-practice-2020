@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.erhuo.dao.AdviertisementMapper">
+
+    <select id="queryAdviertisementAll" resultMap="adviertisement">
+        select * from adviertisement
+    </select>
+
+    <insert id="addAdviertisement" parameterType="adviertisement">
+        insert into adviertisement values (#{id},#{img})
+    </insert>
+
+
+    <resultMap id="adviertisement" type="adviertisement">
+        <result property="id" column="id"/>
+        <result property="img" column="img"/>
+    </resultMap>
+
+
+</mapper>
+
