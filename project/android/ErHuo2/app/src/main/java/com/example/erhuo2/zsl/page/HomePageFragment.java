@@ -19,8 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.erhuo2.R;
+import com.example.erhuo2.SearchPageActivity;
 import com.example.erhuo2.wjh.allKind.AllKindActivity;
-import com.example.erhuo2.zsl.activity.SearchPageActivity;
 import com.example.erhuo2.zsl.adapter.ProductAdapter;
 import com.example.erhuo2.zsl.loder.GlideImageLoader;
 import com.example.erhuo2.zsl.util.Util;
