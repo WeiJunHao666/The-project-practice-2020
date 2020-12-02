@@ -21,4 +21,5 @@ public class Comment {
     private String comUser;
     private String lastUserId;
     private List<Comment> nextComments = new ArrayList<Comment>();
+    private int likeNum;
 }

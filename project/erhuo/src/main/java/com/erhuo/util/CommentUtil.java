@@ -50,6 +50,7 @@ public class CommentUtil {
             commentLite.setLastUser(node.getLastUser());
             commentLite.setMessage(node.getMessage());
             commentLite.setUserId(node.getUserId());
+            commentLite.setLikeNum(node.getLikeNum());
             comList.add(commentLite);
             if (node.getNextComments().size()!=0){
                 getLite(node.getNextComments(),comList);

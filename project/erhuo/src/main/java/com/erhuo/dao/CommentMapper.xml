@@ -28,6 +28,7 @@
         <result property="postId" column="post_id"/>
         <result property="lastId" column="last_id"/>
         <result property="lastUserId" column="last_user_id"/>
+        <result property="likeNum" column="like_num"/>
     </resultMap>
 
 

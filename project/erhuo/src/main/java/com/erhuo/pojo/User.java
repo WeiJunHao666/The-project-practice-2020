@@ -11,7 +11,6 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-
     private int userId;
     private String username;
     private String phoneNum;
@@ -19,5 +18,4 @@ public class User {
     private String password;
     private String loginStatus;
     private Date date;
-
 }

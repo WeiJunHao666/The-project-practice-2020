@@ -18,13 +18,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 public class Test {
 
     @org.junit.Test
-    public void test2(){
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring-dao.xml");
-        UserMapper userMapper = (UserMapper) context.getBean("userDao");
-
-        System.out.println(userMapper.queryUserById(1));
-    }
-    @org.junit.Test
     public void test(){
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-dao.xml");
         CommentMapperImpl commentMapper = (CommentMapperImpl) context.getBean("commentDao");
@@ -34,12 +27,5 @@ public class Test {
         List<Comment> commentList = CommentUtil.addAllNode(firstComment, comments);
         List<CommentLite> comList = new ArrayList<CommentLite>();
         CommentUtil.getLite(commentList,comList);
-    }
-
-    @org.junit.Test
-    public void test1() throws Exception {
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(CommentController.class).build();
-        String s = mockMvc.perform(post("/comment/getCom?1").content("{\"postId\":1}")).andReturn().getResponse().toString();
-        System.out.println(s);
     }
 }

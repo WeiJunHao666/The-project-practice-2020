@@ -1,15 +1,16 @@
 package com.erhuo.pojo;
 
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class CommentLite {
-    private int comId;
+public class Post {
+    private int postId;
     private int userId;
     private String message;
-    private String lastUser;
-    private String comUser;
-    private int LikeNum;
+    private String[] imagesUrl;
+    private int viewNum;
+    private int likeNum;
 }
