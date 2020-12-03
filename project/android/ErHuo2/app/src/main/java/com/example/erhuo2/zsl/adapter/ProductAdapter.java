@@ -1,7 +1,6 @@
 package com.example.erhuo2.zsl.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,16 +9,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.erhuo2.R;
+import com.example.erhuo2.zsl.entities.ProductEntity;
 
 import java.util.List;
-import java.util.Map;
 
 public class ProductAdapter extends BaseAdapter {
     private Context context;
-    private List<Map<String,Object>> dataSource;
+    private List<ProductEntity> dataSource;
     private int item_layout_id;
 
-    public ProductAdapter(Context context, List<Map<String,Object>> dataSource, int item_layout_id){
+    public ProductAdapter(Context context, List<ProductEntity> dataSource, int item_layout_id){
         this.context = context;
         this.dataSource = dataSource;
         this.item_layout_id = item_layout_id;
@@ -51,14 +50,20 @@ public class ProductAdapter extends BaseAdapter {
         TextView txt_position = convertView.findViewById(R.id.txt_position1);
         TextView txt_describe = convertView.findViewById(R.id.txt_describe);
         TextView txt_price = convertView.findViewById(R.id.txt_price);
+        TextView txt_seller = convertView.findViewById(R.id.txt_seller);
         ImageView img_img = convertView.findViewById(R.id.img_img);
         //给数据项填充数据
-        final Map<String,Object> mItemData = dataSource.get(position);
-        //txt_name.setText((CharSequence) mItemData.get("name"));
-        txt_describe.setText((CharSequence) mItemData.get("describe"));
-        txt_position.setText((CharSequence) mItemData.get("position"));
-        txt_price.setText((CharSequence) mItemData.get("price"));
-        img_img.setImageBitmap((Bitmap) mItemData.get("img"));
+        img_img.setImageResource(dataSource.get(position).getImg());
+        txt_describe.setText(dataSource.get(position).getDescribe());
+        txt_price.setText(dataSource.get(position).getPrice());
+        txt_seller.setText(dataSource.get(position).getSeller());
+        txt_position.setText(dataSource.get(position).getPosition());
+//        final List<ProductEntity> mItemData = dataSource.get(position);
+//        //txt_name.setText((CharSequence) mItemData.get("name"));
+//        txt_describe.setText((CharSequence) mItemData.get("describe"));
+//        txt_position.setText((CharSequence) mItemData.get("position"));
+//        txt_price.setText((CharSequence) mItemData.get("price"));
+//        img_img.setImageBitmap((Bitmap) mItemData.get("img"));
         //返回列表
         return convertView;
     }

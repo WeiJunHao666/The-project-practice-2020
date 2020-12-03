@@ -14,7 +14,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".dsl.services.CreateServiceActivity"></activity>
-        <activity android:name=".zsl.activity.LoginActivity" />
         <activity android:name=".wjh.register.view.Register_activity" />
         <activity android:name=".wjh.login.view.MainActivity">
             <intent-filter>
@@ -29,6 +28,7 @@
         <activity android:name=".zsl.activity.CommodityPageActivity" />
         <activity android:name=".zsl.activity.CommodityDetailsActivity" />
         <activity android:name=".SearchPageActivity" />
+        <activity android:name=".zsl.activity.LoginActivity"/>
     </application>
 
 </manifest>

@@ -51,7 +51,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
+    compile 'com.roughike:bottom-bar:2.3.1'//底部导航栏依赖
     //点赞
     compile 'com.jaren:likeview:1.2.2'
 }
