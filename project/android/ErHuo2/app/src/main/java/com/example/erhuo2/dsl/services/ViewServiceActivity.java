@@ -26,6 +26,7 @@ import com.example.erhuo2.R;
 import com.example.erhuo2.dsl.services.adapter.CommentAdapter;
 import com.example.erhuo2.dsl.services.entities.ComInfoEntity;
 import com.example.erhuo2.dsl.services.entities.CommentEntity;
+import com.example.erhuo2.dsl.services.entities.CommentInfoToSer;
 import com.example.erhuo2.dsl.services.entities.ReplyEntity;
 import com.example.erhuo2.dsl.services.view.SquareImageView;
 import com.google.gson.Gson;
@@ -39,6 +40,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +48,9 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ViewServiceActivity extends AppCompatActivity {
+    private ComInfoEntity cominfo;
+
+    private ListView service_reply_list;
     private ImageView service_back;
     private ImageView service_more;
     private CircleImageView view_service_img;
@@ -123,20 +128,21 @@ public class ViewServiceActivity extends AppCompatActivity {
         //评论
         addComment();
 
+//        service_reply_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                service_discuss_content.requestFocus();
+//                service_discuss_content.setHint("回复用户");
+//                Log.e("dsl",position+"");
+//            }
+//        });
+
     }
 
     private void addComment() {
 
         //请求评论数据
         getCommentData();
-
-        //回复
-        service_comment_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            }
-        });
-
     }
 
     //获取评论信息
@@ -145,7 +151,7 @@ public class ViewServiceActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    String s = "http://10.7.89.229:8080/erhuo/comment/getCom?postId=1";
+                    String s = "http://192.168.137.160:8081/erhuoy/comment/getCom/1/1";
                     URL url = new URL(s);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
@@ -161,7 +167,6 @@ public class ViewServiceActivity extends AppCompatActivity {
 
                     Gson gson = new Gson();
                     comInfos = gson.fromJson(str,new TypeToken<List<List<ComInfoEntity>>>(){}.getType());
-                    Log.e("dsl::",""+comInfos.size());
                     for(int j = 0; j < comInfos.size(); j++) {
 
                         //回复列表
@@ -228,7 +233,6 @@ public class ViewServiceActivity extends AppCompatActivity {
         }else{
             view_service_thump.setCheckedWithoutAnimator(false);
         }
-
     }
 
     private void getimgs() {
@@ -298,6 +302,8 @@ public class ViewServiceActivity extends AppCompatActivity {
         service_discuss_submit = findViewById(R.id.service_discuss_submit);
         theres_no_comment = findViewById(R.id.theres_no_comment);
 
+        service_reply_list = findViewById(R.id.service_reply_list);
+
     }
 
     private class MyListener implements View.OnClickListener {
@@ -338,6 +344,37 @@ public class ViewServiceActivity extends AppCompatActivity {
                     break;
                 //提交评论
                 case R.id.service_discuss_submit:
+
+                    new Thread(){
+                        @Override
+                        public void run() {
+                            //使用URL和HttpURLconnection方式进行网络连接
+                            try {
+                                URL url = new URL("http://192.168.137.160:8081/erhuoy/comment/addCom");
+                                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                                //设置网络请求的方式为POST
+                                conn.setRequestMethod("POST");
+                                //获取网络输出流
+                                OutputStream out = conn.getOutputStream();
+                                //获取待发送的字符串
+                                String content = service_discuss_content.getText().toString();
+                                CommentInfoToSer c = new CommentInfoToSer(1,1,content);
+                                Gson gson = new Gson();
+                                String jsonStr = gson.toJson(c);
+                                out.write(jsonStr.getBytes());
+
+                                //必须要获取网络输入流，保证客户端和服务端建立连接
+                                conn.getInputStream();
+                                out.close();
+                                Log.e("dsl","yesssssssssss");
+                            } catch (MalformedURLException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }.start();
+
 
                     break;
             }

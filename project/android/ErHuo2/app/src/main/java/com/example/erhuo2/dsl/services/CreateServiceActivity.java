@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -30,10 +31,8 @@ import java.util.List;
 
 public class CreateServiceActivity extends AppCompatActivity {
 
-    private static final int REQUEST_CODE_CHOOSE = 100;//定义请求码常量
     private TextView create_service_cancel;
     private ImageView create_service_getimg;
-    private RelativeLayout border_getimg;
     private Button create_service_submit;
     private ArrayList<AlbumFile> mAlbumFiles = new ArrayList<>();
     private List<Bitmap> bitmaps = new ArrayList<>();
@@ -60,7 +59,6 @@ public class CreateServiceActivity extends AppCompatActivity {
     private void getView() {
         create_service_cancel = findViewById(R.id.create_service_cancel);
         create_service_getimg = findViewById(R.id.create_service_getimg);
-        border_getimg = findViewById(R.id.border_getimg);
         create_service_submit = findViewById(R.id.create_service_submit);
         create_service_imgs = findViewById(R.id.create_service_imgs);
 
@@ -141,6 +139,7 @@ public class CreateServiceActivity extends AppCompatActivity {
 
         @Override
         public void load(ImageView imageView, String url) {
+            Log.e("dsl",url);
             Glide.with(imageView.getContext())
                     .load(url)
                     .error(R.drawable.write)

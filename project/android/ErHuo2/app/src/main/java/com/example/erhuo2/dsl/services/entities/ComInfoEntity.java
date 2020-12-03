@@ -4,17 +4,28 @@ public class ComInfoEntity {
     private int comId;
     private String comUser;
     private String lastUser;
+    private boolean isLike;
     private int likeNum;
     private String message;
+
+    public boolean isLike() {
+        return isLike;
+    }
+
+    public void setLike(boolean like) {
+        isLike = like;
+    }
+
     private int userId;
 
-    public ComInfoEntity(int comId, String comUser, String lastUser, int likeNum, String message, int userId) {
+    public ComInfoEntity(int comId, String comUser, String lastUser, int likeNum, String message, int userId, boolean isLike) {
         this.comId = comId;
         this.comUser = comUser;
         this.lastUser = lastUser;
         this.likeNum = likeNum;
         this.message = message;
         this.userId = userId;
+        this.isLike = isLike;
     }
 
     public int getComId() {

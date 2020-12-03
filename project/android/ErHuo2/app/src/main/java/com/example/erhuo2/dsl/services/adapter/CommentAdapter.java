@@ -5,7 +5,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,6 +25,9 @@ public class CommentAdapter extends BaseAdapter {
     private Context context;
     private List<CommentEntity> listComment = new ArrayList<>();
     private int item_layout_list;
+
+    private EditText service_discuss_content;
+    private Button service_discuss_submit;
 
     public CommentAdapter(Context context, List<CommentEntity> listComment, int item_layout_list) {
         this.context = context;
