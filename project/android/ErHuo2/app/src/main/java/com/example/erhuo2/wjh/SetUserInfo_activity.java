@@ -32,7 +32,6 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import com.example.erhuo2.R;
-import com.example.erhuo2.wjh.allKind.AllKindActivity;
 import com.example.erhuo2.zsl.activity.LoginActivity;
 
 import java.io.File;

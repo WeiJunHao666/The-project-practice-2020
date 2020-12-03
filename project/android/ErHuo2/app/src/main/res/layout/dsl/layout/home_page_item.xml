@@ -4,6 +4,7 @@
     android:layout_marginLeft="20dp"
     android:layout_marginTop="10dp"
     android:orientation="vertical"
+    android:background="#EEEEEE"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <ImageView
         android:id="@+id/img_img"
@@ -23,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="描述"
-        android:maxLines="1"
+        android:maxLines="2"
         android:maxEms="21"
         android:ellipsize="end"
         android:textSize="20sp"/>
@@ -35,10 +36,26 @@
         android:text="price"
         android:textColor="@color/tomato"
         android:textSize="20sp"/>
-    <TextView
-        android:id="@+id/txt_position1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="位置"
-        android:textSize="15sp"/>
+    <LinearLayout
+        android:id="@+id/ll_shop1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/txt_seller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="商家"/>
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:id="@+id/txt_position1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="位置"
+            android:textSize="15sp"/>
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=">"/>
+    </LinearLayout>
 </LinearLayout>

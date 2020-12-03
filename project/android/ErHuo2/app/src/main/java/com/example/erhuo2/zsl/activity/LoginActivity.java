@@ -1,43 +1,81 @@
 package com.example.erhuo2.zsl.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTabHost;
-
 import android.os.Bundle;
-import android.widget.TabHost;
+
+import androidx.annotation.IdRes;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.example.erhuo2.R;
 import com.example.erhuo2.dsl.services.ServePageFragment;
 import com.example.erhuo2.wjh.MessageContactActivity;
 import com.example.erhuo2.zsl.page.HomePageFragment;
-import com.example.erhuo2.zsl.page.MessagePageFragment;
 import com.example.erhuo2.zsl.page.MyPageFragment;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.BottomBarTab;
+import com.roughike.bottombar.OnTabReselectListener;
+import com.roughike.bottombar.OnTabSelectListener;
 
 public class LoginActivity extends AppCompatActivity {
+    private BottomBar bottomBar;
 
+    private BottomBarTab nearby;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        initFragmentTabHost();
-    }
-    private void initFragmentTabHost(){
-        FragmentTabHost tabHost = findViewById(android.R.id.tabhost);
-        tabHost.setup(this, getSupportFragmentManager(),
-                android.R.id.tabcontent);
-        TabHost.TabSpec tab1 = tabHost.newTabSpec("tab1")
-                .setIndicator("首页");
-        tabHost.addTab(tab1, HomePageFragment.class, null);
 
-        TabHost.TabSpec tab2 = tabHost.newTabSpec("tab2")
-                .setIndicator("服务");
-        tabHost.addTab(tab2, ServePageFragment.class, null);
-        TabHost.TabSpec tab3 = tabHost.newTabSpec("tab3")
-                .setIndicator("消息");
-        tabHost.addTab(tab3, MessageContactActivity.class, null);
-        TabHost.TabSpec tab4 = tabHost.newTabSpec("tab4")
-                .setIndicator("我的");
-        tabHost.addTab(tab4, MyPageFragment.class, null);
-    }
 
+
+
+
+
+        bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int tabId) {
+                Object ob=null;
+                switch (tabId){
+                    case R.id.tab_home:
+                        // 选择指定 id 的标签
+                        nearby = bottomBar.getTabWithId(R.id.tab_my);
+//                        nearby.setBadgeCount(5);
+                        ob  = new HomePageFragment();
+                        break;
+                    case R.id.tab_service:
+                        // 选择指定 id 的标签
+                        nearby = bottomBar.getTabWithId(R.id.tab_my);
+                        //nearby.setBadgeCount(5);
+                        ob  = new ServePageFragment();
+                        break;
+                    case R.id.tab_message:
+                        // 选择指定 id 的标签
+                        nearby = bottomBar.getTabWithId(R.id.tab_my);
+                        //nearby.setBadgeCount(5);
+                        ob  = new MessageContactActivity();
+                        break;
+                    case R.id.tab_my:
+                        // 选择指定 id 的标签
+                        nearby = bottomBar.getTabWithId(R.id.tab_my);
+                        //nearby.setBadgeCount(5);
+                        ob  = new MyPageFragment();
+                        break;
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer,(Fragment) ob).commit();
+            }
+        });
+
+        bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
+            @Override
+            public void onTabReSelected(@IdRes int tabId) {
+                if (tabId == R.id.tab_home) {
+                    // 已经选择了这个标签，又点击一次。即重选。
+                    nearby.removeBadge();
+                }
+            }
+        });
+
+
+    }
 }
