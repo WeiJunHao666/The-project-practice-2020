@@ -35,7 +35,7 @@
         android:id="@+id/create_service_rl"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_below="@+id/create_service_native">
+        android:layout_below="@+id/create_service_imgs">
 
         <EditText
             android:layout_margin="15dp"
@@ -45,13 +45,11 @@
             android:singleLine="false"
             android:hint="将想买 or 想卖的东西分享给大家~"/>
 
-
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/border_getimg"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginTop="20dp"
         android:layout_below="@+id/create_service_rl">
 
         <ImageView
@@ -63,7 +61,15 @@
 
     </RelativeLayout>
 
-
+    <GridLayout
+        android:id="@+id/create_service_imgs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="-4.5dp"
+        android:paddingRight="-4.5dp"
+        android:visibility="gone"
+        android:numColumns="3"
+        android:layout_below="@+id/create_service_native"/>
 
 
     <Button
