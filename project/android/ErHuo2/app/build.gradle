@@ -54,4 +54,7 @@ dependencies {
 
     //点赞
     compile 'com.jaren:likeview:1.2.2'
+
+    //上传图片
+    implementation 'com.yanzhenjie:album:2.1.3'
 }

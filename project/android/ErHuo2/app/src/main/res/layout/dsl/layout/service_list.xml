@@ -109,7 +109,7 @@
             android:layout_height="25dp"
             android:layout_toLeftOf="@+id/num_thump_up"
             app:cirRadius="10dp"
-            app:cycleTime="2000"
+            app:cycleTime="1000"
             android:layout_gravity="center_horizontal"
             app:ringColor="#FF0000"
             app:checkedColor="#FF0000"

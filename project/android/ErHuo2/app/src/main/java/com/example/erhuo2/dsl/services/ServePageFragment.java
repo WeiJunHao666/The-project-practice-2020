@@ -120,7 +120,9 @@ public class ServePageFragment extends Fragment {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.services_write:
-
+                    Intent i = new Intent();
+                    i.setClass(getContext(), CreateServiceActivity.class);
+                    startActivity(i);
                     break;
             }
         }

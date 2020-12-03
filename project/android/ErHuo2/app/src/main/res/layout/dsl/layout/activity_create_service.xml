@@ -12,6 +12,7 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/create_service_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="取消"
@@ -31,18 +32,42 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/create_service_rl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/create_service_native"
-        >
+        android:layout_height="100dp"
+        android:layout_below="@+id/create_service_native">
 
+        <EditText
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:singleLine="false"
+            android:hint="将想买 or 想卖的东西分享给大家~"/>
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/border_getimg"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/create_service_rl">
+
+        <ImageView
+            android:id="@+id/create_service_getimg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/getimg"/>
 
 
     </RelativeLayout>
 
 
 
+
     <Button
+        android:id="@+id/create_service_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="发布"

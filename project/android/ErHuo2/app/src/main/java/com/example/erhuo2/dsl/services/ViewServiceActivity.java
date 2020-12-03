@@ -70,7 +70,7 @@ public class ViewServiceActivity extends AppCompatActivity {
     private RelativeLayout theres_no_comment;
     private ListView service_comment_list;
     private List<CommentEntity> commentList = new ArrayList<>();
-    private List<ComInfoEntity> comInfos = new ArrayList<>();
+    private List<List<ComInfoEntity>> comInfos = new ArrayList<>();
 
 
     private Handler handler = new Handler(){
@@ -161,27 +161,30 @@ public class ViewServiceActivity extends AppCompatActivity {
 
                     Gson gson = new Gson();
                     comInfos = gson.fromJson(str,new TypeToken<List<List<ComInfoEntity>>>(){}.getType());
+                    Log.e("dsl::",""+comInfos.size());
+                    for(int j = 0; j < comInfos.size(); j++) {
 
-                    //回复列表
-                    List<ReplyEntity> rl = new ArrayList<>();
-                    for(int i = 1; i < comInfos.size(); i++){
-                        ReplyEntity re = new ReplyEntity(comInfos.get(i).getComId(),
-                                comInfos.get(i).getUserId(),
-                                comInfos.get(i).getComUser()+" 回复 "+comInfos.get(i).getLastUser(),
-                                comInfos.get(i).getLikeNum()+"",
-                                comInfos.get(i).getMessage());
-                        rl.add(re);
+                        //回复列表
+                        List<ReplyEntity> rl = new ArrayList<>();
+                        for (int i = 1; i < comInfos.get(j).size(); i++) {
+                            ReplyEntity re = new ReplyEntity(comInfos.get(j).get(i).getComId(),
+                                    comInfos.get(j).get(i).getUserId(),
+                                    comInfos.get(j).get(i).getComUser() + " 回复 " + comInfos.get(j).get(i).getLastUser(),
+                                    comInfos.get(j).get(i).getLikeNum() + "",
+                                    comInfos.get(j).get(i).getMessage());
+                            rl.add(re);
+                        }
+
+                        CommentEntity com = new CommentEntity(comInfos.get(j).get(0).getComId(),
+                                comInfos.get(j).get(0).getUserId(),
+                                comInfos.get(j).get(0).getComUser(),
+                                R.drawable.first,
+                                comInfos.get(j).get(0).getLikeNum() + "",
+                                comInfos.get(j).get(0).getMessage(),
+                                rl);
+                        //评论列表
+                        commentList.add(com);
                     }
-
-                    CommentEntity com = new CommentEntity(comInfos.get(0).getComId(),
-                            comInfos.get(0).getUserId(),
-                            comInfos.get(0).getComUser(),
-                            R.drawable.back,
-                            comInfos.get(0).getLikeNum()+"",
-                            comInfos.get(0).getMessage(),
-                            rl);
-                    //评论列表
-                    commentList.add(com);
 
                     Message msg = new Message();
                     msg.what = 1;
@@ -297,7 +300,7 @@ public class ViewServiceActivity extends AppCompatActivity {
 
     }
 
-    class MyListener implements View.OnClickListener {
+    private class MyListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
