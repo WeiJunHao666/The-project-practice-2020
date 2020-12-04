@@ -15,7 +15,9 @@ public interface UserMapper {
 
     public void updateDate(@Param("id") int id, @Param("date") Date date);
 
-    public void logon(@Param("usernaem") String username, @Param("password") String password);
+    public void logon(@Param("username") String username,@Param("password")String password);
 
     public int checkUserByUsername(String username);
+
+    public void updateUser(User user);
 }

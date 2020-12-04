@@ -18,5 +18,7 @@
     <mappers>
         <mapper class="com.erhuo.dao.UserMapper"/>
         <mapper class="com.erhuo.dao.AdvertisementMapper"/>
+        <mapper class="com.erhuo.dao.CommodityMapper"/>
+        <mapper class="com.erhuo.dao.CommodityImgMapper"/>
     </mappers>
 </configuration>

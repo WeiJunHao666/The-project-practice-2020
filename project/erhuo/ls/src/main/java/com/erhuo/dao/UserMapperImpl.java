@@ -39,4 +39,11 @@ public class UserMapperImpl extends SqlSessionDaoSupport implements UserMapper {
         return num;
     }
 
+    @Override
+    public void updateUser(User user) {
+        UserMapper userMapper = getSqlSession().getMapper(UserMapper.class);
+        System.out.println(user);
+        userMapper.updateUser(user);
+    }
+
 }

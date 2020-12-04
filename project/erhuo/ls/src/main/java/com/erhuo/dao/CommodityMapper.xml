@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.erhuo.dao.CommodityMapper">
+
+    <select id="findAll" resultMap="commodity">
+        select * from commodity
+    </select>
+
+    <select id="findCommodityById" resultMap="commodity" parameterType="int">
+        select * from commodity where id=#{id}
+    </select>
+
+
+    <resultMap id="commodity" type="commodity">
+        <result property="userId" column="user_id"/>
+        <result property="value" column="commodity_value"/>
+        <result property="discount" column="commodity_discount"/>
+        <result property="describe" column="commodity_describe"/>
+        <result property="typeId" column="type_id"/>
+    </resultMap>
+
+
+</mapper>
+

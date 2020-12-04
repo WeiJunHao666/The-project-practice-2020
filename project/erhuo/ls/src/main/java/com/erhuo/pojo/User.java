@@ -19,7 +19,7 @@ public class User {
     private String phoneNum;
     private String email;
     private String password;
-    private String loginStatus;
-    private Date date;
+    private String img;
+    private String address;
 
 }

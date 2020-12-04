@@ -29,6 +29,10 @@
 
     </bean>
 
+    <bean id="commodityService" class="com.erhuo.service.CommodityService">
+
+    </bean>
+
     <tx:advice id="txadvice" transaction-manager="transactionManager">
         <tx:attributes>
             <tx:method name="*" propagation="REQUIRED"/>

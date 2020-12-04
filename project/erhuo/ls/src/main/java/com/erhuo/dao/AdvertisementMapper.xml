@@ -4,6 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.erhuo.dao.AdvertisementMapper">
 
+
     <select id="queryAdvertisementAll" resultMap="advertisement">
         select * from advertisement
     </select>
