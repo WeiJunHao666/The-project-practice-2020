@@ -1,11 +1,27 @@
 package com.example.erhuo2.dsl.services.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ServiceEntity {
     private int img;
     private String name;
     private String content;
     private boolean check;
     private int prizes;
+    private ArrayList<Integer> imgs = new ArrayList<>();
+
+    public boolean isCheck() {
+        return check;
+    }
+
+    public ArrayList<Integer> getImgs() {
+        return imgs;
+    }
+
+    public void setImgs(ArrayList<Integer> imgs) {
+        this.imgs = imgs;
+    }
 
     public int getPrizes() {
         return prizes;
@@ -24,12 +40,13 @@ public class ServiceEntity {
     }
 //private List<Bitmap> imgs = new ArrayList<>();
 
-    public ServiceEntity(int img, String name, String content, boolean check, int prizes) {
+    public ServiceEntity(int img, String name, String content, boolean check, int prizes, ArrayList<Integer> imgs) {
         this.img = img;
         this.name = name;
         this.content = content;
         this.check = check;
         this.prizes = prizes;
+        this.imgs = imgs;
     }
 
     public int getImg() {

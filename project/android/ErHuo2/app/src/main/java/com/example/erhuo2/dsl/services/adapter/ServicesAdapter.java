@@ -69,8 +69,8 @@ public class ServicesAdapter extends BaseAdapter {
         final int img = listServices.get(position).getImg();
         final String name = listServices.get(position).getName();
         num_pageviews.setText("16481");
-        service_small_img.setImageResource(R.drawable.first);
-        service_content.setText("近些年来，越来越多的行业开始和互联网结合，诞生了越来越多的互联网创业公司。互联网创业公司需要面对许多的不确定因素。如果你和你的小伙伴们够幸运，你们的公司可能会在几个星期之内让用户数、商品数、订单量增长几十倍上百倍。一次促销可能会带来平时几十倍的访问流量，一次秒杀活动可能会吸引平时数百倍的访问用户。这对公司自然是极大的好事，说明产品得到认可，公司未来前景美妙。");
+        service_small_img.setImageResource(listServices.get(position).getImgs().get(0));
+        service_content.setText(listServices.get(position).getContent());
 
         //点赞信息
         num_thump_up.setText(listServices.get(position).getPrizes()+"");
@@ -118,6 +118,8 @@ public class ServicesAdapter extends BaseAdapter {
                         Intent i = new Intent();
                         i.putExtra("name",name);
                         i.putExtra("img",""+img);
+                        i.putIntegerArrayListExtra("imgs",listServices.get(position).getImgs());
+                        i.putExtra("content",listServices.get(position).getContent());
                         i.setClass(context, ViewServiceActivity.class);
                         i.setFlags(i.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(i);

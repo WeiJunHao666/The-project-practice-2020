@@ -54,7 +54,8 @@ public class ServePageFragment extends Fragment {
                 i.putExtra("name",list.get(position).getName());
                 i.putExtra("img",""+list.get(position).getImg());
                 i.putExtra("check",list.get(position).getCheck());
-                //i.putExtra("content", list.get(position).getContent());
+                i.putExtra("content", list.get(position).getContent());
+                i.putIntegerArrayListExtra("imgs",list.get(position).getImgs());
                 i.setClass(getActivity().getApplicationContext(), ViewServiceActivity.class);
                 startActivity(i);
             }
@@ -82,9 +83,20 @@ public class ServePageFragment extends Fragment {
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
 
                 if(list.size()<10) {
-                    ServiceEntity a = new ServiceEntity(R.drawable.write, "123", "aaa", false,123);
-                    ServiceEntity b = new ServiceEntity(R.drawable.write, "456", "aaa", false,123);
-                    ServiceEntity c = new ServiceEntity(R.drawable.write, "789", "aaa", false,123);
+                    ArrayList<Integer> l = new ArrayList<>();
+                    l.add(R.drawable.ser2_1);
+                    l.add(R.drawable.ser2_2);
+                    l.add(R.drawable.ser2_3);
+                    l.add(R.drawable.ser2_4);
+                    ServiceEntity a = new ServiceEntity(R.drawable.b,"dsl","苹果7。32 G.想换新手机了，充电很快。电池效率98%没有基带。没有摄像头ID可退出很好用。可小刀。大刀勿来！\n",false,10,l);
+                    ArrayList<Integer> i = new ArrayList<>();
+                    i.add(R.drawable.ser3_1);
+                    i.add(R.drawable.ser3_2);
+                    ServiceEntity b = new ServiceEntity(R.drawable.c,"wjh","十成新，只戴了一分钟，感觉颜色不符合我\n" +
+                            "感兴趣的话点“我想要”和我私聊吧～\n",false,0,i);
+                    ArrayList<Integer> s = new ArrayList<>();
+                    s.add(R.drawable.ser4_1);
+                    ServiceEntity c = new ServiceEntity(R.drawable.d,"ywh","牧马人一代g60,自用没有暗病，鼠标多用的时间不长，手掌处有磨损。售出不退，离的远的不包邮。\n",false,1,s);
                     list.add(a);
                     list.add(b);
                     list.add(c);
@@ -100,10 +112,33 @@ public class ServePageFragment extends Fragment {
     }
 
     private void getData() {
-        ServiceEntity s1 = new ServiceEntity(R.drawable.first,"张树林","123",false,123);
-        ServiceEntity s2 = new ServiceEntity(R.drawable.second,"树林张","123",false,123);
-        ServiceEntity s3 = new ServiceEntity(R.drawable.first,"张树林","123",false,123);
-        ServiceEntity s4 = new ServiceEntity(R.drawable.second,"树林张","123",false,123);
+        ArrayList<Integer> l = new ArrayList<>();
+        l.add(R.drawable.ser1_1);
+        l.add(R.drawable.ser1_2);
+        l.add(R.drawable.ser1_3);
+        ServiceEntity s1 = new ServiceEntity(R.drawable.a,"zsl","达尔优MINI版，小巧方便。\n" +
+                " 手感不错，支持官方驱动和宏，\n" +
+                "成色如图 有黑白两色。五色变光，办公，游戏必备。   \n" +
+                "鼠标都是自己动手改的， 与网吧直接淘汰的不同，本鼠标换了\n" +
+                "全新欧姆龙机械寿命两千万次的微动， \n" +
+                "全新USB线， ^_^\n" +
+                "全新脚贴。 \n" +
+                "本鼠标全部进行了深度清理。   \n" +
+                "发货之前全部酒精消毒，七天之内有质量问题包退换， 保修三个月。\n",false,12,l);
+        ArrayList<Integer> i = new ArrayList<>();
+        i.add(R.drawable.ser2_1);
+        i.add(R.drawable.ser2_2);
+        i.add(R.drawable.ser2_3);
+        i.add(R.drawable.ser2_4);
+        ServiceEntity s2 = new ServiceEntity(R.drawable.b,"dsl","苹果7。32 G.想换新手机了，充电很快。电池效率98%没有基带。没有摄像头ID可退出很好用。可小刀。大刀勿来！\n",false,10,i);
+        ArrayList<Integer> s = new ArrayList<>();
+        s.add(R.drawable.ser3_1);
+        s.add(R.drawable.ser3_2);
+        ServiceEntity s3 = new ServiceEntity(R.drawable.c,"wjh","十成新，只戴了一分钟，感觉颜色不符合我\n" +
+                "感兴趣的话点“我想要”和我私聊吧～\n",false,0,s);
+        ArrayList<Integer> t = new ArrayList<>();
+        t.add(R.drawable.ser4_1);
+        ServiceEntity s4 = new ServiceEntity(R.drawable.d,"ywh","牧马人一代g60,自用没有暗病，鼠标多用的时间不长，手掌处有磨损。售出不退，离的远的不包邮。\n",false,1,t);
         list.add(s1);
         list.add(s2);
         list.add(s3);

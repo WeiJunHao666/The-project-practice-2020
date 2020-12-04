@@ -61,7 +61,7 @@ public class ViewServiceActivity extends AppCompatActivity {
     private CircleImageView view_service_img;
     private TextView view_service_name;
     //private List<Bitmap> imgs = new ArrayList<>();
-    private int[] imgs = new int[6];
+    private ArrayList<Integer> imgs = new ArrayList<>();
     private GridLayout gridLayoutPost;
 
     private TextView shout_content;
@@ -118,6 +118,9 @@ public class ViewServiceActivity extends AppCompatActivity {
         Intent request = getIntent();
         String name = request.getStringExtra("name");
         String img = request.getStringExtra("img");
+        String content = request.getStringExtra("content");
+        String check = request.getStringExtra("check");
+        imgs = request.getIntegerArrayListExtra("imgs");
 
         findView();
 
@@ -125,15 +128,12 @@ public class ViewServiceActivity extends AppCompatActivity {
 
         view_service_name.setText(name);
         view_service_img.setImageResource(Integer.parseInt(img));
-        String str = "近些年来，越来越多的行业开始和互联网结合，诞生了越来越多的互联网创业公司。互联网创业公司需要面对许多的不确定因素。如果你和你的小伙伴们够幸运，你们的公司可能会在几个星期之内让用户数、商品数、订单量增长几十倍上百倍。一次促销可能会带来平时几十倍的访问流量，一次秒杀活动可能会吸引平时数百倍的访问用户。这对公司自然是极大的好事，说明产品得到认可，公司未来前景美妙。";
+        String str = content;
         shout_content.setText(str);
         whole_content.setText(str);
 
         //设置更多
         toMore();
-
-        //获取图片
-        getimgs();
 
         //显示图片
         putimgs();
@@ -254,12 +254,7 @@ public class ViewServiceActivity extends AppCompatActivity {
     }
 
     private void getimgs() {
-        imgs[0] = R.drawable.first;
-        imgs[1] = R.drawable.second;
-        imgs[2] = R.drawable.first;
-        imgs[3] = R.drawable.second;
-        imgs[4] = R.drawable.first;
-        imgs[5] = R.drawable.second;
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -268,10 +263,10 @@ public class ViewServiceActivity extends AppCompatActivity {
         int columnCount = 3;//得到列数
 
         //特判
-        if(imgs.length == 4){
+        if(imgs.size() == 4){
             columnCount = 2;
         }
-        for (int i = 0, size = imgs.length; i < size; i++) {
+        for (int i = 0, size = imgs.size(); i < size; i++) {
             GridLayout.Spec rowSpec = GridLayout.spec(i / columnCount);//行数
             GridLayout.Spec columnSpec = GridLayout.spec(i % columnCount, 1.0f);//列数 列宽的比例 weight=1
             ImageView imageView = new SquareImageView(getApplicationContext());
@@ -283,7 +278,7 @@ public class ViewServiceActivity extends AppCompatActivity {
 
             layoutParams.setMargins(5, 5, 5, 5);
 
-            imageView.setImageResource(imgs[i]);
+            imageView.setImageResource(imgs.get(i));
             gridLayoutPost.addView(imageView, layoutParams);
         }
     }
