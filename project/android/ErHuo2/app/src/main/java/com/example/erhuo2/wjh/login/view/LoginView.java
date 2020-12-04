@@ -1,5 +1,6 @@
 package com.example.erhuo2.wjh.login.view;
 
+
 public interface LoginView {
     /**
      * 获得用户名
@@ -19,5 +20,8 @@ public interface LoginView {
      */
     void showMessage(String message);
 
+    void onSuccess(String data);
+
 
 }
+

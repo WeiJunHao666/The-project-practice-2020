@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:id="@+id/iv_kind_child"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/c"/>
+    <TextView
+        android:id="@+id/tv_kind_child"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="手机1"/>
+
+</LinearLayout>

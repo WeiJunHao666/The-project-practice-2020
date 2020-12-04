@@ -27,9 +27,14 @@
         </attr>
     </declare-styleable>
 
-    <style name="PopupWindowAnimation" parent="@android:style/Animation.Dialog">
-        <item name="android:windowEnterAnimation">@anim/popup_in</item>
-        <item name="android:windowExitAnimation">@anim/popup_out</item>
+    <style name="BottomPopupWindowAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/bottom_popup_in</item>
+        <item name="android:windowExitAnimation">@anim/bottom_popup_out</item>
     </style>
+    <style name="RightPopupWindowAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/right_popup_in</item>
+        <item name="android:windowExitAnimation">@anim/right_popup_out</item>
+    </style>
+
 
 </resources>

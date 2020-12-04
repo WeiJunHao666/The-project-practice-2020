@@ -1,9 +1,9 @@
-package com.example.erhuo2.wjh.allKind;
+package com.example.erhuo2.wjh.allKind.bean;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class ThemeMainReq implements Serializable{
+public class LeftBean implements Serializable{
 
 
     private List<DatasBean> datas;

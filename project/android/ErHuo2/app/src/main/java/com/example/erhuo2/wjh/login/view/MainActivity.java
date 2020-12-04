@@ -1,28 +1,30 @@
 package com.example.erhuo2.wjh.login.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTabHost;
 
 import com.example.erhuo2.R;
-import com.example.erhuo2.dsl.services.ServePageFragment;
 import com.example.erhuo2.wjh.SetUserInfo_activity;
+import com.example.erhuo2.wjh.UserInfo;
 import com.example.erhuo2.wjh.login.listener.PasswordEditChangedListener;
 import com.example.erhuo2.wjh.login.listener.UserEditChangedListener;
 import com.example.erhuo2.wjh.login.presenter.LoginPresenter;
 import com.example.erhuo2.wjh.register.view.Register_activity;
-import com.example.erhuo2.zsl.page.MyPageFragment;
+import com.example.erhuo2.zsl.activity.LoginActivity;
+import com.google.gson.Gson;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -159,6 +161,25 @@ public class MainActivity extends AppCompatActivity implements LoginView{
     @Override
     public void showMessage(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSuccess(String data) {
+        Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
+        UserInfo info = new Gson().fromJson(data, UserInfo.class);
+        //可以创建一个新的SharedPreference来对储存的文件进行操作
+        SharedPreferences sp = getApplication().getSharedPreferences("data", Context.MODE_PRIVATE);
+        //像SharedPreference中写入数据需要使用Editor
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("userId", info.getUserId());
+        editor.putString("username", info.getUsername());
+        editor.putString("nickname", info.getNickname());
+        editor.putString("phoneNum", info.getPhoneNum());
+        editor.putString("email", info.getEmail());
+        editor.putString("password", info.getPassword());
+        editor.putString("img", info.getImg());
+        Log.e("mmmm", info.getUserId()+"");
+        editor.commit();
     }
 
 }

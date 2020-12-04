@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,7 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.erhuo2.R;
 import com.example.erhuo2.SearchPageActivity;
-import com.example.erhuo2.wjh.allKind.AllKindActivity;
+import com.example.erhuo2.wjh.allKind.view.AllKindActivity;
 import com.example.erhuo2.zsl.adapter.ProductAdapter;
 import com.example.erhuo2.zsl.entities.ProductEntity;
 import com.example.erhuo2.zsl.loder.GlideImageLoader;

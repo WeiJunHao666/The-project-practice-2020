@@ -1,6 +1,5 @@
-package com.example.erhuo2.wjh.allKind;
+package com.example.erhuo2.wjh.allKind.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -12,25 +11,25 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.erhuo2.R;
+import com.example.erhuo2.wjh.allKind.bean.LeftBean;
 
-import java.util.ArrayList;
 import java.util.List;
+
 
 public class AllKindLeftAdapter extends RecyclerView.Adapter<AllKindLeftAdapter.ViewHolder> {
     private Context context;
-    private List<ThemeMainReq.DatasBean> list;
-    private List<Integer> liveList=new ArrayList<>();
+    private List<LeftBean.DatasBean> list;
     private View inflater;
     private OnSelectorListener mSelectorListener;
 
-    public AllKindLeftAdapter(Context context, List<ThemeMainReq.DatasBean> list){
+    public AllKindLeftAdapter(Context context, List<LeftBean.DatasBean> list){
         this.context = context;
         this.list = list;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AllKindLeftAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //创建ViewHolder，返回每一项的布局
         inflater = LayoutInflater.from(context).inflate(R.layout.item_all_kind_left,parent,false);
         ViewHolder viewHolder = new ViewHolder(inflater);
@@ -38,11 +37,10 @@ public class AllKindLeftAdapter extends RecyclerView.Adapter<AllKindLeftAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final AllKindLeftAdapter.ViewHolder holder, final int position) {
         //将数据和控件绑定
         holder.itemView.setId(position);
         holder.textView.setText(list.get(position).getShowName());
-
         holder.setIsRecyclable(false);
         if (list.get(position).isChick()) {
             holder.itemView.setBackgroundResource(R.drawable.a);
@@ -52,6 +50,7 @@ public class AllKindLeftAdapter extends RecyclerView.Adapter<AllKindLeftAdapter.
         }
 
     }
+
 
     @Override
     public int getItemCount() {
@@ -76,7 +75,6 @@ public class AllKindLeftAdapter extends RecyclerView.Adapter<AllKindLeftAdapter.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    textView.setTextColor(Color.parseColor("#ffffff"));
                     mSelectorListener.onSelect(v, getAbsoluteAdapterPosition());
                 }
             });

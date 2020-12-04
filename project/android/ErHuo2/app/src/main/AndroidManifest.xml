@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.erhuo2">
     <!-- if you want to load images from the internet -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- if you want to load images from aa file OR from the internet -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -25,13 +27,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".wjh.allKind.AllKindActivity" />
+        <activity android:name=".wjh.SearchResultActivity"/>
+        <activity android:name=".wjh.MessageContactActivity" tools:ignore="Instantiatable" />
+        <activity android:name=".wjh.allKind.view.AllKindActivity" />
         <activity android:name=".wjh.SetUserInfo_activity" />
         <activity android:name=".dsl.services.ViewServiceActivity" />
         <activity android:name=".zsl.activity.CommodityPageActivity" />
         <activity android:name=".zsl.activity.CommodityDetailsActivity" />
         <activity android:name=".SearchPageActivity" />
         <activity android:name=".zsl.activity.LoginActivity"/>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.erhuo2.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 

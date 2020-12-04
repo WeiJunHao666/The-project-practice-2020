@@ -18,22 +18,20 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.example.erhuo2.wjh.ConfigUtil;
 import com.example.erhuo2.R;
 import com.example.erhuo2.wjh.SetUserInfo_activity;
+import com.example.erhuo2.wjh.login.view.MainActivity;
+import com.example.erhuo2.wjh.register.presenter.RegisterPresenter;
+import com.example.erhuo2.zsl.activity.LoginActivity;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
-public class Register_activity extends AppCompatActivity implements RegisterView{
+public class Register_activity extends AppCompatActivity implements RegisterView {
     private EditText et_register_user;
     private EditText et_register_password;
     private Button btn_register;
     private CheckBox cb_register_check;
     private TextView tv_protocol;
+    private RegisterPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +40,7 @@ public class Register_activity extends AppCompatActivity implements RegisterView
         setListener();
         //设置服务协议及隐私协议的格式
         setProtocol();
+        presenter = new RegisterPresenter(this);
     }
 
     private void setListener() {
@@ -65,12 +64,6 @@ public class Register_activity extends AppCompatActivity implements RegisterView
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.et_register_user:
-
-                    break;
-                case R.id.et_register_password:
-
-                    break;
                 case R.id.btn_register:
                     if(!cb_register_check.isChecked()){
                         showMessage("请阅读协议");
@@ -82,13 +75,13 @@ public class Register_activity extends AppCompatActivity implements RegisterView
 
                         }else if(password==null || password.equals("")){
                             showMessage("请填写密码");
-                            
+
                         }else{
-                            upStr(ConfigUtil.SERVER_ADDR + "", user, password);
+                            presenter.upload();
                             Intent i = new Intent();
-                            i.setClass(getApplicationContext(), SetUserInfo_activity.class);
+                            i.setClass(getApplicationContext(), MainActivity.class);
                             startActivity(i);
-                            Toast.makeText(getApplicationContext(),"注册成功", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(),"注册成功", Toast.LENGTH_SHORT).show();
                         }
                     }
                     break;
@@ -136,36 +129,4 @@ public class Register_activity extends AppCompatActivity implements RegisterView
         tv_protocol.setMovementMethod(LinkMovementMethod.getInstance());
 
     }
-
-    /**
-     * 上传字符串敏感信息
-     * @param s
-     * @param user
-     * @param pwd
-     */
-    private void upStr(final String s, final String user, final String pwd) {
-        new Thread(){
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL(s);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    //设置网络请求的方式为POST
-                    conn.setRequestMethod("POST");
-                    //获取网络输出流
-                    OutputStream out = conn.getOutputStream();
-                    //获取待发送的字符串
-                    String str = user.trim() + "?" + pwd.trim();
-                    out.write(str.getBytes());
-                    //必须获取网络输入流，保证客户端和服务端建立连接
-                    conn.getInputStream();
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
-    }
-
 }

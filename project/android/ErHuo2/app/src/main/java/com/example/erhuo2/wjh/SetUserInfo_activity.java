@@ -61,7 +61,7 @@ public class SetUserInfo_activity extends AppCompatActivity implements View.OnCl
         findViews();
         setListener();
         image = new int[]{R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e
-                    ,R.drawable.f, R.drawable.g, R.drawable.h};
+                ,R.drawable.f, R.drawable.g, R.drawable.h};
         name = new String[]{"路飞", "索隆", "山治", "娜美", "乔巴", "乌索普", "罗宾", "弗兰奇", "布鲁克", "甚平"};
         setHeadShape(iv_setHead, R.drawable.a);
     }
@@ -141,7 +141,7 @@ public class SetUserInfo_activity extends AppCompatActivity implements View.OnCl
         addBackground();
 
         //设置进出动画
-        popupWindow.setAnimationStyle(R.style.PopupWindowAnimation);
+        popupWindow.setAnimationStyle(R.style.BottomPopupWindowAnimation);
 
         //引入依附的布局
         View parentView = LayoutInflater.from(SetUserInfo_activity.this).inflate(R.layout.activity_set_user_info_activity, null);
@@ -236,7 +236,7 @@ public class SetUserInfo_activity extends AppCompatActivity implements View.OnCl
         }
         if(Build.VERSION.SDK_INT>=24){
             imageUri = FileProvider.getUriForFile(SetUserInfo_activity.this,
-                    "com.example.project2020.fileprovider", outputImage);
+                    "com.example.erhuo2.fileprovider", outputImage);
         }else{
             imageUri = Uri.fromFile(outputImage);
         }
