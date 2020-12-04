@@ -11,8 +11,17 @@ public class CommentEntity {
     private String prizes;
     private String content;
     private List<ReplyEntity> list = new ArrayList<>();
+    private boolean isLike;
 
-    public CommentEntity(int comId, int userId, String name, int img, String prizes, String content, List<ReplyEntity> list) {
+    public boolean isLike() {
+        return isLike;
+    }
+
+    public void setLike(boolean like) {
+        isLike = like;
+    }
+
+    public CommentEntity(int comId, int userId, String name, int img, String prizes, String content, List<ReplyEntity> list, boolean isLike) {
         this.comId = comId;
         this.userId = userId;
         this.name = name;
@@ -20,6 +29,7 @@ public class CommentEntity {
         this.prizes = prizes;
         this.content = content;
         this.list = list;
+        this.isLike = isLike;
     }
 
     public int getComId() {

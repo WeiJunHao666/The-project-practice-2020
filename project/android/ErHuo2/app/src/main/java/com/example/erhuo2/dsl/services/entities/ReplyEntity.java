@@ -6,14 +6,24 @@ public class ReplyEntity {
     private String name;
     private String prizes;
     private String content;
+    private boolean isLike;
 
 
-    public ReplyEntity(int comId, int userId, String name, String prizes, String content) {
+    public ReplyEntity(int comId, int userId, String name, String prizes, String content, boolean isLike) {
         this.comId = comId;
         this.userId = userId;
         this.name = name;
         this.prizes = prizes;
         this.content = content;
+        this.isLike = isLike;
+    }
+
+    public boolean isLike() {
+        return isLike;
+    }
+
+    public void setLike(boolean like) {
+        isLike = like;
     }
 
     public int getComId() {

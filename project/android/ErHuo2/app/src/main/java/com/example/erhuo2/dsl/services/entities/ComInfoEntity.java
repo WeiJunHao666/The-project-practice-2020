@@ -18,7 +18,7 @@ public class ComInfoEntity {
 
     private int userId;
 
-    public ComInfoEntity(int comId, String comUser, String lastUser, int likeNum, String message, int userId, boolean isLike) {
+    public ComInfoEntity(int comId, String comUser, String lastUser, int likeNum, String message, int userId) {
         this.comId = comId;
         this.comUser = comUser;
         this.lastUser = lastUser;

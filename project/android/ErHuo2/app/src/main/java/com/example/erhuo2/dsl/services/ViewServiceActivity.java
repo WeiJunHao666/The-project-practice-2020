@@ -1,6 +1,7 @@
 package com.example.erhuo2.dsl.services;
 
 import android.content.Intent;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,7 +9,6 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
@@ -33,24 +33,29 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jaren.lib.view.LikeView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class ViewServiceActivity extends AppCompatActivity {
-    private ComInfoEntity cominfo;
 
-    private ListView service_reply_list;
     private ImageView service_back;
     private ImageView service_more;
     private CircleImageView view_service_img;
@@ -76,18 +81,29 @@ public class ViewServiceActivity extends AppCompatActivity {
     private ListView service_comment_list;
     private List<CommentEntity> commentList = new ArrayList<>();
     private List<List<ComInfoEntity>> comInfos = new ArrayList<>();
+    private CommentAdapter ca;
+
+    private OkHttpClient okHttpClient;
 
 
     private Handler handler = new Handler(){
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case 1:
                     if(commentList.size() > 0){
                         theres_no_comment.setVisibility(View.GONE);
-                        CommentAdapter ca = new CommentAdapter(getApplicationContext(),commentList, R.layout.comment_list);
+                        ca = new CommentAdapter(getApplicationContext(),commentList, R.layout.comment_list);
                         service_comment_list.setAdapter(ca);
                     }
+                    break;
+                case 2:
+                    Log.e("dsl","111111");
+                    CommentEntity c = (CommentEntity) msg.obj;
+                    commentList.add(0,c);
+                    ca.notifyDataSetChanged();
+                    break;
             }
         }
     };
@@ -151,7 +167,7 @@ public class ViewServiceActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    String s = "http://192.168.137.160:8081/erhuoy/comment/getCom/1/1";
+                    String s = "http://10.7.90.60:8081/erhuoy/comment/getCom/1/1";
                     URL url = new URL(s);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
@@ -176,7 +192,8 @@ public class ViewServiceActivity extends AppCompatActivity {
                                     comInfos.get(j).get(i).getUserId(),
                                     comInfos.get(j).get(i).getComUser() + " 回复 " + comInfos.get(j).get(i).getLastUser(),
                                     comInfos.get(j).get(i).getLikeNum() + "",
-                                    comInfos.get(j).get(i).getMessage());
+                                    comInfos.get(j).get(i).getMessage(),
+                                    comInfos.get(j).get(i).isLike());
                             rl.add(re);
                         }
 
@@ -186,7 +203,8 @@ public class ViewServiceActivity extends AppCompatActivity {
                                 R.drawable.first,
                                 comInfos.get(j).get(0).getLikeNum() + "",
                                 comInfos.get(j).get(0).getMessage(),
-                                rl);
+                                rl,
+                                comInfos.get(j).get(0).isLike());
                         //评论列表
                         commentList.add(com);
                     }
@@ -302,8 +320,6 @@ public class ViewServiceActivity extends AppCompatActivity {
         service_discuss_submit = findViewById(R.id.service_discuss_submit);
         theres_no_comment = findViewById(R.id.theres_no_comment);
 
-        service_reply_list = findViewById(R.id.service_reply_list);
-
     }
 
     private class MyListener implements View.OnClickListener {
@@ -345,39 +361,59 @@ public class ViewServiceActivity extends AppCompatActivity {
                 //提交评论
                 case R.id.service_discuss_submit:
 
-                    new Thread(){
-                        @Override
-                        public void run() {
-                            //使用URL和HttpURLconnection方式进行网络连接
-                            try {
-                                URL url = new URL("http://192.168.137.160:8081/erhuoy/comment/addCom");
-                                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                                //设置网络请求的方式为POST
-                                conn.setRequestMethod("POST");
-                                //获取网络输出流
-                                OutputStream out = conn.getOutputStream();
-                                //获取待发送的字符串
-                                String content = service_discuss_content.getText().toString();
-                                CommentInfoToSer c = new CommentInfoToSer(1,1,content);
-                                Gson gson = new Gson();
-                                String jsonStr = gson.toJson(c);
-                                out.write(jsonStr.getBytes());
+                    //评论
+                    sendComment();
 
-                                //必须要获取网络输入流，保证客户端和服务端建立连接
-                                conn.getInputStream();
-                                out.close();
-                                Log.e("dsl","yesssssssssss");
-                            } catch (MalformedURLException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }.start();
-
-
+                    //回复
                     break;
             }
         }
+    }
+
+    private void sendComment() {
+        new Thread(){
+            @Override
+            public void run() {
+                final String content = service_discuss_content.getText().toString();
+                CommentInfoToSer c = new CommentInfoToSer(1,1,content);
+                Gson gson = new Gson();
+                String jsonStr = gson.toJson(c);
+                RequestBody requestBody = RequestBody.create(
+                        MediaType.parse("text/plain;charset=utf-8"),
+                        jsonStr);
+                //2) 创建请求对象
+                final Request request = new Request.Builder()
+                        .url("http://10.7.90.60:8081/erhuoy/comment/addCom")
+                        .post(requestBody)
+                        .build();
+                //3. 创建CALL对象
+                okHttpClient = new OkHttpClient();
+                Call call = okHttpClient.newCall(request);
+
+                //4. 提交请求并获取响应
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                        Log.i("lww", "请求失败");
+                    }
+
+                    @Override
+                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        String result[] = response.body().string().split("&");
+                        int comId = Integer.parseInt(result[0]);
+                        if(result[1].equals("1")){
+                            List<ReplyEntity> list = new ArrayList<>();
+                            CommentEntity c = new CommentEntity(comId,1,"张树林",R.drawable.first,"0",content,list,false);
+                            Message msg = handler.obtainMessage();
+                            msg.what = 2;
+                            msg.obj = c;
+                            handler.sendMessage(msg);
+                        } else{
+                            Log.e("dsl","发布失败");
+                        }
+                    }
+                });
+            }
+        }.start();
     }
 }

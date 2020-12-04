@@ -53,6 +53,7 @@ public class ServePageFragment extends Fragment {
                 Intent i = new Intent();
                 i.putExtra("name",list.get(position).getName());
                 i.putExtra("img",""+list.get(position).getImg());
+                i.putExtra("check",list.get(position).getCheck());
                 //i.putExtra("content", list.get(position).getContent());
                 i.setClass(getActivity().getApplicationContext(), ViewServiceActivity.class);
                 startActivity(i);

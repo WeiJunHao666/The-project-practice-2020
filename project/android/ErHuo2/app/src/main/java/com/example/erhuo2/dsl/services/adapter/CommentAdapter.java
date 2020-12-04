@@ -26,9 +26,6 @@ public class CommentAdapter extends BaseAdapter {
     private List<CommentEntity> listComment = new ArrayList<>();
     private int item_layout_list;
 
-    private EditText service_discuss_content;
-    private Button service_discuss_submit;
-
     public CommentAdapter(Context context, List<CommentEntity> listComment, int item_layout_list) {
         this.context = context;
         this.listComment = listComment;
@@ -51,7 +48,7 @@ public class CommentAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         // 加载列表布局文件
         if(null == convertView){
@@ -75,22 +72,27 @@ public class CommentAdapter extends BaseAdapter {
         ReplyAdapter ra = new ReplyAdapter(context,listComment.get(position).getList(), R.layout.reply_list);
         service_reply_list.setAdapter(ra);
 
-        final boolean[] status = {false};
+        if(listComment.get(position).isLike()){
+            comment_item_like.setImageResource(R.drawable.ed_thump_up);
+        }else{
+            comment_item_like.setImageResource(R.drawable.ex_thump_up);
+        }
+
 
         comment_item_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!status[0]){
+                if(!listComment.get(position).isLike()){
                     comment_item_like.setImageResource(R.drawable.ed_thump_up);
                     prizes.setText(Integer.parseInt(prizes.getText().toString())+1+"");
-                    status[0] = true;
+                    listComment.get(position).setLike(true);
                     Log.e("dsl","thump up !!!");
                     //更新点赞数
                     updateThumpUp();
                 }else{
                     comment_item_like.setImageResource(R.drawable.ex_thump_up);
                     prizes.setText(Integer.parseInt(prizes.getText().toString())-1+"");
-                    status[0] = false;
+                    listComment.get(position).setLike(false);
                     Log.e("dsl","thump down !!!");
                     //更新点赞数
                     updateThumpUp();

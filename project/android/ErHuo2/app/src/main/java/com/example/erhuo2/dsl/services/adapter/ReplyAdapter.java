@@ -41,7 +41,7 @@ public class ReplyAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         // 加载列表布局文件
         if(null == convertView){
@@ -58,22 +58,26 @@ public class ReplyAdapter extends BaseAdapter {
         reply_prizes.setText(listReply.get(position).getPrizes());
         reply_data.setText(listReply.get(position).getContent());
 
-        final boolean[] status = {false};
+        if(listReply.get(position).isLike()){
+            reply_item_like.setImageResource(R.drawable.ed_thump_up);
+        }else{
+            reply_item_like.setImageResource(R.drawable.ex_thump_up);
+        }
 
         reply_item_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!status[0]){
+                if(!listReply.get(position).isLike()){
                     reply_item_like.setImageResource(R.drawable.ed_thump_up);
                     reply_prizes.setText(Integer.parseInt(reply_prizes.getText().toString())+1+"");
-                    status[0] = true;
+                    listReply.get(position).setLike(true);
                     Log.e("dsl","thump up !!!");
                     //更新点赞数
                     updateThumpUp();
                 }else{
                     reply_item_like.setImageResource(R.drawable.ex_thump_up);
                     reply_prizes.setText(Integer.parseInt(reply_prizes.getText().toString())-1+"");
-                    status[0] = false;
+                    listReply.get(position).setLike(false);
                     Log.e("dsl","thump down !!!");
                     //更新点赞数
                     updateThumpUp();
