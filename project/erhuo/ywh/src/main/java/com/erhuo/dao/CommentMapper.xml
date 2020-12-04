@@ -31,6 +31,12 @@
         <result property="likeNum" column="like_num"/>
     </resultMap>
 
+    <insert id="addCom" parameterType="comment" useGeneratedKeys="true" keyProperty="comId">
+        insert into comment(post_id,message,user_id) values (#{postId},#{message},#{userId})
+    </insert>
+
+
+
 
 </mapper>
 

@@ -29,4 +29,8 @@ public interface CommentMapper {
 
     @Delete("delete form user_likecom where user_id = #{userId} and com_id = #{comId}")
     public int delUserLike(@Param("userId") int userId, @Param("comId") int comId);
+
+    int addCom(Comment comment1);
+
+    int reply(Comment comment);
 }

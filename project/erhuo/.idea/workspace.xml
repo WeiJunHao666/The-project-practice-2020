@@ -7,12 +7,35 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="faee4034-7e33-4a03-98ec-633278c6d8ad" name="Default Changelist" comment="" />
+    <list default="true" id="faee4034-7e33-4a03-98ec-633278c6d8ad" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/controller/CommentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/CommentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/CommentMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/CommentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/CommentMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/CommentMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/CommentMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/pojo/CommentLite.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/pojo/CommentLite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/pojo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/pojo/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/service/CommentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/util/CommentUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/util/CommentUtil.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -38,8 +61,11 @@
     </option>
   </component>
   <component name="ProjectId" id="1l6NhM0u27ythhdsOSFbPbNDqXL" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/ls/src/main/webapp/WEB-INF" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/pojo" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2045977" />
@@ -53,11 +79,11 @@
       <recent name="com.erhuo.controller" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\The-project-practice-2020\project\erhuo\ywh\src\main\java\com\erhuo\pojo" />
       <recent name="E:\IntelliJ IDEA 2019.2.4\IDEA_code\erhuo\ls\src\main\webapp\WEB-INF" />
       <recent name="E:\IntelliJ IDEA 2019.2.4\IDEA_code\erhuo\ls\src\main\resources" />
       <recent name="E:\IntelliJ IDEA 2019.2.4\IDEA_code\erhuo\ywh\src\main\java\com\erhuo\util" />
       <recent name="E:\IntelliJ IDEA 2019.2.4\IDEA_code\erhuo\ls\src\main\java\com\erhuo\util" />
-      <recent name="E:\IntelliJ IDEA 2019.2.4\IDEA_code\erhuo\ls\src\main\java\com\erhuo\service" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -160,5 +186,18 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

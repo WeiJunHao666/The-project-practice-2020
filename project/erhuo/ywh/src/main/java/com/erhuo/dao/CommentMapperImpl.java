@@ -48,4 +48,16 @@ public class CommentMapperImpl extends SqlSessionDaoSupport implements CommentMa
         int result = commentMapper.delUserLike(userId,comId);
         return result;
     }
+
+    @Override
+    public int addCom(Comment comment1) {
+        CommentMapper commentMapper = getSqlSession().getMapper(CommentMapper.class);
+        int result = commentMapper.addCom(comment1);
+        return result;
+    }
+
+    @Override
+    public int reply(Comment comment) {
+        return 0;
+    }
 }

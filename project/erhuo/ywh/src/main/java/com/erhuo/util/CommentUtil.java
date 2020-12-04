@@ -42,7 +42,7 @@ public class CommentUtil {
         return firstList;
     }
 
-    public static void getLite(List<Comment> list, List<CommentLite> comList){
+    public static void getLite(List<Comment> list, List<CommentLite> comList,List<Integer> likeList){
         for (Comment node : list) {
             CommentLite commentLite = new CommentLite();
             commentLite.setComId(node.getComId());
@@ -51,9 +51,12 @@ public class CommentUtil {
             commentLite.setMessage(node.getMessage());
             commentLite.setUserId(node.getUserId());
             commentLite.setLikeNum(node.getLikeNum());
+            if(likeList.contains(node.getComId())){
+                commentLite.setIsLike(true);
+            }
             comList.add(commentLite);
             if (node.getNextComments().size()!=0){
-                getLite(node.getNextComments(),comList);
+                getLite(node.getNextComments(),comList,likeList);
             }
         }
     }
