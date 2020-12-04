@@ -167,7 +167,7 @@ public class ViewServiceActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    String s = "http://10.7.90.60:8081/erhuoy/comment/getCom/1/1";
+                    String s = "http://192.168.43.244:8081/erhuoy/comment/getCom/1/1";
                     URL url = new URL(s);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
@@ -378,7 +378,7 @@ public class ViewServiceActivity extends AppCompatActivity {
                         jsonStr);
                 //2) 创建请求对象
                 final Request request = new Request.Builder()
-                        .url("http://10.7.90.60:8081/erhuoy/comment/addCom")
+                        .url("http://192.168.43.244:8081/erhuoy/comment/addCom")
                         .post(requestBody)
                         .build();
                 //3. 创建CALL对象

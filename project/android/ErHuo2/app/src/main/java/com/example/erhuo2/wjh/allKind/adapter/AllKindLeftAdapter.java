@@ -43,8 +43,8 @@ public class AllKindLeftAdapter extends RecyclerView.Adapter<AllKindLeftAdapter.
         holder.textView.setText(list.get(position).getShowName());
         holder.setIsRecyclable(false);
         if (list.get(position).isChick()) {
-            holder.itemView.setBackgroundResource(R.drawable.a);
-            holder.textView.setTextColor(Color.parseColor("#ffffff"));
+            holder.itemView.setBackgroundResource(R.drawable.background_choose);
+            holder.textView.setTextColor(Color.parseColor("#13CDC1"));
         } else {
             holder.itemView.setBackgroundColor(Color.parseColor("#DDDDDD"));
         }

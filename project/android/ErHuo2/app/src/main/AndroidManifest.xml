@@ -36,6 +36,7 @@
         <activity android:name=".zsl.activity.CommodityDetailsActivity" />
         <activity android:name=".SearchPageActivity" />
         <activity android:name=".zsl.activity.LoginActivity"/>
+        <activity android:name=".zsl.activity.ProductDetailsActivity"/>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.erhuo2.fileprovider"

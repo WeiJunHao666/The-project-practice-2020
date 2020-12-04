@@ -110,9 +110,6 @@ public class MainActivity extends AppCompatActivity implements LoginView{
 
                     }else{
                         getData();
-                        Intent j = new Intent();
-                        j.setClass(getApplicationContext(), SetUserInfo_activity.class);
-                        startActivity(j);
                     }
                     break;
 
@@ -166,6 +163,9 @@ public class MainActivity extends AppCompatActivity implements LoginView{
     @Override
     public void onSuccess(String data) {
         Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
+        Intent j = new Intent();
+        j.setClass(getApplicationContext(), SetUserInfo_activity.class);
+        startActivity(j);
         UserInfo info = new Gson().fromJson(data, UserInfo.class);
         //可以创建一个新的SharedPreference来对储存的文件进行操作
         SharedPreferences sp = getApplication().getSharedPreferences("data", Context.MODE_PRIVATE);

@@ -35,8 +35,8 @@ public class AllKindActivity extends AppCompatActivity implements AllKindLeftAda
     }
     private void initData() {
         //模拟数据
-        String response = "{\"datas\": [{\"id\": \"56\",\"showName\": \"清新\"},{\"id\": \"57\",\"showName\": \"复古\"},{\"id\": \"58\", \"showName\": \"古风\"},{\"id\": \"59\", \"showName\": \"盐系\"},{ \"id\": \"141\", \"showName\": \"暗黑\"},{  \"id\": \"62\", \"showName\": \"花草\"},{\"id\": \"63\", \"showName\": \"\n" +
-                "美食物品\"},{ \"id\": \"64\", \"showName\": \"人物\" },{ \"id\": \"65\",  \"showName\": \"文字字母\"},{\"id\": \"67\", \"showName\": \"基础款\"},{\"id\": \"68\",\"showName\": \"风景\"},{ \"id\": \"70\", \"showName\": \"动物\"}, { \"id\": \"70\", \"showName\": \"英语\"}, { \"id\": \"70\", \"showName\": \"1物\"}, { \"id\": \"70\", \"showName\": \"xx\"}, { \"id\": \"70\", \"showName\": \"tt\"} ,{ \"id\": \"70\", \"showName\": \"kk\"}]}\n";
+        String response = "{\"datas\": [{\"id\": \"1\",\"showName\": \"生活百货\"},{\"id\": \"2\",\"showName\": \"手机数码\"},{\"id\": \"3\", \"showName\": \"女装\"},{\"id\": \"4\", \"showName\": \"美妆\"},{ \"id\": \"5\", \"showName\": \"运动户外\"},{  \"id\": \"6\", \"showName\": \"车品\"},{\"id\": \"7\", \"showName\": \"\n" +
+                "儿童玩具\"},{ \"id\": \"8\", \"showName\": \"游戏装备\" },{ \"id\": \"9\",  \"showName\": \"宠物用品\"},{\"id\": \"10\", \"showName\": \"男装\"},{\"id\": \"11\",\"showName\": \"箱包\"},{ \"id\": \"12\", \"showName\": \"游戏交易\"}, { \"id\": \"13\", \"showName\": \"演出票\"}, { \"id\": \"14\", \"showName\": \"男鞋\"}, { \"id\": \"15\", \"showName\": \"女鞋\"}, { \"id\": \"16\", \"showName\": \"服饰配件\"}]}\n";
         //对数据进行解析
         LeftBean leftBean = new Gson().fromJson(response, LeftBean.class);
         //获取分类集合
@@ -83,6 +83,19 @@ public class AllKindActivity extends AppCompatActivity implements AllKindLeftAda
         recyclerView2.setAdapter(adapter2);
 
     }
+    private void initData3(){
+        //模拟数据
+        String str = "{\"datas\":[{\"title\": \"推荐\", \"list\":[{\"name\":\"优衣库\"}, {\"name\":\"Zara\"}, " +
+                "{\"name\":\"拉夏贝尔\"}, {\"name\":\"ONLY\"}, {\"name\":\"Vero Moda\"}, {\"name\":\"MeTe\"}]}, {\"title\": \"推荐\", \"list\":[{\"name\":\"一键转卖\"}, {\"name\":\"品牌低价\"},  {\"name\":\"网红同款\"}]}, {\"title\": \"上装\", \"list\":[{\"name\":\"背心\"}, {\"name\":\"女式卫衣\"},  {\"name\":\"女士T恤\"},  {\"name\":\"主板\"}]}" + ",{\"title\": \"特色服装\", \"list\":[{\"name\":\"礼服\"}, {\"name\":\"一体机\"}, {\"name\":\"台式机\"}, {\"name\":\"笔记本电脑\"},{\"name\":\"平板电脑\"}]}," +
+                "{\"title\": \"相机\", \"list\":[{\"name\":\"照相机\"}, {\"name\":\"镜头\"}, {\"name\":\"单反镜头\"}, {\"name\":\"数码单反\"}, {\"name\":\"数码相机\"}, {\"name\":\"索尼\"}]}]}";
+        RightBean rightBean = new Gson().fromJson(str, RightBean.class);
+        list2 = rightBean.getDatas();
+        adapter2 = new AllKindRightAdapter(this, list2);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView2.setLayoutManager(manager);
+        recyclerView2.setAdapter(adapter2);
+    }
 
     @Override
     public void onSelect(View view, int position) {
@@ -99,11 +112,14 @@ public class AllKindActivity extends AppCompatActivity implements AllKindLeftAda
             Log.e(i+1+"", list.get(i).isChick()+"");
         }
         String id = list.get(position).getId();
-        if(id.equals("57")){
+        if(id.equals("1")){
+            initData1();
+        }
+        if(id.equals("2")){
             initData2();
         }
-        if(id.equals("56")){
-            initData1();
+        if(id.equals("3")){
+            initData3();
         }
         //刷新列表
         adapter.notifyDataSetChanged();
