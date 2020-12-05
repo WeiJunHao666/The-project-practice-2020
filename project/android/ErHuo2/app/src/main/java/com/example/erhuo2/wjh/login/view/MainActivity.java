@@ -110,6 +110,9 @@ public class MainActivity extends AppCompatActivity implements LoginView{
 
                     }else{
                         getData();
+                        Intent j = new Intent();
+                        j.setClass(getApplicationContext(), SetUserInfo_activity.class);
+                        startActivity(j);
                     }
                     break;
 

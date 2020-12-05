@@ -54,7 +54,7 @@ public class ReplyAdapter extends BaseAdapter {
         final ImageView reply_item_like = convertView.findViewById(R.id.reply_item_like);
         TextView reply_data = convertView.findViewById(R.id.reply_data);
 
-        reply_user.setText(listReply.get(position).getName());
+        reply_user.setText(listReply.get(position).getName()+" 回复 "+listReply.get(position).getLastName());
         reply_prizes.setText(listReply.get(position).getPrizes());
         reply_data.setText(listReply.get(position).getContent());
 
