@@ -95,7 +95,6 @@ public class ViewServiceActivity extends AppCompatActivity {
 
     private OkHttpClient okHttpClient;
 
-
     private Handler handler = new Handler(){
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
@@ -468,6 +467,8 @@ public class ViewServiceActivity extends AppCompatActivity {
                             msg.obj = r;
                             handler.sendMessage(msg);
                         }
+
+                        service_discuss_content.setHint("说点什么吧~");
                     }
                     break;
             }

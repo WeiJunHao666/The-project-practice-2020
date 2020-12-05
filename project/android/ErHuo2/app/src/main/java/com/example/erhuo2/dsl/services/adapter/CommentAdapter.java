@@ -22,6 +22,7 @@ import com.example.erhuo2.dsl.services.entities.CommentEntity;
 import com.example.erhuo2.dsl.services.entities.CommentInfoToSer;
 import com.example.erhuo2.dsl.services.entities.MyEvent;
 import com.example.erhuo2.dsl.services.entities.ReplyEntity;
+import com.example.erhuo2.dsl.services.model.CommentModel;
 import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
@@ -48,7 +49,7 @@ public class CommentAdapter extends BaseAdapter {
     private Context context;
     private List<CommentEntity> listComment = new ArrayList<>();
     private int item_layout_list;
-    private OkHttpClient okHttpClient;
+    private CommentModel cm = new CommentModel().getInstance();
 
 
     public CommentAdapter(Context context, List<CommentEntity> listComment, int item_layout_list) {
@@ -121,16 +122,14 @@ public class CommentAdapter extends BaseAdapter {
                     listComment.get(position).setLike(true);
                     Log.e("dsl","thump up !!!");
                     //更新点赞数
-                    //updateLike(1, listComment.get(position).getComId());
-                    //notifyDataSetChanged();
+                    //cm.updateLike(1, listComment.get(position).getComId());
                 }else{
                     comment_item_like.setImageResource(R.drawable.ex_thump_up);
                     prizes.setText(Integer.parseInt(prizes.getText().toString())-1+"");
                     listComment.get(position).setLike(false);
                     Log.e("dsl","thump down !!!");
                     //更新点赞数
-                    //updateUnLike(1,listComment.get(position).getComId());
-                    //notifyDataSetChanged();
+                    //cm.updateUnLike(1,listComment.get(position).getComId());
                 }
             }
         });
@@ -138,70 +137,5 @@ public class CommentAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private void updateLike(final int userId, final int comId) {
-        new Thread(){
-            @Override
-            public void run() {
 
-                RequestBody requestBody = RequestBody.create(
-                        MediaType.parse("text/plain;charset=utf-8"),
-                        "");
-                //2) 创建请求对象
-                final Request request = new Request.Builder()
-                        .url(SERVER_ADDR+"comment/like/"+userId+"/"+comId)
-                        .post(requestBody)
-                        .build();
-                //3. 创建CALL对象
-                okHttpClient = new OkHttpClient();
-                Call call = okHttpClient.newCall(request);
-
-                //4. 提交请求并获取响应
-                call.enqueue(new Callback() {
-                    @Override
-                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                        Log.i("lww", "请求失败");
-                    }
-
-                    @Override
-                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                        Log.i("lww", "请求成功");
-                    }
-                });
-            }
-        }.start();
-
-    }
-
-    private void updateUnLike(final int userId, final int comId) {
-        new Thread(){
-            @Override
-            public void run() {
-
-                RequestBody requestBody = RequestBody.create(
-                        MediaType.parse("text/plain;charset=utf-8"),
-                        "");
-                //2) 创建请求对象
-                final Request request = new Request.Builder()
-                        .url(SERVER_ADDR+"comment/unlike/"+userId+"/"+comId)
-                        .post(requestBody)
-                        .build();
-                //3. 创建CALL对象
-                okHttpClient = new OkHttpClient();
-                Call call = okHttpClient.newCall(request);
-
-                //4. 提交请求并获取响应
-                call.enqueue(new Callback() {
-                    @Override
-                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                        Log.i("lww", "请求失败");
-                    }
-
-                    @Override
-                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                        Log.i("lww", "请求成功");
-                    }
-                });
-            }
-        }.start();
-    }
 }

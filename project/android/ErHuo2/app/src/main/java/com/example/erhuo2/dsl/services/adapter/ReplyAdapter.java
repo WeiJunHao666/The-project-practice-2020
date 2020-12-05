@@ -11,14 +11,29 @@ import android.widget.TextView;
 
 import com.example.erhuo2.R;
 import com.example.erhuo2.dsl.services.entities.ReplyEntity;
+import com.example.erhuo2.dsl.services.model.ReplyModel;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+import static com.example.erhuo2.dsl.services.usefulimg.ConfigUtil.SERVER_ADDR;
 
 public class ReplyAdapter extends BaseAdapter {
     private Context context;
     private List<ReplyEntity> listReply = new ArrayList<>();
     private int item_layout_list;
+    private ReplyModel rm = ReplyModel.getInstance();
 
     public ReplyAdapter(Context context, List<ReplyEntity> listReply, int item_layout_list) {
         this.context = context;
@@ -73,21 +88,18 @@ public class ReplyAdapter extends BaseAdapter {
                     listReply.get(position).setLike(true);
                     Log.e("dsl","thump up !!!");
                     //更新点赞数
-                    updateThumpUp();
+                    rm.updateThumpUp(1,listReply.get(position).getComId());
                 }else{
                     reply_item_like.setImageResource(R.drawable.ex_thump_up);
                     reply_prizes.setText(Integer.parseInt(reply_prizes.getText().toString())-1+"");
                     listReply.get(position).setLike(false);
                     Log.e("dsl","thump down !!!");
                     //更新点赞数
-                    updateThumpUp();
+                    rm.updateThumpDown(1,listReply.get(position).getComId());
                 }
             }
         });
 
         return convertView;
-    }
-
-    private void updateThumpUp() {
     }
 }

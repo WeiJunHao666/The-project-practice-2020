@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.erhuo2.R;
 import com.example.erhuo2.dsl.services.ViewServiceActivity;
 import com.example.erhuo2.dsl.services.entities.ServiceEntity;
+import com.example.erhuo2.dsl.services.model.ServiceModel;
 import com.jaren.lib.view.LikeView;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class ServicesAdapter extends BaseAdapter {
     private Context context;
     private List<ServiceEntity> listServices = new ArrayList<>();
     private int item_layout_list;
+    private ServiceModel sm = ServiceModel.getInstance();
 
     public ServicesAdapter(Context context, List<ServiceEntity> listServices, int item_layout_list) {
         this.context = context;
@@ -101,7 +103,7 @@ public class ServicesAdapter extends BaseAdapter {
                             listServices.get(position).setCheck(true);
                             Log.e("dsl","thump up !!!");
                             //更新点赞数
-                            updateThumpUp();
+                            //sm.updateThumpUp(1,listServices.get(position).getImg());
                         }else{
                             //取消点赞
                             service_thump_up.toggle();
@@ -110,7 +112,7 @@ public class ServicesAdapter extends BaseAdapter {
                             listServices.get(position).setCheck(false);
                             Log.e("dsl","thump down !!!");
                             //更新点赞数
-                            updateThumpUp();
+                            //sm.updateThumpDown(1,listServices.get(position).getImg());
                         }
                         break;
                     //评论跳转
@@ -134,9 +136,6 @@ public class ServicesAdapter extends BaseAdapter {
         service_discuss.setOnClickListener(listener);
 
         return convertView;
-    }
-
-    private void updateThumpUp() {
     }
 
 }
