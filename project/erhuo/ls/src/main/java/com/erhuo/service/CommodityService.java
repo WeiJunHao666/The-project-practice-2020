@@ -34,4 +34,14 @@ public class CommodityService {
         commodity.setImg(img);
         return commodity;
     }
+
+    public List<Commodity> findCommodityByName(String name) {
+        List<Commodity> list = commodityMapper.findCommodityByName(name);
+        for (Commodity commodity : list) {
+            int id = commodity.getId();
+            List<CommodityImg> img = commodityImgMapper.findImgById(id);
+            commodity.setImg(img);
+        }
+        return list;
+    }
 }
