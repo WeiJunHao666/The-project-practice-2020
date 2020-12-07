@@ -27,10 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".wjh.SearchResultActivity"/>
-        <activity android:name=".wjh.MessageContactActivity" tools:ignore="Instantiatable" />
+        <activity android:name=".wjh.searchResult.SearchResultActivity"/>
+        <activity android:name=".wjh.message.MessageContactActivity" tools:ignore="Instantiatable" />
         <activity android:name=".wjh.allKind.view.AllKindActivity" />
-        <activity android:name=".wjh.SetUserInfo_activity" />
+        <activity android:name=".wjh.setInfo.view.SetUserInfo_activity" />
         <activity android:name=".dsl.services.ViewServiceActivity" />
         <activity android:name=".zsl.activity.CommodityPageActivity" />
         <activity android:name=".zsl.activity.CommodityDetailsActivity" />

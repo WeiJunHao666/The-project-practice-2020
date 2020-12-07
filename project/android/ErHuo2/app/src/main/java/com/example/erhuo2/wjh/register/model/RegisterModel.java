@@ -1,6 +1,6 @@
 package com.example.erhuo2.wjh.register.model;
 
-import com.example.erhuo2.wjh.login.model.ModelListener;
+import com.example.erhuo2.wjh.login.model.LoginListener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import java.net.URL;
 
 public class RegisterModel implements Model {
     @Override
-    public void register(final String s, final ModelListener registerListener) {
+    public void register(final String s, final LoginListener registerListener) {
         new Thread(){
             @Override
             public void run() {

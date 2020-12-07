@@ -1,4 +1,4 @@
-package com.example.erhuo2.wjh;
+package com.example.erhuo2.wjh.searchResult;
 
 import android.content.Context;
 import android.os.Bundle;

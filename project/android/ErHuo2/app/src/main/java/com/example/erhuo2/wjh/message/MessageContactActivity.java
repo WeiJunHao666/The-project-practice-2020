@@ -1,4 +1,4 @@
-package com.example.erhuo2.wjh;
+package com.example.erhuo2.wjh.message;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,7 +8,6 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.erhuo2.R;

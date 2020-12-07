@@ -1,4 +1,4 @@
-package com.example.erhuo2.wjh;
+package com.example.erhuo2.wjh.message;
 
 public class MessageData {
     private int headImage;
