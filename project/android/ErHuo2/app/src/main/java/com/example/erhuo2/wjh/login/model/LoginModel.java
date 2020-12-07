@@ -16,7 +16,7 @@ import java.net.URL;
 public class LoginModel implements Model {
 
     @Override
-    public void login(final String s , final ModelListener loginListener) {
+    public void login(final String s , final LoginListener loginListener) {
         new Thread(){
             @Override
             public void run() {

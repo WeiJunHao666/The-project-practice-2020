@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.example.erhuo2.wjh.ConfigUtil;
-import com.example.erhuo2.wjh.login.model.ModelListener;
+import com.example.erhuo2.wjh.login.model.LoginListener;
 import com.example.erhuo2.wjh.register.model.RegisterModel;
 import com.example.erhuo2.wjh.register.view.RegisterView;
 
@@ -22,7 +22,7 @@ public class RegisterPresenter {
         registerModelClass = new RegisterModel();
         String s = ConfigUtil.REGISTER +  "?username="+userName+"&password=" +userPassword;
         Log.e("sss", s);
-        registerModelClass.register(s, new ModelListener() {
+        registerModelClass.register(s, new LoginListener() {
             @Override
             public void onSuccess(final String msg) {
                 mHandler.post(new Runnable() {

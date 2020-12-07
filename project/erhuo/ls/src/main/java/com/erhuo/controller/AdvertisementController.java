@@ -23,6 +23,7 @@ public class AdvertisementController {
     public String getAdvertisementAll(){
         List<Advertisement> list = advertisementService.queryAdvertisementAll();
         String s = JSON.toJSONString(list);
+        System.out.println(s);
         return s;
     }
 

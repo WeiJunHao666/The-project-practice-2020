@@ -13,7 +13,7 @@ public class test {
     private CommodityService commodityService;
     @Test
     public void test1(){
-        List<Commodity> all = commodityService.findAll();
-        System.out.println(all);
+        String upToken = QiniuUpload.getUpToken();
+        System.out.println(upToken);
     }
 }

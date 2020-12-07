@@ -55,7 +55,7 @@ public class AllKindLeftAdapter extends RecyclerView.Adapter<AllKindLeftAdapter.
     @Override
     public int getItemCount() {
         //返回Item总条数
-        return list.size();
+        return list!=null ? list.size() : 0;
     }
 
     public interface OnSelectorListener {

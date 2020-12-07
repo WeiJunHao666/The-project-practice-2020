@@ -1,6 +1,6 @@
 package com.example.erhuo2.wjh.login.model;
 
-public interface ModelListener {
+public interface LoginListener {
 
     void onSuccess(String msg);
 

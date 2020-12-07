@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.erhuo2.R;
 import com.example.erhuo2.dsl.services.ServePageFragment;
-import com.example.erhuo2.wjh.MessageContactActivity;
+import com.example.erhuo2.wjh.message.MessageContactActivity;
 import com.example.erhuo2.zsl.page.HomePageFragment;
 import com.example.erhuo2.zsl.page.MyPageFragment;
 import com.roughike.bottombar.BottomBar;

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.erhuo2.R;
+import com.example.erhuo2.dsl.services.model.ServiceModel;
 import com.example.erhuo2.dsl.services.view.SquareImageView;
 import com.yanzhenjie.album.Action;
 import com.yanzhenjie.album.Album;
@@ -37,6 +39,7 @@ public class CreateServiceActivity extends AppCompatActivity {
     private ArrayList<AlbumFile> mAlbumFiles = new ArrayList<>();
     private List<Bitmap> bitmaps = new ArrayList<>();
     private GridLayout create_service_imgs;
+    private ServiceModel sm = ServiceModel.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +78,10 @@ public class CreateServiceActivity extends AppCompatActivity {
                     getImg();
                     break;
                 case R.id.create_service_submit:
-
+                    //sm.addPost();
+                    Intent i = new Intent();
+                    i.setClass(getApplicationContext(),ServePageFragment.class);
+                    startActivity(i);
                     break;
             }
         }

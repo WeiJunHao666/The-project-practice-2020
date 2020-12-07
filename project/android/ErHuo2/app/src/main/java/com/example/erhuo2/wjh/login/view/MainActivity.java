@@ -17,13 +17,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.erhuo2.R;
-import com.example.erhuo2.wjh.SetUserInfo_activity;
+import com.example.erhuo2.wjh.setInfo.view.SetUserInfo_activity;
 import com.example.erhuo2.wjh.UserInfo;
 import com.example.erhuo2.wjh.login.listener.PasswordEditChangedListener;
 import com.example.erhuo2.wjh.login.listener.UserEditChangedListener;
 import com.example.erhuo2.wjh.login.presenter.LoginPresenter;
 import com.example.erhuo2.wjh.register.view.Register_activity;
-import com.example.erhuo2.zsl.activity.LoginActivity;
 import com.google.gson.Gson;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -110,6 +109,9 @@ public class MainActivity extends AppCompatActivity implements LoginView{
 
                     }else{
                         getData();
+                        Intent j = new Intent();
+                        j.setClass(getApplicationContext(), SetUserInfo_activity.class);
+                        startActivity(j);
                     }
                     break;
 

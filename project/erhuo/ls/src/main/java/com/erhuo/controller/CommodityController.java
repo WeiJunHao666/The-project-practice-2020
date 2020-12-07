@@ -32,4 +32,11 @@ public class CommodityController {
         String s = JSON.toJSONString(commodity);
         return s;
     }
+
+    @RequestMapping(value="/search", produces = {"text/plain;charset=utf-8","text/html;charset=utf-8"})
+    public String searchCommodityByName(String name) {
+        List<Commodity> list = commodityService.findCommodityByName("%"+name+"%");
+        String s = JSON.toJSONString(list);
+        return s;
+    }
 }
