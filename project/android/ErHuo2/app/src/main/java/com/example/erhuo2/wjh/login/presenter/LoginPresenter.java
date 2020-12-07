@@ -4,7 +4,7 @@ import android.os.Handler;
 
 import com.example.erhuo2.wjh.ConfigUtil;
 import com.example.erhuo2.wjh.login.model.LoginModel;
-import com.example.erhuo2.wjh.login.model.ModelListener;
+import com.example.erhuo2.wjh.login.model.LoginListener;
 import com.example.erhuo2.wjh.login.view.LoginView;
 
 public class LoginPresenter {
@@ -21,7 +21,7 @@ public class LoginPresenter {
         String userPassword = loginView.getUserPassword();
         loginModelClass = new LoginModel();
         String s = ConfigUtil.LOGIN +"?username="+userName+"&password=" +userPassword;
-        loginModelClass.login(s, new ModelListener() {
+        loginModelClass.login(s, new LoginListener() {
             @Override
             public void onSuccess(final String data) {
                 mHandler.post(new Runnable() {

@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.erhuo2.R;
-import com.example.erhuo2.wjh.SearchResultActivity;
 import com.example.erhuo2.wjh.allKind.bean.RightBean;
+import com.example.erhuo2.wjh.searchResult.SearchResultActivity;
 
 import java.util.List;
 

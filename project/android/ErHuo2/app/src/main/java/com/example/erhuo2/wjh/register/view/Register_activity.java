@@ -19,10 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.erhuo2.R;
-import com.example.erhuo2.wjh.SetUserInfo_activity;
 import com.example.erhuo2.wjh.login.view.MainActivity;
 import com.example.erhuo2.wjh.register.presenter.RegisterPresenter;
-import com.example.erhuo2.zsl.activity.LoginActivity;
 
 
 public class Register_activity extends AppCompatActivity implements RegisterView {

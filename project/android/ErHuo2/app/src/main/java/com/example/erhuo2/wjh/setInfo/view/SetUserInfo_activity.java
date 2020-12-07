@@ -1,12 +1,14 @@
-package com.example.erhuo2.wjh;
+package com.example.erhuo2.wjh.setInfo.view;
 
 
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -32,14 +35,21 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import com.example.erhuo2.R;
+import com.example.erhuo2.uploadUtils.Etag;
+import com.example.erhuo2.uploadUtils.FileUtils;
+import com.example.erhuo2.uploadUtils.UploadFile;
+import com.example.erhuo2.wjh.ConfigUtil;
+import com.example.erhuo2.wjh.setInfo.bean.InfoData;
+import com.example.erhuo2.wjh.setInfo.presenter.SetInfoPresenter;
 import com.example.erhuo2.zsl.activity.LoginActivity;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
-public class SetUserInfo_activity extends AppCompatActivity implements View.OnClickListener{
+public class SetUserInfo_activity extends AppCompatActivity implements View.OnClickListener,SetInfoView{
     private static final int TAKE_PHOTO = 1;
     private static final int CHOOSE_PHOTO = 2;
     private Uri imageUri;
@@ -52,6 +62,9 @@ public class SetUserInfo_activity extends AppCompatActivity implements View.OnCl
     private int[] image;
     private String[] name;
     private PopupWindow popupWindow;
+    private SetInfoPresenter presenter;
+    private UploadFile uploadFile;
+    private String path;
 
 
     @Override
@@ -61,9 +74,66 @@ public class SetUserInfo_activity extends AppCompatActivity implements View.OnCl
         findViews();
         setListener();
         image = new int[]{R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.e
-                ,R.drawable.f, R.drawable.g, R.drawable.h};
+                    ,R.drawable.f, R.drawable.g, R.drawable.h};
         name = new String[]{"路飞", "索隆", "山治", "娜美", "乔巴", "乌索普", "罗宾", "弗兰奇", "布鲁克", "甚平"};
         setHeadShape(iv_setHead, R.drawable.a);
+        presenter = new SetInfoPresenter(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onSuccess(String msg) {
+        try {
+            Log.e("token", msg);
+            //上传图片
+            File file = new File(path);
+            uploadFile = new UploadFile();
+            String hash = null;
+            hash = Etag.file(file);
+            uploadFile.upload(file, hash, msg);
+
+            SharedPreferences sp = getApplication().getSharedPreferences("data", MODE_PRIVATE);
+            int id = sp.getInt("userId", 1);
+            String nickname = sp.getString("nickname", "");
+            String s = ConfigUtil.UPDATE;
+            Log.e("mmmm", String.valueOf(sp.getInt("userId", 1)));
+            Log.e("yyyy", "1");
+            Log.e("hash", hash);
+
+            Gson gson = new Gson();
+            InfoData userInfo = new InfoData(id, hash);
+            String sendInfo = gson.toJson(userInfo);
+
+            presenter.uploadFWQ(s, sendInfo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Bitmap drawableToBitamp(Drawable drawable)
+    {
+        int w = drawable.getIntrinsicWidth();
+        int h = drawable.getIntrinsicHeight();
+        return Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);
+    }
+
+    @Override
+    public void onFailure(String msg) {
+        Toast.makeText(getApplicationContext(), "上传失败", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSuccess1(String msg) {
+        Toast.makeText(getApplicationContext(), "上传成功1", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onFailure1(String msg) {
+        Toast.makeText(getApplicationContext(), "上传失败1", Toast.LENGTH_SHORT).show();
     }
 
     private void setHeadShape(ImageView iv, int res) {
@@ -93,11 +163,6 @@ public class SetUserInfo_activity extends AppCompatActivity implements View.OnCl
         tv_random = findViewById(R.id.tv_random);
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
     class MyOnClickListener implements View.OnClickListener{
 
         @Override
@@ -107,9 +172,11 @@ public class SetUserInfo_activity extends AppCompatActivity implements View.OnCl
                     showAnimation();
                     break;
                 case R.id.btn_setInfo_save:
-                    Intent ii = new Intent();
-                    ii.setClass(getApplicationContext(), LoginActivity.class);
-                    startActivity(ii);
+                    String s = ConfigUtil.GET_TOKEN;
+                    presenter.uploadQNY(s);
+                    Intent i = new Intent();
+                    i.setClass(getApplicationContext(), LoginActivity.class);
+                    startActivity(i);
                     break;
                 case R.id.iv_random:
                     int random_one = (int)(Math.random()*8);
@@ -123,9 +190,9 @@ public class SetUserInfo_activity extends AppCompatActivity implements View.OnCl
                     et_setName.setText(name[random_four]);
                     break;
                 case R.id.btn_skip:
-                    Intent i = new Intent();
-                    i.setClass(getApplicationContext(), LoginActivity.class);
-                    startActivity(i);
+                    Intent j = new Intent();
+                    j.setClass(getApplicationContext(), LoginActivity.class);
+                    startActivity(j);
                     break;
 
             }
@@ -135,7 +202,7 @@ public class SetUserInfo_activity extends AppCompatActivity implements View.OnCl
     //
     private void showAnimation() {
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View vPopupWindow = inflater.inflate(R.layout.popupwindow, null, false);//引入弹窗布局
+        View vPopupWindow = inflater.inflate(R.layout.popupwindow_photo, null, false);//引入弹窗布局
         popupWindow = new PopupWindow(vPopupWindow, ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT, true);
         //设置背景透明
         addBackground();
@@ -236,7 +303,7 @@ public class SetUserInfo_activity extends AppCompatActivity implements View.OnCl
         }
         if(Build.VERSION.SDK_INT>=24){
             imageUri = FileProvider.getUriForFile(SetUserInfo_activity.this,
-                    "com.example.erhuo2.fileprovider", outputImage);
+                    "com.example.project2020.fileprovider", outputImage);
         }else{
             imageUri = Uri.fromFile(outputImage);
         }
@@ -246,6 +313,7 @@ public class SetUserInfo_activity extends AppCompatActivity implements View.OnCl
         startActivityForResult(intent, TAKE_PHOTO);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -260,6 +328,7 @@ public class SetUserInfo_activity extends AppCompatActivity implements View.OnCl
                         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().
                                 openInputStream(imageUri));
                         iv_setHead.setImageBitmap(bitmap);
+                        path = FileUtils.getPath(this, imageUri);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -273,11 +342,13 @@ public class SetUserInfo_activity extends AppCompatActivity implements View.OnCl
                         if(popupWindow!=null){
                             popupWindow.dismiss();
                         }
+                        Log.e("uri", uri+"");
                         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
                         RoundedBitmapDrawable circleDrawable = RoundedBitmapDrawableFactory.create(getResources(), BitmapFactory.decodeStream(getContentResolver().openInputStream(uri)));
                         circleDrawable.getPaint().setAntiAlias(true);
                         circleDrawable.setCornerRadius(Math.min(bitmap.getWidth(), bitmap.getHeight()));
                         iv_setHead.setImageDrawable(circleDrawable);
+                        path = FileUtils.getPath(this, uri);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -327,7 +398,7 @@ public class SetUserInfo_activity extends AppCompatActivity implements View.OnCl
 //    private void displayImage(String imagePath) {
 //        if(imagePath != null){
 //            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-//            Log.ee("222", imagePath);
+//            Log.e("222", imagePath);
 //            iv_setHead.setImageBitmap(bitmap);
 //        }else{
 //            Toast.makeText(this, "获取图片失败", Toast.LENGTH_SHORT).show();
@@ -346,7 +417,6 @@ public class SetUserInfo_activity extends AppCompatActivity implements View.OnCl
 //        }
 //        return path;
 //    }
-
 
     @Override
     protected void onDestroy() {

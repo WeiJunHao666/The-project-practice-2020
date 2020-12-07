@@ -12,6 +12,9 @@
         select * from commodity where id=#{id}
     </select>
 
+    <select id="findCommodityByName" resultMap="commodity" parameterType="String">
+        select * from commodity where commodity_describe like #{name}
+    </select>
 
     <resultMap id="commodity" type="commodity">
         <result property="userId" column="user_id"/>
