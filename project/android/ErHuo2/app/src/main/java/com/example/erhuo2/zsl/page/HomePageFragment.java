@@ -1,6 +1,7 @@
 package com.example.erhuo2.zsl.page;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,11 +21,12 @@ import com.example.erhuo2.SearchPageActivity;
 import com.example.erhuo2.wjh.allKind.view.AllKindActivity;
 import com.example.erhuo2.zsl.activity.ProductDetailsActivity;
 import com.example.erhuo2.zsl.adapter.ProductAdapter;
+import com.example.erhuo2.zsl.entities.AdvertisingEntity;
 import com.example.erhuo2.zsl.entities.ProductEntity;
-import com.example.erhuo2.zsl.entities.RightBean;
 import com.example.erhuo2.zsl.loder.GlideImageLoader;
 import com.example.erhuo2.zsl.view.MyGridView;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -47,7 +49,7 @@ import java.util.List;
 public class HomePageFragment extends Fragment {
     private View root;
     private TextView position;
-    private EditText keyWord;
+    private Button keyWord;
     private Button search;
     private Button kind1;
     private Button kind2;
@@ -55,10 +57,11 @@ public class HomePageFragment extends Fragment {
     private Button kind4;
     private Button kind5;
     private Button more;
+    private Button kind;
     private MyGridView gridView;
     private SmartRefreshLayout refresh_layout;
     private String str;
-    private List<RightBean.AdvertisingEntity> advertisingEntity;
+    private List<AdvertisingEntity> advertisingEntity;
     private ProductAdapter productAdapter;
     private List<ProductEntity> dataSource = new ArrayList<>();
 
@@ -74,7 +77,7 @@ public class HomePageFragment extends Fragment {
 
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.home_page_fragment, container, false);
-        //upKeyValue("http://192.168.2.104:8081/erhuol/advertisement/all");
+        upKeyValue("http://10.7.88.15:8081/erhuol/advertisement/all");
         //downloadAdcertising("http://192.168.2.104:8081/erhuol/advertisement/all");
 
 //        RightBean rightBean = new Gson().fromJson(str, RightBean.class);
@@ -122,26 +125,33 @@ public class HomePageFragment extends Fragment {
     private void getViews(){
         refresh_layout = root.findViewById(R.id.home_refresh);
         position = root.findViewById(R.id.txt_position);
-        keyWord = root.findViewById(R.id.edit_keyword);
-        search = root.findViewById(R.id.btn_search);
-        kind1 = root.findViewById(R.id.btn_kind1);
-        kind2 = root.findViewById(R.id.btn_kind2);
-        kind3 = root.findViewById(R.id.btn_kind3);
-        kind4 = root.findViewById(R.id.btn_kind4);
-        kind5 = root.findViewById(R.id.btn_kind5);
-        more = root.findViewById(R.id.btn_more);
+        keyWord = root.findViewById(R.id.btn_search);
+//        kind1 = root.findViewById(R.id.btn_kind1);
+//        kind2 = root.findViewById(R.id.btn_kind2);
+//        kind3 = root.findViewById(R.id.btn_kind3);
+//        kind4 = root.findViewById(R.id.btn_kind4);
+//        kind5 = root.findViewById(R.id.btn_kind5);
+//        more = root.findViewById(R.id.btn_more);
+        kind = root.findViewById(R.id.home_kind);
         gridView = root.findViewById(R.id.grid_view);
+        Drawable drawable = getResources().getDrawable(R.drawable.zsl_kind);
+        drawable.setBounds(10, 0, 70, 70);// 第一0是距左边距离，第二0是距上边距离，60分别是长宽
+        kind.setCompoundDrawables(drawable, null, null, null);// 只放左边
     }
     public void setOnClickListener(){
         MyClickListener listener = new MyClickListener();
         keyWord.setOnClickListener(listener);
-        search.setOnClickListener(listener);
-        kind1.setOnClickListener(listener);
-        kind2.setOnClickListener(listener);
-        kind3.setOnClickListener(listener);
-        kind4.setOnClickListener(listener);
-        kind5.setOnClickListener(listener);
-        more.setOnClickListener(listener);
+        kind.setOnClickListener(listener);
+//        kind1.setOnClickListener(listener);
+//        kind2.setOnClickListener(listener);
+//        kind3.setOnClickListener(listener);
+//        kind4.setOnClickListener(listener);
+//        kind5.setOnClickListener(listener);
+//        more.setOnClickListener(listener);
+
+        Drawable drawable = getResources().getDrawable(R.drawable.search);
+        drawable.setBounds(50, 0, 120, 70);// 第一0是距左边距离，第二0是距上边距离，60分别是长宽
+        keyWord.setCompoundDrawables(drawable, null, null, null);// 只放左边
         //给智能刷新控件注册下拉刷新事件监听器
         refresh_layout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -165,6 +175,8 @@ public class HomePageFragment extends Fragment {
                     dataSource.add(a);
                     dataSource.add(a);
                     //通知加载数据完毕
+                    productAdapter = new ProductAdapter(getActivity().getApplicationContext(),dataSource, R.layout.home_page_item);
+                    gridView.setAdapter(productAdapter);
                     refresh_layout.finishLoadMore();
                 }else{
                     //通知没有更多数据可加载
@@ -178,20 +190,23 @@ public class HomePageFragment extends Fragment {
         @Override
         public void onClick(View view) {
             switch (view.getId()){
-                case R.id.edit_keyword:
                 case R.id.btn_search:
                     Intent intent = new Intent(getActivity().getApplicationContext(), SearchPageActivity.class);
                     startActivity(intent);
                     break;
-                case R.id.btn_kind1:
-                case R.id.btn_kind2:
-                case R.id.btn_kind3:
-                case R.id.btn_kind4:
-                case R.id.btn_kind5:
-                case R.id.btn_more:
+                case R.id.home_kind:
                     Intent intent6 = new Intent(getActivity().getApplicationContext(), AllKindActivity.class);
                     startActivity(intent6);
                     break;
+//                case R.id.btn_kind1:
+//                case R.id.btn_kind2:
+//                case R.id.btn_kind3:
+//                case R.id.btn_kind4:
+//                case R.id.btn_kind5:
+//                case R.id.btn_more:
+//                    Intent intent6 = new Intent(getActivity().getApplicationContext(), AllKindActivity.class);
+//                    startActivity(intent6);
+//                    break;
 
             }
         }
@@ -240,9 +255,8 @@ public class HomePageFragment extends Fragment {
                     //读取字符信息
                     str = reader.readLine();
                     Log.e("zsl",str+"");
-                    RightBean rightBean = new Gson().fromJson(str, RightBean.class);
-                    advertisingEntity = rightBean.getDatas();
-                    Log.e("zsl",advertisingEntity.toString());
+                    advertisingEntity = new Gson().fromJson(str,new TypeToken<List<AdvertisingEntity>>(){}.getType());
+                    Log.e("zsl",advertisingEntity.get(0).getId()+"");
                     //关闭流
                     reader.close();
                     in.close();

@@ -1,24 +1,39 @@
 package com.example.erhuo2.wjh.searchResult;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.erhuo2.R;
+import com.example.erhuo2.SearchPageActivity;
+import com.example.erhuo2.dsl.services.ServePageFragment;
+import com.example.erhuo2.zsl.page.HomePageFragment;
+import com.example.erhuo2.zsl.page.MyPageFragment;
 
 
 public class SearchResultActivity extends AppCompatActivity {
     private PopupWindow popupWindow;
     private TextView search_choose;
+    private ImageView back;
+    private Button keyWord;
+    private Button go;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,10 +45,18 @@ public class SearchResultActivity extends AppCompatActivity {
     private void setListener() {
         MyOnClickListener listener = new MyOnClickListener();
         search_choose.setOnClickListener(listener);
+        back.setOnClickListener(listener);
+        go.setOnClickListener(listener);
     }
 
     private void findViews() {
         search_choose = findViewById(R.id.search_choose);
+        back = findViewById(R.id.search_result_back);
+        keyWord = findViewById(R.id.search_result_keyword);
+        go = findViewById(R.id.search_result_go);
+        Drawable drawable = getResources().getDrawable(R.drawable.search);
+        drawable.setBounds(50, 0, 120, 70);// 第一0是距左边距离，第二0是距上边距离，60分别是长宽
+        keyWord.setCompoundDrawables(drawable, null, null, null);// 只放左边
     }
 
     class MyOnClickListener implements View.OnClickListener{
@@ -44,10 +67,61 @@ public class SearchResultActivity extends AppCompatActivity {
                 case R.id.search_choose:
                     showAnimation();
                     break;
+                case R.id.search_result_keyword:
+                    Intent intent = new Intent(SearchResultActivity.this, SearchPageActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.search_result_back:
+                    onBackPressed();
+                    break;
+                case R.id.search_result_go:
+                    showPopupMenu(go);
+                    break;
             }
         }
     }
+    private void showPopupMenu(View view) {
+        // View当前PopupMenu显示的相对View的位置
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        // menu布局
+        popupMenu.getMenuInflater().inflate(R.menu.zsl_search_result_menu, popupMenu.getMenu());
+        // menu的item点击事件
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                switch (item.getItemId()){
+                    case R.id.go_home:
+                        Intent intent = new Intent(SearchResultActivity.this, HomePageFragment.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.go_service:
+                        Intent intent1 = new Intent(SearchResultActivity.this, ServePageFragment.class);
+                        startActivity(intent1);
+                        break;
+                    case R.id.go_chat:
+                        Intent intent2 = new Intent(SearchResultActivity.this, MessageContactActivity.class);
+                        startActivity(intent2);
+                        break;
+                    case R.id.go_mine:
+                        Intent intent3 = new Intent(SearchResultActivity.this, MyPageFragment.class);
+                        startActivity(intent3);
+                        break;
 
+                }
+                return false;
+            }
+        });
+        // PopupMenu关闭事件
+        popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
+            @Override
+            public void onDismiss(PopupMenu menu) {
+                Toast.makeText(getApplicationContext(), "关闭PopupMenu", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        popupMenu.show();
+    }
     private void showAnimation() {
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View vPopupWindow = inflater.inflate(R.layout.popupwindow_choose, null, false);//引入弹窗布局

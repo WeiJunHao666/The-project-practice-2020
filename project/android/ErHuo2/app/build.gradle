@@ -63,7 +63,26 @@ dependencies {
     implementation 'com.yanzhenjie:album:2.1.3'
 
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+
+    // Retrofit库，网络请求框架
+    implementation 'com.squareup.retrofit2:retrofit:2.0.2'
+    implementation 'com.squareup.okhttp3:okhttp:3.1.2'
+    // Okhttp库
+
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.2.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.2.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
+=======
+<<<<<<< HEAD
+>>>>>>> 6488c4f769eadc67d6f9e1770b5d25a70845ac51
     //wjh：网络请求框架AsyncHttpClient
     dependencies {
         implementation 'com.loopj.android:android-async-http:1.4.9'
@@ -77,5 +96,10 @@ dependencies {
     //-------------------------------------//
 
     implementation 'org.greenrobot:eventbus:3.1.1'
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0f53ef4b29f9c5dfb8ecdcdc1f31f173fc810d6c
+>>>>>>> 4a1e9ffe1bcb58ce11c3e9041d4a9818c5449fd4
+>>>>>>> 6488c4f769eadc67d6f9e1770b5d25a70845ac51
 }
