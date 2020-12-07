@@ -2,16 +2,9 @@ package com.example.erhuo2.wjh.setInfo.model;
 
 import android.util.Log;
 
-import java.io.BufferedReader;
+import com.example.erhuo2.uploadUtils.GetToken;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -31,41 +24,13 @@ public class SetInfoModel implements Model{
             @Override
             public void run() {
                 synchronized (myLock1){
-                    URL url = null;
-                    try {
-                        url = new URL(s);
-                        Log.e("kk", s);
-                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                        //设置网络请求的方式为POST
-                        conn.setRequestMethod("POST");
-                        //获取网络输出流
-                        OutputStream out = conn.getOutputStream();
-                        //必须获取网络输入流，保证客户端和服务端建立连接
-                        InputStream in = conn.getInputStream();
-                        //使用字符流读取
-                        BufferedReader reader = new BufferedReader(
-                                new InputStreamReader(in, "utf-8"));
-                        //读取字符信息
-                        String flag = reader.readLine();
-                        //关闭流
-                        reader.close();
-                        in.close();
-                        out.close();
-                        if(!flag.equals("") && flag!=null){
-                            listener.onSuccess(flag);
-                        }else{
-                            listener.onFailure("上传失败");
-                        }
-                        Log.e("线程1","thread1");
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    } catch (ProtocolException e) {
-                        e.printStackTrace();
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    String flag = GetToken.getToken(s);
+                    if(!flag.equals("") && flag!=null){
+                        listener.onSuccess(flag);
+                    }else{
+                        listener.onFailure("上传失败");
                     }
+                    Log.e("线程1","thread1");
                 }
             }
 
@@ -109,5 +74,4 @@ public class SetInfoModel implements Model{
         });
         thread2.start();
     }
-
 }
