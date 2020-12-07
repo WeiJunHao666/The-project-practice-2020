@@ -1,5 +1,6 @@
 package com.example.erhuo2.dsl.services;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
@@ -26,12 +29,16 @@ import com.example.erhuo2.dsl.services.adapter.CommentAdapter;
 import com.example.erhuo2.dsl.services.entities.ComInfoEntity;
 import com.example.erhuo2.dsl.services.entities.CommentEntity;
 import com.example.erhuo2.dsl.services.entities.CommentInfoToSer;
+import com.example.erhuo2.dsl.services.entities.MyEvent;
 import com.example.erhuo2.dsl.services.entities.ReplyEntity;
 import com.example.erhuo2.dsl.services.view.SquareImageView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jaren.lib.view.LikeView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
@@ -53,8 +60,11 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static com.example.erhuo2.dsl.services.usefulimg.ConfigUtil.SERVER_ADDR;
+
 public class ViewServiceActivity extends AppCompatActivity {
 
+    private MyEvent toCom;
     private ImageView service_back;
     private ImageView service_more;
     private CircleImageView view_service_img;
@@ -84,7 +94,6 @@ public class ViewServiceActivity extends AppCompatActivity {
 
     private OkHttpClient okHttpClient;
 
-
     private Handler handler = new Handler(){
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
@@ -100,13 +109,49 @@ public class ViewServiceActivity extends AppCompatActivity {
                 case 2:
                     Log.e("dsl","111111");
                     CommentEntity c = (CommentEntity) msg.obj;
-                    commentList.add(0,c);
+                    commentList.add(c);
                     ca.notifyDataSetChanged();
+                    Toast.makeText(getApplicationContext(), "评论成功！",
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                case 3:
+                    Log.e("dsl","33333333");
+                    ReplyEntity r = (ReplyEntity) msg.obj;
+                    commentList.get(toCom.getPrePosition()).getList().add(r);
+                    ca.notifyDataSetChanged();
+                    Toast.makeText(getApplicationContext(), "评论成功！",
+                            Toast.LENGTH_SHORT).show();
                     break;
             }
         }
     };
 
+    //订阅者
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MyEvent event) {
+        toCom = event;
+        String name="";
+        if(toCom.getAftPosition()!=-1){
+            name = commentList.get(toCom.getPrePosition()).getList().get(toCom.getAftPosition()).getName();
+        }else{
+            name = commentList.get(toCom.getPrePosition()).getName();
+        }
+        service_discuss_content.setHint("张树林 回复 "+name);
+        //聚焦并显示软键盘
+        service_discuss_content.setFocusable(true);
+        service_discuss_content.setFocusableInTouchMode(true);
+        service_discuss_content.requestFocus();
+        InputMethodManager inputManager =
+                (InputMethodManager) service_discuss_content.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.showSoftInput(service_discuss_content, 0);
+
+    };
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -114,11 +159,11 @@ public class ViewServiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_service);
 
+
         Intent request = getIntent();
         String name = request.getStringExtra("name");
         String img = request.getStringExtra("img");
         String content = request.getStringExtra("content");
-        String check = request.getStringExtra("check");
         imgs = request.getIntegerArrayListExtra("imgs");
 
         findView();
@@ -143,21 +188,45 @@ public class ViewServiceActivity extends AppCompatActivity {
         //评论
         addComment();
 
-//        service_reply_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                service_discuss_content.requestFocus();
-//                service_discuss_content.setHint("回复用户");
-//                Log.e("dsl",position+"");
-//            }
-//        });
 
     }
 
     private void addComment() {
 
         //请求评论数据
-        getCommentData();
+        //getCommentData();
+
+        ReplyEntity r1 = new ReplyEntity(1,1,"杜世龙","张树林",12+"","llllll",true);
+        ReplyEntity r2 = new ReplyEntity(1,1,"韦俊豪","张树林",15+"","llllll",false);
+
+        List<ReplyEntity> l1 = new ArrayList<>();
+        l1.add(r1);
+        l1.add(r2);
+        CommentEntity c1 = new CommentEntity(1,1,"张树林",R.drawable.first,123+"","6666",l1,false);
+
+        List<ReplyEntity> l3 = new ArrayList<>();
+        l3.add(r1);
+        CommentEntity c2 = new CommentEntity(1,1,"张树林",R.drawable.first,0+"","777",l3,false);
+
+        List<ReplyEntity> l2 = new ArrayList<>();
+        CommentEntity c3 = new CommentEntity(1,1,"张树林",R.drawable.first,1+"","6888",l2,true);
+
+        commentList.add(c1);
+        commentList.add(c2);
+        commentList.add(c3);
+
+        ca = new CommentAdapter(getApplicationContext(),commentList, R.layout.comment_list);
+        service_comment_list.setAdapter(ca);
+
+
+        service_comment_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position1, long id) {
+                MyEvent e = new MyEvent(position1,-1);
+                EventBus.getDefault().post(e);
+            }
+        });
+
     }
 
     //获取评论信息
@@ -166,7 +235,7 @@ public class ViewServiceActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    String s = "http://192.168.43.244:8081/erhuoy/comment/getCom/1/1";
+                    String s = SERVER_ADDR+"comment/getCom/1/1";
                     URL url = new URL(s);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
@@ -189,7 +258,7 @@ public class ViewServiceActivity extends AppCompatActivity {
                         for (int i = 1; i < comInfos.get(j).size(); i++) {
                             ReplyEntity re = new ReplyEntity(comInfos.get(j).get(i).getComId(),
                                     comInfos.get(j).get(i).getUserId(),
-                                    comInfos.get(j).get(i).getComUser() + " 回复 " + comInfos.get(j).get(i).getLastUser(),
+                                    comInfos.get(j).get(i).getComUser() ,comInfos.get(j).get(i).getLastUser(),
                                     comInfos.get(j).get(i).getLikeNum() + "",
                                     comInfos.get(j).get(i).getMessage(),
                                     comInfos.get(j).get(i).isLike());
@@ -354,14 +423,126 @@ public class ViewServiceActivity extends AppCompatActivity {
                     break;
                 //提交评论
                 case R.id.service_discuss_submit:
+                    if(service_discuss_content.getText().equals("")){
+                        Toast.makeText(getApplicationContext(), "评论内容不能为空！",
+                                Toast.LENGTH_SHORT).show();
+                    }
 
-                    //评论
-                    sendComment();
 
-                    //回复
+                    if(service_discuss_content.getHint().toString().equals("说点什么吧~")){
+                        //评论
+                        //sendComment();
+
+                        String content = service_discuss_content.getText().toString();
+                        List<ReplyEntity> list = new ArrayList<>();
+                        CommentEntity s = new CommentEntity(1,1,"张树林",R.drawable.first,"0",content,list,false);
+                        Message msg = handler.obtainMessage();
+                        msg.what = 2;
+                        msg.obj = s;
+                        handler.sendMessage(msg);
+
+
+                    }else{
+                        //回复
+                        //sendReply();
+
+                        String content = service_discuss_content.getText().toString();
+                        if(toCom.getAftPosition()!=-1){
+                            ReplyEntity r = new ReplyEntity(1,1,"张树林",
+                                    commentList.get(toCom.getPrePosition()).getList().get(toCom.getAftPosition()).getName(),
+                                    0+"",content,false);
+
+                            Message msg = handler.obtainMessage();
+                            msg.what = 3;
+                            msg.obj = r;
+                            handler.sendMessage(msg);
+                        }else{
+                            ReplyEntity r = new ReplyEntity(1,1,"张树林",
+                                    commentList.get(toCom.getPrePosition()).getName(),
+                                    0+"",content,false);
+
+                            Message msg = handler.obtainMessage();
+                            msg.what = 3;
+                            msg.obj = r;
+                            handler.sendMessage(msg);
+                        }
+
+                        service_discuss_content.setHint("说点什么吧~");
+                    }
                     break;
             }
         }
+    }
+
+    private void sendReply() {
+        new Thread(){
+            @Override
+            public void run() {
+                final String content = service_discuss_content.getText().toString();
+                CommentInfoToSer c;
+                if(toCom.getAftPosition()!=-1){
+                    c = new CommentInfoToSer(1,1,content,
+                            commentList.get(toCom.getPrePosition()).getList().get(toCom.getAftPosition()).getComId(),
+                            commentList.get(toCom.getPrePosition()).getList().get(toCom.getAftPosition()).getUserId());
+                }else{
+                    c = new CommentInfoToSer(1,1,content,
+                            commentList.get(toCom.getPrePosition()).getComId(),
+                            commentList.get(toCom.getPrePosition()).getUserId());
+                }
+                Gson gson = new Gson();
+                String jsonStr = gson.toJson(c);
+                RequestBody requestBody = RequestBody.create(
+                        MediaType.parse("text/plain;charset=utf-8"),
+                        jsonStr);
+                //2) 创建请求对象
+                final Request request = new Request.Builder()
+                        .url(SERVER_ADDR+"comment/addCom")
+                        .post(requestBody)
+                        .build();
+                //3. 创建CALL对象
+                okHttpClient = new OkHttpClient();
+                Call call = okHttpClient.newCall(request);
+
+                //4. 提交请求并获取响应
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                        Toast.makeText(getApplicationContext(), "评论失败，请检查网络重新评论！",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        String result[] = response.body().string().split("&");
+                        int comId = Integer.parseInt(result[0]);
+                        if(result[1].equals("1")){
+                            if(toCom.getAftPosition()!=-1){
+                                ReplyEntity r = new ReplyEntity(comId,1,"张树林",
+                                        commentList.get(toCom.getPrePosition()).getList().get(toCom.getAftPosition()).getName(),
+                                        0+"",content,false);
+
+                                Message msg = handler.obtainMessage();
+                                msg.what = 3;
+                                msg.obj = r;
+                                handler.sendMessage(msg);
+                            }else{
+                                ReplyEntity r = new ReplyEntity(1,1,"张树林",
+                                        commentList.get(toCom.getPrePosition()).getName(),
+                                        0+"",content,false);
+
+                                Message msg = handler.obtainMessage();
+                                msg.what = 3;
+                                msg.obj = r;
+                                handler.sendMessage(msg);
+                            }
+                        } else{
+                            Toast.makeText(getApplicationContext(), "评论失败，请检查网络重新评论！",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        }.start();
     }
 
     private void sendComment() {
@@ -377,7 +558,7 @@ public class ViewServiceActivity extends AppCompatActivity {
                         jsonStr);
                 //2) 创建请求对象
                 final Request request = new Request.Builder()
-                        .url("http://192.168.43.244:8081/erhuoy/comment/addCom")
+                        .url(SERVER_ADDR+"comment/addCom")
                         .post(requestBody)
                         .build();
                 //3. 创建CALL对象
@@ -388,7 +569,8 @@ public class ViewServiceActivity extends AppCompatActivity {
                 call.enqueue(new Callback() {
                     @Override
                     public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                        Log.i("lww", "请求失败");
+                        Toast.makeText(getApplicationContext(), "评论失败，请检查网络重新评论！",
+                                Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -403,7 +585,8 @@ public class ViewServiceActivity extends AppCompatActivity {
                             msg.obj = c;
                             handler.sendMessage(msg);
                         } else{
-                            Log.e("dsl","发布失败");
+                            Toast.makeText(getApplicationContext(), "评论失败，请检查网络重新评论！",
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

@@ -10,4 +10,6 @@ public interface CommodityMapper {
     public List<Commodity> findAll();
 
     public Commodity findCommodityById(@Param("id") int id);
+
+    public List<Commodity> findCommodityByName(@Param("name") String name);
 }

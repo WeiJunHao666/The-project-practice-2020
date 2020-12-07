@@ -21,4 +21,11 @@ public class CommodityMapperImpl extends SqlSessionDaoSupport implements Commodi
         Commodity commodity = commodityMapper.findCommodityById(id);
         return commodity;
     }
+
+    @Override
+    public List<Commodity> findCommodityByName(String name) {
+        CommodityMapper commodityMapper = getSqlSession().getMapper(CommodityMapper.class);
+        List<Commodity> list = commodityMapper.findCommodityByName(name);
+        return list;
+    }
 }

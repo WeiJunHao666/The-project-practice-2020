@@ -1,10 +1,13 @@
 package com.example.erhuo2.dsl.services.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -14,17 +17,40 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.erhuo2.R;
+import com.example.erhuo2.dsl.services.ViewServiceActivity;
 import com.example.erhuo2.dsl.services.entities.CommentEntity;
+import com.example.erhuo2.dsl.services.entities.CommentInfoToSer;
+import com.example.erhuo2.dsl.services.entities.MyEvent;
+import com.example.erhuo2.dsl.services.entities.ReplyEntity;
+import com.example.erhuo2.dsl.services.model.CommentModel;
+import com.google.gson.Gson;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+import static com.example.erhuo2.dsl.services.usefulimg.ConfigUtil.SERVER_ADDR;
 
 public class CommentAdapter extends BaseAdapter {
     private Context context;
     private List<CommentEntity> listComment = new ArrayList<>();
     private int item_layout_list;
+    private CommentModel cm = new CommentModel().getInstance();
+
 
     public CommentAdapter(Context context, List<CommentEntity> listComment, int item_layout_list) {
         this.context = context;
@@ -72,6 +98,14 @@ public class CommentAdapter extends BaseAdapter {
         ReplyAdapter ra = new ReplyAdapter(context,listComment.get(position).getList(), R.layout.reply_list);
         service_reply_list.setAdapter(ra);
 
+        service_reply_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position1, long id) {
+                MyEvent e = new MyEvent(position,position1);
+                EventBus.getDefault().post(e);
+            }
+        });
+
         if(listComment.get(position).isLike()){
             comment_item_like.setImageResource(R.drawable.ed_thump_up);
         }else{
@@ -88,14 +122,14 @@ public class CommentAdapter extends BaseAdapter {
                     listComment.get(position).setLike(true);
                     Log.e("dsl","thump up !!!");
                     //更新点赞数
-                    updateThumpUp();
+                    //cm.updateLike(1, listComment.get(position).getComId());
                 }else{
                     comment_item_like.setImageResource(R.drawable.ex_thump_up);
                     prizes.setText(Integer.parseInt(prizes.getText().toString())-1+"");
                     listComment.get(position).setLike(false);
                     Log.e("dsl","thump down !!!");
                     //更新点赞数
-                    updateThumpUp();
+                    //cm.updateUnLike(1,listComment.get(position).getComId());
                 }
             }
         });
@@ -103,6 +137,5 @@ public class CommentAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private void updateThumpUp() {
-    }
+
 }
