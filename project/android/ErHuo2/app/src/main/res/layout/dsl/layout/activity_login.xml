@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="3dp"
         android:background="#EEEEEE"></View>
 
     <RelativeLayout
@@ -20,11 +20,11 @@
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:background="#eeeeee"
+        android:background="#f2f2f2"
         android:layout_alignParentBottom="true"
         app:bb_tabXmlResource="@xml/bottombar_menu"
         app:bb_behavior="shifting"
-        app:bb_activeTabColor="#000000"
+        app:bb_activeTabColor="@color/colorAccent"
         app:bb_inActiveTabAlpha="0.3"
         app:bb_inActiveTabColor="#000000"/>
 

@@ -2,6 +2,7 @@ package com.example.erhuo2;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
@@ -14,6 +15,7 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,12 +23,15 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.erhuo2.wjh.SearchResultActivity;
+
 import java.util.Date;
 
 public class SearchPageActivity extends Activity {
     private ImageView back;
     private EditText et_search;
     private TextView tv_tip;
+    private Button search;
     private MyListView listView;
     private TextView tv_clear;
     private RecordSQLiteOpenHelper helper = new RecordSQLiteOpenHelper(this);;
@@ -66,7 +71,9 @@ public class SearchPageActivity extends Activity {
                     }
                     // TODO 根据输入的内容模糊查询商品，并跳转到另一个界面，由你自己去实现
                     Toast.makeText(SearchPageActivity.this, "clicked!", Toast.LENGTH_SHORT).show();
-
+                    Intent intent = new Intent(SearchPageActivity.this, SearchResultActivity.class);
+                    intent.putExtra("keyWord",et_search.getText().toString().trim());
+                    startActivity(intent);
                 }
                 return false;
             }
@@ -170,10 +177,11 @@ public class SearchPageActivity extends Activity {
         tv_tip = (TextView) findViewById(R.id.tv_tip);
         listView = (MyListView) findViewById(R.id.listView);
         tv_clear = (TextView) findViewById(R.id.tv_clear);
+        search = findViewById(R.id.search_page_search);
 
         // 调整EditText左边的搜索按钮的大小
         Drawable drawable = getResources().getDrawable(R.drawable.search);
-        drawable.setBounds(0, 0, 100, 100);// 第一0是距左边距离，第二0是距上边距离，60分别是长宽
+        drawable.setBounds(50, 0, 120, 70);// 第一0是距左边距离，第二0是距上边距离，60分别是长宽
         et_search.setCompoundDrawables(drawable, null, null, null);// 只放左边
     }
 }

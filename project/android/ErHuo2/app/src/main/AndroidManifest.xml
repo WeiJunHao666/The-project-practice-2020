@@ -21,11 +21,7 @@
         <activity android:name=".dsl.services.CreateServiceActivity"></activity>
         <activity android:name=".wjh.register.view.Register_activity" />
         <activity android:name=".wjh.login.view.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".wjh.SearchResultActivity"/>
         <activity android:name=".wjh.MessageContactActivity" tools:ignore="Instantiatable" />
@@ -35,7 +31,13 @@
         <activity android:name=".zsl.activity.CommodityPageActivity" />
         <activity android:name=".zsl.activity.CommodityDetailsActivity" />
         <activity android:name=".SearchPageActivity" />
-        <activity android:name=".zsl.activity.LoginActivity"/>
+        <activity android:name=".zsl.activity.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".zsl.activity.ProductDetailsActivity"/>
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -48,5 +50,5 @@
         </provider>
     </application>
 
-
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
