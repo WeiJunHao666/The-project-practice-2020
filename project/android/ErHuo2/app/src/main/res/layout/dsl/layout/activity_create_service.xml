@@ -38,6 +38,7 @@
         android:layout_below="@+id/create_service_imgs">
 
         <EditText
+            android:id="@+id/create_service_content"
             android:layout_margin="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

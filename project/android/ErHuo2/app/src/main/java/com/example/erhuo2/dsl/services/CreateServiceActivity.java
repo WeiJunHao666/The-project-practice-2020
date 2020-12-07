@@ -13,10 +13,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.erhuo2.R;
@@ -28,6 +30,7 @@ import com.yanzhenjie.album.AlbumConfig;
 import com.yanzhenjie.album.AlbumFile;
 import com.yanzhenjie.album.AlbumLoader;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +43,8 @@ public class CreateServiceActivity extends AppCompatActivity {
     private List<Bitmap> bitmaps = new ArrayList<>();
     private GridLayout create_service_imgs;
     private ServiceModel sm = ServiceModel.getInstance();
+    private List<File> imgFiles = new ArrayList<>();
+    private EditText create_service_content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +69,7 @@ public class CreateServiceActivity extends AppCompatActivity {
         create_service_getimg = findViewById(R.id.create_service_getimg);
         create_service_submit = findViewById(R.id.create_service_submit);
         create_service_imgs = findViewById(R.id.create_service_imgs);
+        create_service_content = findViewById(R.id.create_service_content);
 
     }
 
@@ -78,11 +84,17 @@ public class CreateServiceActivity extends AppCompatActivity {
                     getImg();
                     break;
                 case R.id.create_service_submit:
-                    //sm.addPost();
-                    Intent i = new Intent();
-                    i.setClass(getApplicationContext(),ServePageFragment.class);
-                    startActivity(i);
-                    break;
+                    if(create_service_content.getText().toString().trim().equals("")){
+                        Toast.makeText(getApplicationContext(), "发布失败，内容不能为空！",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        //sm.addPost();
+                        Intent i = new Intent();
+                        i.setClass(getApplicationContext(),ServePageFragment.class);
+                        startActivity(i);
+                        break;
+                    }
             }
         }
     }
@@ -104,11 +116,14 @@ public class CreateServiceActivity extends AppCompatActivity {
                     public void onAction(@NonNull ArrayList<AlbumFile> result) {
                         create_service_imgs.removeAllViews();
                         bitmaps.clear();
+                        imgFiles.clear();
                         if(result.size()>0){
                             create_service_imgs.setVisibility(View.VISIBLE);
                             for(int i = 0; i < result.size(); i++){
                                 Bitmap bit = BitmapFactory.decodeFile((result.get(i).getPath()));
                                 bitmaps.add(bit);
+                                File f = new File(result.get(i).getPath());
+                                imgFiles.add(f);
 
                                 GridLayout.Spec rowSpec = GridLayout.spec(i/3);//行数
                                 GridLayout.Spec columnSpec = GridLayout.spec(i%3, 1.0f);//列数 列宽的比例 weight=1

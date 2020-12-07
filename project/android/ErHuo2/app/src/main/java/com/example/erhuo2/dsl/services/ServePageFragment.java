@@ -93,7 +93,7 @@ public class ServePageFragment extends Fragment {
 //                List<ServiceEntity> li = new ArrayList<>();
 //                li = sm.getServiceDate(pageNum);
 //                if(li.size()>0){
-//                    list.addAll(0,li);
+//                    list.addAll(li);
 //                    //通知加载数据完毕
 //                    refresh_layout.finishLoadMore();
 //                }else{

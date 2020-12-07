@@ -114,6 +114,7 @@ public class ViewServiceActivity extends AppCompatActivity {
                     ca.notifyDataSetChanged();
                     Toast.makeText(getApplicationContext(), "评论成功！",
                             Toast.LENGTH_SHORT).show();
+                    service_discuss_content.setText("");
                     break;
                 case 3:
                     Log.e("dsl","33333333");
@@ -122,6 +123,7 @@ public class ViewServiceActivity extends AppCompatActivity {
                     ca.notifyDataSetChanged();
                     Toast.makeText(getApplicationContext(), "评论成功！",
                             Toast.LENGTH_SHORT).show();
+                    service_discuss_content.setText("");
                     break;
             }
         }
@@ -145,6 +147,7 @@ public class ViewServiceActivity extends AppCompatActivity {
         InputMethodManager inputManager =
                 (InputMethodManager) service_discuss_content.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.showSoftInput(service_discuss_content, 0);
+        service_discuss_content.setText("");
 
     };
 
@@ -424,7 +427,7 @@ public class ViewServiceActivity extends AppCompatActivity {
                     break;
                 //提交评论
                 case R.id.service_discuss_submit:
-                    if(service_discuss_content.getText().equals("")){
+                    if(service_discuss_content.getText().toString().trim().equals("")){
                         Toast.makeText(getApplicationContext(), "评论内容不能为空！",
                                 Toast.LENGTH_SHORT).show();
                     }
@@ -441,7 +444,7 @@ public class ViewServiceActivity extends AppCompatActivity {
                         msg.what = 2;
                         msg.obj = s;
                         handler.sendMessage(msg);
-
+                        service_discuss_content.setText("");
 
                     }else{
                         //回复
@@ -469,6 +472,7 @@ public class ViewServiceActivity extends AppCompatActivity {
                         }
 
                         service_discuss_content.setHint("说点什么吧~");
+                        service_discuss_content.setText("");
                     }
                     break;
             }
@@ -554,6 +558,7 @@ public class ViewServiceActivity extends AppCompatActivity {
                 CommentInfoToSer c = new CommentInfoToSer(1,1,content);
                 Gson gson = new Gson();
                 String jsonStr = gson.toJson(c);
+                //1)
                 RequestBody requestBody = RequestBody.create(
                         MediaType.parse("text/plain;charset=utf-8"),
                         jsonStr);

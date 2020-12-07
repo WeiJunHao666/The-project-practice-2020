@@ -10,6 +10,7 @@ public class ServiceEntity {
     private boolean check;
     private int prizes;
     private ArrayList<Integer> imgs = new ArrayList<>();
+    //private ArrayList<String> imgs = new ArrayList<>();
 
     public boolean isCheck() {
         return check;
@@ -38,7 +39,6 @@ public class ServiceEntity {
     public void setCheck(boolean check) {
         this.check = check;
     }
-//private List<Bitmap> imgs = new ArrayList<>();
 
     public ServiceEntity(int img, String name, String content, boolean check, int prizes, ArrayList<Integer> imgs) {
         this.img = img;
