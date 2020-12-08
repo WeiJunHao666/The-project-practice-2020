@@ -4,27 +4,29 @@
     package="com.example.erhuo2">
     <!-- if you want to load images from the internet -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- if you want to load images from aa file OR from the internet -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        android:requestLegacyExternalStorage="true">
-        <activity android:name=".dsl.services.CreateServiceActivity"></activity>
+        android:usesCleartextTraffic="true">
+        <activity android:name=".dsl.additem.AddItemActivity"></activity>
+        <activity android:name=".dsl.services.CreateServiceActivity" />
         <activity android:name=".wjh.register.view.Register_activity" />
-        <activity android:name=".wjh.login.view.MainActivity">
-
-        </activity>
-        <activity android:name=".wjh.searchResult.SearchResultActivity"/>
-        <activity android:name=".wjh.message.MessageContactActivity" tools:ignore="Instantiatable" />
+        <activity android:name=".wjh.login.view.MainActivity" />
+        <activity android:name=".wjh.searchResult.SearchResultActivity" />
+        <activity
+            android:name=".wjh.message.MessageContactActivity"
+            tools:ignore="Instantiatable" />
         <activity android:name=".wjh.allKind.view.AllKindActivity" />
         <activity android:name=".wjh.setInfo.view.SetUserInfo_activity" />
         <activity android:name=".dsl.services.ViewServiceActivity" />
@@ -38,7 +40,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".zsl.activity.ProductDetailsActivity"/>
+        <activity android:name=".zsl.activity.ProductDetailsActivity" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.erhuo2.fileprovider"
@@ -50,5 +53,4 @@
         </provider>
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

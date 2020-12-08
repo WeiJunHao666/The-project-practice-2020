@@ -25,7 +25,7 @@ public class ReplyModel {
     }
 
     public void updateThumpUp(final int userId, final int comId) {
-        new Thread(){
+        class MyThread extends Thread{
             @Override
             public void run() {
 
@@ -54,11 +54,18 @@ public class ReplyModel {
                     }
                 });
             }
-        }.start();
+        }
+        MyThread thread = new MyThread();
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void updateThumpDown(final int userId, final int comId) {
-        new Thread(){
+        class MyThread extends Thread{
             @Override
             public void run() {
 
@@ -87,6 +94,13 @@ public class ReplyModel {
                     }
                 });
             }
-        }.start();
+        }
+        MyThread thread = new MyThread();
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

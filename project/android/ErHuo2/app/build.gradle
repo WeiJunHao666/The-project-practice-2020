@@ -13,7 +13,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    //在layout文件夹下建立子文件夹
+//在layout文件夹下建立子文件夹
     sourceSets {
         main{
             res.srcDirs = [
@@ -73,12 +73,7 @@ dependencies {
     }
     implementation 'com.squareup.okhttp3:okhttp:4.2.2'
     //-------------------------------------//
-    //wjh: Glide图片加载框架
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
-    //-------------------------------------//
-    //wjh:圆角框架
-    compile 'com.makeramen:roundedimageview:2.3.0'
+
     implementation 'org.greenrobot:eventbus:3.1.1'
 
 }

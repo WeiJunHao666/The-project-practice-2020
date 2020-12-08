@@ -23,7 +23,10 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.example.erhuo2.wjh.searchResult.SearchResultActivity;
+
+import java.util.Date;
 
 public class SearchPageActivity extends Activity {
     private ImageView back;
