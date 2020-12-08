@@ -31,7 +31,9 @@ import com.example.erhuo2.dsl.services.entities.CommentEntity;
 import com.example.erhuo2.dsl.services.entities.CommentInfoToSer;
 import com.example.erhuo2.dsl.services.entities.MyEvent;
 import com.example.erhuo2.dsl.services.entities.ReplyEntity;
+import com.example.erhuo2.dsl.services.entities.ServiceEntity;
 import com.example.erhuo2.dsl.services.view.SquareImageView;
+import com.example.erhuo2.uploadUtils.DownloadFile;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jaren.lib.view.LikeView;
@@ -63,14 +65,14 @@ import okhttp3.Response;
 import static com.example.erhuo2.dsl.services.usefulimg.ConfigUtil.SERVER_ADDR;
 
 public class ViewServiceActivity extends AppCompatActivity {
+    private ServiceEntity viewService;
 
     private MyEvent toCom;
     private ImageView service_back;
     private ImageView service_more;
     private CircleImageView view_service_img;
     private TextView view_service_name;
-    //private List<Bitmap> imgs = new ArrayList<>();
-    private ArrayList<Integer> imgs = new ArrayList<>();
+    private ArrayList<String> imgs = new ArrayList<>();
     private GridLayout gridLayoutPost;
 
     private TextView shout_content;
@@ -113,6 +115,7 @@ public class ViewServiceActivity extends AppCompatActivity {
                     ca.notifyDataSetChanged();
                     Toast.makeText(getApplicationContext(), "评论成功！",
                             Toast.LENGTH_SHORT).show();
+                    service_discuss_content.setText("");
                     break;
                 case 3:
                     Log.e("dsl","33333333");
@@ -121,6 +124,7 @@ public class ViewServiceActivity extends AppCompatActivity {
                     ca.notifyDataSetChanged();
                     Toast.makeText(getApplicationContext(), "评论成功！",
                             Toast.LENGTH_SHORT).show();
+                    service_discuss_content.setText("");
                     break;
             }
         }
@@ -144,6 +148,7 @@ public class ViewServiceActivity extends AppCompatActivity {
         InputMethodManager inputManager =
                 (InputMethodManager) service_discuss_content.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.showSoftInput(service_discuss_content, 0);
+        service_discuss_content.setText("");
 
     };
 
@@ -159,12 +164,19 @@ public class ViewServiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_service);
 
-
         Intent request = getIntent();
+        int postId = Integer.parseInt(request.getStringExtra("postId"));
+        int userId = Integer.parseInt(request.getStringExtra("userId"));
         String name = request.getStringExtra("name");
         String img = request.getStringExtra("img");
         String content = request.getStringExtra("content");
-        imgs = request.getIntegerArrayListExtra("imgs");
+        imgs = request.getStringArrayListExtra("imgs");
+        String date = request.getStringExtra("date");
+        int pageview = Integer.parseInt(request.getStringExtra("pageview"));
+        boolean check = Boolean.getBoolean(request.getStringExtra("check"));
+        int prizes = Integer.parseInt(request.getStringExtra("prizes"));
+
+        viewService = new ServiceEntity(postId,userId,img,name,content,date,check,prizes,pageview,imgs);
 
         findView();
 
@@ -187,7 +199,6 @@ public class ViewServiceActivity extends AppCompatActivity {
 
         //评论
         addComment();
-
 
     }
 
@@ -312,18 +323,15 @@ public class ViewServiceActivity extends AppCompatActivity {
     }
 
     private void viewPages() {
-        view_service_pageview.setText("123456 次浏览");
-        view_num_thump.setText("123");
-        if(status){
+        view_service_pageview.setText(viewService.getPageview());
+        view_num_thump.setText(viewService.getPrizes());
+        if(viewService.isCheck()){
             view_service_thump.setCheckedWithoutAnimator(true);
         }else{
             view_service_thump.setCheckedWithoutAnimator(false);
         }
     }
 
-    private void getimgs() {
-
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void putimgs() {
@@ -346,7 +354,8 @@ public class ViewServiceActivity extends AppCompatActivity {
 
             layoutParams.setMargins(5, 5, 5, 5);
 
-            imageView.setImageResource(imgs.get(i));
+            DownloadFile d = new DownloadFile();
+            d.clickDown(imageView,imgs.get(i));
             gridLayoutPost.addView(imageView, layoutParams);
         }
     }
@@ -423,7 +432,7 @@ public class ViewServiceActivity extends AppCompatActivity {
                     break;
                 //提交评论
                 case R.id.service_discuss_submit:
-                    if(service_discuss_content.getText().equals("")){
+                    if(service_discuss_content.getText().toString().trim().equals("")){
                         Toast.makeText(getApplicationContext(), "评论内容不能为空！",
                                 Toast.LENGTH_SHORT).show();
                     }
@@ -440,7 +449,7 @@ public class ViewServiceActivity extends AppCompatActivity {
                         msg.what = 2;
                         msg.obj = s;
                         handler.sendMessage(msg);
-
+                        service_discuss_content.setText("");
 
                     }else{
                         //回复
@@ -468,6 +477,7 @@ public class ViewServiceActivity extends AppCompatActivity {
                         }
 
                         service_discuss_content.setHint("说点什么吧~");
+                        service_discuss_content.setText("");
                     }
                     break;
             }
@@ -553,6 +563,7 @@ public class ViewServiceActivity extends AppCompatActivity {
                 CommentInfoToSer c = new CommentInfoToSer(1,1,content);
                 Gson gson = new Gson();
                 String jsonStr = gson.toJson(c);
+                //1)
                 RequestBody requestBody = RequestBody.create(
                         MediaType.parse("text/plain;charset=utf-8"),
                         jsonStr);

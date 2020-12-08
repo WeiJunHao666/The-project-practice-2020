@@ -23,6 +23,10 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d2b1795a7800dafdd469987daf33207fd07f586c
 import com.example.erhuo2.wjh.searchResult.SearchResultActivity;
 
 import java.util.Date;

@@ -10,18 +10,13 @@ import com.example.erhuo2.dsl.services.entities.CommentEntity;
 import com.example.erhuo2.dsl.services.entities.CommentInfoToSer;
 import com.example.erhuo2.dsl.services.entities.ReplyEntity;
 import com.example.erhuo2.dsl.services.entities.ServiceEntity;
+import com.example.erhuo2.dsl.services.entities.ServiceToSer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +31,7 @@ import okhttp3.Response;
 import static com.example.erhuo2.dsl.services.usefulimg.ConfigUtil.SERVER_ADDR;
 
 public class ServiceModel {
+    private List<ServiceEntity> serviceList = new ArrayList<>();
     private OkHttpClient okHttpClient;
     private static ServiceModel uniqueInstance = new ServiceModel();
     public ServiceModel(){}
@@ -45,17 +41,15 @@ public class ServiceModel {
 
     //请求分页数据
     public List<ServiceEntity> getServiceDate(int pageNum){
-        List<ServiceEntity> list = new ArrayList<>();
-        new Thread(){
+        class MyThread extends Thread {
             @Override
             public void run() {
-
                 RequestBody requestBody = RequestBody.create(
                         MediaType.parse("text/plain;charset=utf-8"),
                         "");
                 //2) 创建请求对象
                 final Request request = new Request.Builder()
-                        .url(SERVER_ADDR+"comment/addCom")
+                        .url(SERVER_ADDR+"")
                         .post(requestBody)
                         .build();
                 //3. 创建CALL对象
@@ -66,29 +60,46 @@ public class ServiceModel {
                 call.enqueue(new Callback() {
                     @Override
                     public void onFailure(@NotNull Call call, @NotNull IOException e) {
-
+                        Log.e("dsl","请求失败");
                     }
-
                     @Override
                     public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        String jsonStr = response.body().string();
 
+                        Gson gson = new Gson();
+                        serviceList = gson.fromJson(jsonStr,new TypeToken<List<ServiceEntity>>(){}.getType());
+                        Log.e("dsl","请求成功");
                     }
                 });
             }
-        }.start();
+        }
 
-        return list;
+        MyThread thread = new MyThread();
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return serviceList;
     }
 
     //添加帖子
-    public void addPost(){
-        new Thread(){
+    public void addPost(ServiceToSer s){
+        class MyThread extends Thread{
+            private ServiceToSer s;
+            public MyThread(ServiceToSer s){
+                this.s = s;
+            }
             @Override
             public void run() {
 
+                Gson gson = new Gson();
+                String jsonStr = gson.toJson(s);
+
                 RequestBody requestBody = RequestBody.create(
                         MediaType.parse("text/plain;charset=utf-8"),
-                        "");
+                        jsonStr);
                 //2) 创建请求对象
                 final Request request = new Request.Builder()
                         .url(SERVER_ADDR+"comment/addCom")
@@ -102,22 +113,29 @@ public class ServiceModel {
                 call.enqueue(new Callback() {
                     @Override
                     public void onFailure(@NotNull Call call, @NotNull IOException e) {
-
+                        Log.e("dsl","添加帖子失败");
                     }
 
                     @Override
                     public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-
+                        Log.e("dsl","添加帖子成功");
                     }
                 });
             }
-        }.start();
+        }
+        MyThread thread = new MyThread(s);
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
     //点赞  取消点赞
     public void updateThumpUp(final int userId, final int comId) {
-        new Thread(){
+        class MyThread extends Thread{
             @Override
             public void run() {
 
@@ -146,11 +164,19 @@ public class ServiceModel {
                     }
                 });
             }
-        }.start();
+        }
+
+        MyThread thread = new MyThread();
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void updateThumpDown(final int userId, final int comId) {
-        new Thread(){
+        class MyThread extends Thread{
             @Override
             public void run() {
 
@@ -179,8 +205,18 @@ public class ServiceModel {
                     }
                 });
             }
-        }.start();
+        }
+        MyThread thread = new MyThread();
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
+    //增加了浏览量
+    private void addViewPage(){
 
+    }
 }

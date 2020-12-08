@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.erhuo2.R;
+import com.example.erhuo2.dsl.additem.AddItemActivity;
 import com.example.erhuo2.dsl.services.adapter.ServicesAdapter;
 import com.example.erhuo2.dsl.services.entities.ServiceEntity;
 import com.example.erhuo2.dsl.services.model.ServiceModel;
@@ -55,11 +56,16 @@ public class ServePageFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent();
+                i.putExtra("postId",list.get(position).getPostId());
+                i.putExtra("userId",list.get(position).getUserId());
                 i.putExtra("name",list.get(position).getName());
                 i.putExtra("img",""+list.get(position).getImg());
-                i.putExtra("check",list.get(position).getCheck());
+                i.putExtra("check",list.get(position).isCheck()+"");
                 i.putExtra("content", list.get(position).getContent());
-                i.putIntegerArrayListExtra("imgs",list.get(position).getImgs());
+                i.putStringArrayListExtra("imgs",list.get(position).getImgs());
+                i.putExtra("pageview",list.get(position).getPageview());
+                i.putExtra("date",list.get(position).getDate());
+                i.putExtra("prizes",list.get(position).getPrizes());
                 i.setClass(getActivity().getApplicationContext(), ViewServiceActivity.class);
                 startActivity(i);
             }
@@ -90,17 +96,18 @@ public class ServePageFragment extends Fragment {
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 pageNum++;
                 //请求分页数据
-//                List<ServiceEntity> li = new ArrayList<>();
-//                li = sm.getServiceDate(pageNum);
-//                if(li.size()>0){
-//                    list.addAll(0,li);
-//                    //通知加载数据完毕
-//                    refresh_layout.finishLoadMore();
-//                }else{
-//                    //通知没有更多数据可加载
-//                    refreshLayout.finishLoadMoreWithNoMoreData();
-//                }
+                List<ServiceEntity> li = new ArrayList<>();
+                li = sm.getServiceDate(pageNum);
+                if(li.size()>0){
+                    list.addAll(li);
+                    //通知加载数据完毕
+                    refresh_layout.finishLoadMore();
+                }else{
+                    //通知没有更多数据可加载
+                    refreshLayout.finishLoadMoreWithNoMoreData();
+                }
 
+                /*
                 if(list.size()<10) {
                     ArrayList<Integer> l = new ArrayList<>();
                     l.add(R.drawable.ser2_1);
@@ -124,13 +131,14 @@ public class ServePageFragment extends Fragment {
                 }else{
                     //通知没有更多数据可加载
                     refreshLayout.finishLoadMoreWithNoMoreData();
-                }
+                }*/
             }
         });
 
     }
 
     private void getData() {
+        /*
         ArrayList<Integer> l = new ArrayList<>();
         l.add(R.drawable.ser1_1);
         l.add(R.drawable.ser1_2);
@@ -162,9 +170,9 @@ public class ServePageFragment extends Fragment {
         list.add(s2);
         list.add(s3);
         list.add(s4);
+*/
 
-
-        //list = sm.getServiceDate(0);
+        list = sm.getServiceDate(0);
 
     }
 

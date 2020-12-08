@@ -25,7 +25,7 @@ public class CommentModel {
     }
 
     public void updateLike(final int userId, final int comId) {
-        new Thread(){
+        class MyThread extends Thread{
             @Override
             public void run() {
 
@@ -54,12 +54,20 @@ public class CommentModel {
                     }
                 });
             }
-        }.start();
+        }
+
+        MyThread thread = new MyThread();
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 
     public void updateUnLike(final int userId, final int comId) {
-        new Thread(){
+        class MyThread extends Thread{
             @Override
             public void run() {
 
@@ -88,6 +96,13 @@ public class CommentModel {
                     }
                 });
             }
-        }.start();
+        }
+        MyThread thread = new MyThread();
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
