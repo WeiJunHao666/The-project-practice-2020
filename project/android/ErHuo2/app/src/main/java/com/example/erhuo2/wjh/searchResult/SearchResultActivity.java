@@ -11,21 +11,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.erhuo2.R;
 import com.example.erhuo2.SearchPageActivity;
 import com.example.erhuo2.dsl.services.ServePageFragment;
+import com.example.erhuo2.wjh.message.MessageContactActivity;
 import com.example.erhuo2.zsl.page.HomePageFragment;
 import com.example.erhuo2.zsl.page.MyPageFragment;
+
+import java.util.ArrayList;
 
 
 public class SearchResultActivity extends AppCompatActivity {
@@ -34,12 +39,19 @@ public class SearchResultActivity extends AppCompatActivity {
     private ImageView back;
     private Button keyWord;
     private Button go;
+    private RecyclerView recyclerView;
+    private SearchResultAdapter adapter;
+    private String []img = {"http://qkl7o9qw8.hb-bkt.clouddn.com/dsl", "http://qkl7o9qw8.hb-bkt.clouddn.com/wjh", "http://qkl7o9qw8.hb-bkt.clouddn.com/wjh",
+            "http://qkl7o9qw8.hb-bkt.clouddn.com/dsl", "http://qkl7o9qw8.hb-bkt.clouddn.com/wjh", "http://qkl7o9qw8.hb-bkt.clouddn.com/zsl", "http://qkl7o9qw8.hb-bkt.clouddn.com/wjh",
+            "http://qkl7o9qw8.hb-bkt.clouddn.com/dsl", "http://qkl7o9qw8.hb-bkt.clouddn.com/wjh", "http://qkl7o9qw8.hb-bkt.clouddn.com/dsl"};
+    private ArrayList<String> list = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
         findViews();
         setListener();
+        init();
     }
 
     private void setListener() {
@@ -54,9 +66,37 @@ public class SearchResultActivity extends AppCompatActivity {
         back = findViewById(R.id.search_result_back);
         keyWord = findViewById(R.id.search_result_keyword);
         go = findViewById(R.id.search_result_go);
+        recyclerView = findViewById(R.id.recyclerView_search_result);
         Drawable drawable = getResources().getDrawable(R.drawable.search);
         drawable.setBounds(50, 0, 120, 70);// 第一0是距左边距离，第二0是距上边距离，60分别是长宽
         keyWord.setCompoundDrawables(drawable, null, null, null);// 只放左边
+    }
+    private void init(){
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemAnimator(null);
+        final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        //防止Item切换
+        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+        recyclerView.setLayoutManager(layoutManager);
+        final int spanCount = 2;
+        recyclerView.addItemDecoration(new StaggeredDividerItemDecoration(this, 16, spanCount));
+        //解决底部滚动到顶部时，顶部item上方偶尔会出现一大片间隔的问题
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                int[] first = new int[spanCount];
+                layoutManager.findFirstCompletelyVisibleItemPositions(first);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && (first[0] == 1 || first[1] == 1)) {
+                    layoutManager.invalidateSpanAssignments();
+                }
+            }
+        });
+        for(int i=0; i<9; i++){
+            list.add(img[i]);
+        }
+        adapter = new SearchResultAdapter(this, list);
+        recyclerView.setAdapter(adapter);
     }
 
     class MyOnClickListener implements View.OnClickListener{

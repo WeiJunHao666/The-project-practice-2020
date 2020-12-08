@@ -1,9 +1,5 @@
 package com.example.erhuo2.dsl.services;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,10 +11,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.transition.DrawableCrossFadeFactory;
 import com.example.erhuo2.R;
 import com.example.erhuo2.dsl.services.model.ServiceModel;
 import com.example.erhuo2.dsl.services.view.SquareImageView;
@@ -146,11 +147,13 @@ public class CreateServiceActivity extends AppCompatActivity {
         @Override
         public void load(ImageView imageView, String url) {
             Log.e("dsl",url);
+            DrawableCrossFadeFactory drawableCrossFadeFactory = new DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build();
             Glide.with(imageView.getContext())
                     .load(url)
                     .error(R.drawable.write)
                     .placeholder(R.drawable.back)
-                    .crossFade()
+                    .dontAnimate()
+                    .transition(DrawableTransitionOptions.with(drawableCrossFadeFactory))
                     .into(imageView);
         }
     }
