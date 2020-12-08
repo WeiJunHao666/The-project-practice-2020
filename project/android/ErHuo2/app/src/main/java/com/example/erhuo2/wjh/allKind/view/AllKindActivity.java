@@ -3,6 +3,7 @@ package com.example.erhuo2.wjh.allKind.view;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,12 +26,23 @@ public class AllKindActivity extends AppCompatActivity implements AllKindLeftAda
     private AllKindRightAdapter adapter2;
     private List<LeftBean.DatasBean> list;
     private List<RightBean.DatasBean> list2;
+    private ImageView back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_kind);
         recyclerView = findViewById(R.id.recyclerView_left);
         recyclerView2 = findViewById(R.id.recyclerView_right);
+        back = findViewById(R.id.all_kind_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()){
+                    case R.id.all_kind_back:
+                        onBackPressed();
+                }
+            }
+        });
         initData();
     }
     private void initData() {

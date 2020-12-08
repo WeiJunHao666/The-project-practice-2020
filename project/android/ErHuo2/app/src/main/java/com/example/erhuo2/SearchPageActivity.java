@@ -23,7 +23,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.erhuo2.wjh.SearchResultActivity;
+import com.example.erhuo2.wjh.searchResult.SearchResultActivity;
 
 import java.util.Date;
 

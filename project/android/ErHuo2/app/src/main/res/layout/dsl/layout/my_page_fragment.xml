@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/my_page_head"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:background="#00000000"
+        android:elevation="10px">
+        <ImageView
+            android:id="@+id/my_page_set"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/set"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"/>
+    </RelativeLayout>
+    <com.example.erhuo2.zsl.view.MyScrollView
+        android:id="@+id/myScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/my_page_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/zsl_mypage_background">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/my_page_user_img"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerVertical="true"
+                app:civ_border_width="1dp"
+                app:civ_border_color="#C5C1C1"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/zsl_user_img"
+                android:layout_marginTop="60dp"/>
+            <LinearLayout
+                android:id="@+id/my_page_usermessage"
+                android:layout_toRightOf="@+id/my_page_user_img"
+                android:layout_width="220dp"
+                android:layout_height="80dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="70dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textColor="#ffffff"
+                    android:textSize="30sp"/>
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:maxEms="20"
+                    android:textColor="#ffffff"
+                    android:text="地址"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/my_page_introductory"
+                android:layout_below="@id/my_page_usermessage"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="30dp"
+                android:text="还没有个人简介欧！"
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:textColor="#ffffff"
+                android:maxEms="20"/>
+
+
+        </RelativeLayout>
+        <FrameLayout
+            android:id="@+id/frame"
+            android:layout_below="@id/my_page_user"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9"
+            android:layout_marginTop="10dp">
+        </FrameLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_navigation01"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_below="@id/frame">
+
+            <RadioGroup
+                android:id="@+id/radio"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:checkedButton="@+id/button01"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/my_one"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="80dp"
+
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="音乐" />
+
+                <RadioButton
+                    android:id="@+id/my_two"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="社区" />
+
+                <RadioButton
+                    android:id="@+id/my_three"
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="我的" />
+            </RadioGroup>
+
+        </RelativeLayout>
+        </RelativeLayout>
+
+    </com.example.erhuo2.zsl.view.MyScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rl_navigation02"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="60dp"
+        android:orientation="horizontal"></RelativeLayout>
+
+
+
+</RelativeLayout>

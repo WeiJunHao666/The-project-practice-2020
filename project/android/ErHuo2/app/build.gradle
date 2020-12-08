@@ -32,6 +32,7 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.viewpager:viewpager:1.0.0'
     compileOnly 'org.projectlombok:lombok:1.18.16'
     annotationProcessor 'org.projectlombok:lombok:1.18.16'
 
@@ -62,23 +63,6 @@ dependencies {
     //上传图片
     implementation 'com.yanzhenjie:album:2.1.3'
 
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-<<<<<<< HEAD
-
-
-    // Retrofit库，网络请求框架
-    implementation 'com.squareup.retrofit2:retrofit:2.0.2'
-    implementation 'com.squareup.okhttp3:okhttp:3.1.2'
-    // Okhttp库
-
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
-    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
-    implementation 'com.squareup.retrofit2:retrofit:2.2.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
-    implementation 'com.squareup.retrofit2:converter-scalars:2.2.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
-=======
-<<<<<<< HEAD
     //wjh：网络请求框架AsyncHttpClient
     dependencies {
         implementation 'com.loopj.android:android-async-http:1.4.9'
@@ -90,9 +74,7 @@ dependencies {
     }
     implementation 'com.squareup.okhttp3:okhttp:4.2.2'
     //-------------------------------------//
-=======
 
     implementation 'org.greenrobot:eventbus:3.1.1'
->>>>>>> 0f53ef4b29f9c5dfb8ecdcdc1f31f173fc810d6c
->>>>>>> 4a1e9ffe1bcb58ce11c3e9041d4a9818c5449fd4
+
 }

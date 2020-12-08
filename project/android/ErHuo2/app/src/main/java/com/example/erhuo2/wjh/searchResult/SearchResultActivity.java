@@ -24,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.erhuo2.R;
 import com.example.erhuo2.SearchPageActivity;
 import com.example.erhuo2.dsl.services.ServePageFragment;
+import com.example.erhuo2.wjh.message.MessageContactActivity;
 import com.example.erhuo2.zsl.page.HomePageFragment;
 import com.example.erhuo2.zsl.page.MyPageFragment;
 
