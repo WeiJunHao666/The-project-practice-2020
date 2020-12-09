@@ -93,7 +93,6 @@ public class ServicesAdapter extends BaseAdapter {
             @SuppressLint("ResourceType")
             @Override
             public void onClick(View v) {
-                Log.e("ddd",position+"");
                 switch (v.getId()) {
                     //点赞
                     case R.id.service_thump_up:

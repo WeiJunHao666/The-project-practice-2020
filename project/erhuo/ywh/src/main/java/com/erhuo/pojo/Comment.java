@@ -16,10 +16,10 @@ public class Comment {
     private int userId;
     private int postId;
     private int lastId;
+    private int lastUserId;
     private String message;
     private String lastUser;
     private String comUser;
-    private String lastUserId;
     private List<Comment> nextComments = new ArrayList<Comment>();
     private int likeNum;
 }

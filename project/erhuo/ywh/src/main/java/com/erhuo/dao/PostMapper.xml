@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.erhuo.dao.PostMapper">
+
+    <insert id="addPost" parameterType="post" useGeneratedKeys="true" keyProperty="postId">
+        insert into post(user_id, post_mes, post_date) VALUES (#{userId},#{postMes},#{postDate})
+    </insert>
+
+    <insert id="addPostImg" parameterType="java.util.List">
+        insert into post_image(post_id, img) values
+        <foreach collection="postImgList" item="postImg" separator=",">
+            (#{postImg.postId},#{postImg.img})
+        </foreach>
+    </insert>
+
+
+
+</mapper>
