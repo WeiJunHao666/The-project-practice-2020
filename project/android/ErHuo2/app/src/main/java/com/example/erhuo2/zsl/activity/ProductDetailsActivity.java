@@ -33,7 +33,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         imgSearch.setOnClickListener(listener);
         btnChat.setOnClickListener(listener);
     }
-    class MyOnClickListener implements View.OnClickListener{
+    private class MyOnClickListener implements View.OnClickListener{
 
         @Override
         public void onClick(View view) {

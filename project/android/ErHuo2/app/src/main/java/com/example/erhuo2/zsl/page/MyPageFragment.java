@@ -75,7 +75,7 @@ public class MyPageFragment extends Fragment{
         edit.setOnClickListener(listener);
 
     }
-    public class MyOnClickListener implements View.OnClickListener {
+    private class MyOnClickListener implements View.OnClickListener {
 
         @Override
         public void onClick(View view) {
