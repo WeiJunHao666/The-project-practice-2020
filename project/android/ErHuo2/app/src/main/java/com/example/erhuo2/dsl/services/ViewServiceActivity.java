@@ -24,6 +24,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.erhuo2.R;
 import com.example.erhuo2.dsl.services.adapter.CommentAdapter;
 import com.example.erhuo2.dsl.services.entities.ComInfoEntity;
@@ -165,16 +166,16 @@ public class ViewServiceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_service);
 
         Intent request = getIntent();
-        int postId = Integer.parseInt(request.getStringExtra("postId"));
-        int userId = Integer.parseInt(request.getStringExtra("userId"));
+        int postId = request.getIntExtra("postId",0);
+        int userId = request.getIntExtra("userId",0);
         String name = request.getStringExtra("name");
         String img = request.getStringExtra("img");
         String content = request.getStringExtra("content");
         imgs = request.getStringArrayListExtra("imgs");
         String date = request.getStringExtra("date");
-        int pageview = Integer.parseInt(request.getStringExtra("pageview"));
+        int pageview = request.getIntExtra("pageview",0);
         boolean check = Boolean.getBoolean(request.getStringExtra("check"));
-        int prizes = Integer.parseInt(request.getStringExtra("prizes"));
+        int prizes = request.getIntExtra("prizes",0);
 
         viewService = new ServiceEntity(postId,userId,img,name,content,date,check,prizes,pageview,imgs);
 
@@ -205,26 +206,7 @@ public class ViewServiceActivity extends AppCompatActivity {
     private void addComment() {
 
         //请求评论数据
-        //getCommentData();
-
-        ReplyEntity r1 = new ReplyEntity(1,1,"杜世龙","张树林",12+"","llllll",true);
-        ReplyEntity r2 = new ReplyEntity(1,1,"韦俊豪","张树林",15+"","llllll",false);
-
-        List<ReplyEntity> l1 = new ArrayList<>();
-        l1.add(r1);
-        l1.add(r2);
-        CommentEntity c1 = new CommentEntity(1,1,"张树林",R.drawable.first,123+"","6666",l1,false);
-
-        List<ReplyEntity> l3 = new ArrayList<>();
-        l3.add(r1);
-        CommentEntity c2 = new CommentEntity(1,1,"张树林",R.drawable.first,0+"","777",l3,false);
-
-        List<ReplyEntity> l2 = new ArrayList<>();
-        CommentEntity c3 = new CommentEntity(1,1,"张树林",R.drawable.first,1+"","6888",l2,true);
-
-        commentList.add(c1);
-        commentList.add(c2);
-        commentList.add(c3);
+        getCommentData();
 
         ca = new CommentAdapter(getApplicationContext(),commentList, R.layout.comment_list);
         service_comment_list.setAdapter(ca);
@@ -246,7 +228,7 @@ public class ViewServiceActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    String s = SERVER_ADDR+"comment/getCom/1/1";
+                    String s = SERVER_ADDR+"comment/getCom/"+viewService.getPostId()+"/1";
                     URL url = new URL(s);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
@@ -323,8 +305,8 @@ public class ViewServiceActivity extends AppCompatActivity {
     }
 
     private void viewPages() {
-        view_service_pageview.setText(viewService.getPageview());
-        view_num_thump.setText(viewService.getPrizes());
+        view_service_pageview.setText(viewService.getPageview()+" 次浏览");
+        view_num_thump.setText(viewService.getPrizes()+"");
         if(viewService.isCheck()){
             view_service_thump.setCheckedWithoutAnimator(true);
         }else{
@@ -353,9 +335,9 @@ public class ViewServiceActivity extends AppCompatActivity {
             layoutParams.columnSpec = columnSpec;
 
             layoutParams.setMargins(5, 5, 5, 5);
-
-            DownloadFile d = new DownloadFile();
-            d.clickDown(imageView,imgs.get(i));
+            Glide.with(getApplicationContext())
+                    .load("http://qkl7o9qw8.hb-bkt.clouddn.com/"+imgs.get(i))
+                    .into(imageView);
             gridLayoutPost.addView(imageView, layoutParams);
         }
     }
@@ -440,7 +422,7 @@ public class ViewServiceActivity extends AppCompatActivity {
 
                     if(service_discuss_content.getHint().toString().equals("说点什么吧~")){
                         //评论
-                        //sendComment();
+                        sendComment();
 
                         String content = service_discuss_content.getText().toString();
                         List<ReplyEntity> list = new ArrayList<>();
@@ -453,7 +435,7 @@ public class ViewServiceActivity extends AppCompatActivity {
 
                     }else{
                         //回复
-                        //sendReply();
+                        sendReply();
 
                         String content = service_discuss_content.getText().toString();
                         if(toCom.getAftPosition()!=-1){

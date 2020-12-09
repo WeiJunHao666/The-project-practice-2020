@@ -25,12 +25,6 @@
         <activity android:name=".wjh.login.view.MainActivity"></activity>
 
         <activity android:name=".dsl.additem.AddItemActivity"></activity>
-        <activity android:name=".dsl.services.CreateServiceActivity"
-            tools:ignore="DuplicateActivity" />
-        <activity android:name=".wjh.register.view.Register_activity"
-            tools:ignore="DuplicateActivity" />
-        <activity android:name=".wjh.login.view.MainActivity"
-            tools:ignore="DuplicateActivity" />
         <activity android:name=".wjh.searchResult.SearchResultActivity" />
         <activity
             android:name=".wjh.message.MessageContactActivity"

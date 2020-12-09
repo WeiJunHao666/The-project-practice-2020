@@ -34,7 +34,6 @@
             android:id="@+id/service_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2020/12/21 16:08"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:textSize="15sp"/>
@@ -72,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_alignParentRight="true"
-            android:paddingTop="2dp"
+            android:paddingTop="3dp"
             android:textSize="15sp"
             android:layout_centerVertical="true"/>
         <ImageView
