@@ -27,6 +27,7 @@ import com.example.erhuo2.dsl.services.model.ServiceModel;
 import com.example.erhuo2.uploadUtils.Etag;
 import com.example.erhuo2.uploadUtils.GetToken;
 import com.example.erhuo2.uploadUtils.UploadFile;
+import com.example.erhuo2.zsl.activity.LoginActivity;
 import com.yanzhenjie.album.Action;
 import com.yanzhenjie.album.Album;
 import com.yanzhenjie.album.AlbumConfig;
@@ -102,9 +103,8 @@ public class CreateServiceActivity extends AppCompatActivity {
                     else{
                         getPost();
                         sm.addPost(toPost);
-                        Intent i = new Intent();
-                        i.setClass(getApplicationContext(),ServePageFragment.class);
-                        startActivity(i);
+                        Toast.makeText(getApplicationContext(), "发布成功！", Toast.LENGTH_SHORT).show();
+                        onBackPressed();
                         break;
                     }
             }
@@ -114,13 +114,20 @@ public class CreateServiceActivity extends AppCompatActivity {
     private void getPost() {
         int userId = 1;
         String content = create_service_content.getText().toString();
-        String token = GetToken.getToken("");
+        final String[] token = {""};
+        new Thread(){
+            @Override
+            public void run() {
+                token[0] = GetToken.getToken("http://10.7.89.236:8081/erhuol/img/token");
+            }
+        }.start();
+        System.out.println(token[0]);
         List<String> l = new ArrayList<>();
         UploadFile u = new UploadFile();
         for(File f : imgFiles){
             try {
                 String temp = Etag.file(f);
-                u.upload(f,temp,token);
+                u.upload(f,temp, token[0]);
                 l.add(temp);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -135,6 +142,8 @@ public class CreateServiceActivity extends AppCompatActivity {
         String date = dateFormat.format(date1);
 
         toPost = new ServiceToSer(userId,content,l,date);
+
+        Log.e("dsl","数据打包完成");
 
     }
 

@@ -37,6 +37,26 @@
         <!-- <activity android:name=".wjh.login.view.MainActivity" -->
         <!-- tools:ignore="DuplicateActivity" /> -->
         <activity android:name=".zsl.activity.ProductDetailsActivity" />
+<<<<<<< HEAD
+=======
+=======
+
+        <activity android:name=".dsl.services.CreateServiceActivity" />
+        <activity android:name=".wjh.register.view.Register_activity" />
+        <activity android:name=".wjh.login.view.MainActivity"></activity>
+
+        <activity android:name=".dsl.additem.AddItemActivity"></activity>
+<<<<<<< HEAD
+=======
+        <activity android:name=".dsl.services.CreateServiceActivity"
+            tools:ignore="DuplicateActivity" />
+        <activity android:name=".wjh.register.view.Register_activity"
+            tools:ignore="DuplicateActivity" />
+        <activity android:name=".wjh.login.view.MainActivity"
+            tools:ignore="DuplicateActivity" />
+>>>>>>> f85fbf26db22810c9dfe9aad96cd38d7540dea9f
+>>>>>>> ed5a82cb46866d2e5d926ba87063b1fa1cde2487
+>>>>>>> fd5f34249e2ca43f0cc585e7f3fba843f5e84e53
         <activity android:name=".wjh.searchResult.SearchResultActivity" />
         <activity android:name=".wjh.allKind.view.AllKindActivity" />
         <activity android:name=".wjh.setInfo.view.SetUserInfo_activity" />

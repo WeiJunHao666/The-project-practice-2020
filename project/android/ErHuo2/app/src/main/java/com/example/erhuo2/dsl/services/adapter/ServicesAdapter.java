@@ -11,11 +11,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.erhuo2.R;
 import com.example.erhuo2.dsl.services.ViewServiceActivity;
 import com.example.erhuo2.dsl.services.entities.ServiceEntity;
 import com.example.erhuo2.dsl.services.model.ServiceModel;
-import com.example.erhuo2.uploadUtils.DownloadFile;
 import com.jaren.lib.view.LikeView;
 
 import java.util.ArrayList;
@@ -66,14 +66,23 @@ public class ServicesAdapter extends BaseAdapter {
         TextView num_pageviews = convertView.findViewById(R.id.num_pageviews);
         ImageView service_small_img = convertView.findViewById(R.id.service_small_img);
         TextView service_content = convertView.findViewById(R.id.service_content);
+        TextView service_time = convertView.findViewById(R.id.service_time);
 
-        DownloadFile d = new DownloadFile();
-        d.clickDown(service_img,listServices.get(position).getImg());
+        service_time.setText(listServices.get(position).getDate());
+        Glide.with(context)
+                .load("http://"+listServices.get(position).getImg())
+                .into(service_img);
         service_name.setText(listServices.get(position).getName());
         final String img = listServices.get(position).getImg();
         final String name = listServices.get(position).getName();
-        num_pageviews.setText(listServices.get(position).getPageview());
-        d.clickDown(service_small_img,listServices.get(position).getImgs().get(0));
+        num_pageviews.setText(listServices.get(position).getPageview()+"");
+        if(listServices.get(position).getImgs().size()>0) {
+            Glide.with(context)
+                    .load("http://qkl7o9qw8.hb-bkt.clouddn.com/"+listServices.get(position).getImgs().get(0))
+                    .error(R.drawable.img_error)
+                    .into(service_small_img);
+        }
+        //d.clickDown(service_small_img,listServices.get(position).getImgs().get(0));
         service_content.setText(listServices.get(position).getContent());
 
         //点赞信息
