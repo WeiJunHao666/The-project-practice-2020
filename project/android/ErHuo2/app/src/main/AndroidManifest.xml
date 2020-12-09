@@ -19,16 +19,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-<<<<<<< HEAD
+
         <activity android:name=".dsl.services.CreateServiceActivity" />
         <activity android:name=".wjh.register.view.Register_activity" />
         <activity android:name=".wjh.login.view.MainActivity"></activity>
-=======
+
         <activity android:name=".dsl.additem.AddItemActivity"></activity>
-        <activity android:name=".dsl.services.CreateServiceActivity" />
-        <activity android:name=".wjh.register.view.Register_activity" />
-        <activity android:name=".wjh.login.view.MainActivity" />
->>>>>>> d2b1795a7800dafdd469987daf33207fd07f586c
+        <activity android:name=".dsl.services.CreateServiceActivity"
+            tools:ignore="DuplicateActivity" />
+        <activity android:name=".wjh.register.view.Register_activity"
+            tools:ignore="DuplicateActivity" />
+        <activity android:name=".wjh.login.view.MainActivity"
+            tools:ignore="DuplicateActivity" />
         <activity android:name=".wjh.searchResult.SearchResultActivity" />
         <activity
             android:name=".wjh.message.MessageContactActivity"

@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.erhuo2.R;
-import com.example.erhuo2.dsl.additem.AddItemActivity;
 import com.example.erhuo2.dsl.services.adapter.ServicesAdapter;
 import com.example.erhuo2.dsl.services.entities.ServiceEntity;
 import com.example.erhuo2.dsl.services.model.ServiceModel;

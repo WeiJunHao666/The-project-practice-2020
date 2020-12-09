@@ -184,11 +184,8 @@ public class CreateServiceActivity extends AppCompatActivity {
 
         @Override
         public void load(ImageView imageView, String url) {
-            Log.e("dsl",url);
             Glide.with(imageView.getContext())
                     .load(url)
-                    .error(R.drawable.write)
-                    .placeholder(R.drawable.back)
                     .crossFade()
                     .into(imageView);
         }

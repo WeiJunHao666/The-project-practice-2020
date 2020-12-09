@@ -1,14 +1,7 @@
 package com.example.erhuo2.dsl.services.model;
 
-import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.erhuo2.R;
-import com.example.erhuo2.dsl.services.entities.ComInfoEntity;
-import com.example.erhuo2.dsl.services.entities.CommentEntity;
-import com.example.erhuo2.dsl.services.entities.CommentInfoToSer;
-import com.example.erhuo2.dsl.services.entities.ReplyEntity;
 import com.example.erhuo2.dsl.services.entities.ServiceEntity;
 import com.example.erhuo2.dsl.services.entities.ServiceToSer;
 import com.google.gson.Gson;
