@@ -19,16 +19,37 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+<<<<<<< HEAD
+        <activity android:name=".zsl.activity.EditActivity"></activity>
+        <activity android:name=".zsl.activity.SettingActivity" />
+        <activity android:name=".dsl.services.CreateServiceActivity" />
+        <activity android:name=".wjh.register.view.Register_activity" />
+        <activity android:name=".wjh.login.view.MainActivity" />
+        <activity android:name=".dsl.additem.AddItemActivity" /> <!-- <activity android:name=".dsl.services.CreateServiceActivity" -->
+        <!-- tools:ignore="DuplicateActivity" /> -->
+        <!-- <activity android:name=".wjh.register.view.Register_activity" -->
+        <!-- tools:ignore="DuplicateActivity" /> -->
+        <!-- <activity android:name=".wjh.login.view.MainActivity" -->
+        <!-- tools:ignore="DuplicateActivity" /> -->
+        <activity android:name=".zsl.activity.ProductDetailsActivity" />
+=======
 
         <activity android:name=".dsl.services.CreateServiceActivity" />
         <activity android:name=".wjh.register.view.Register_activity" />
         <activity android:name=".wjh.login.view.MainActivity"></activity>
 
         <activity android:name=".dsl.additem.AddItemActivity"></activity>
+<<<<<<< HEAD
+=======
+        <activity android:name=".dsl.services.CreateServiceActivity"
+            tools:ignore="DuplicateActivity" />
+        <activity android:name=".wjh.register.view.Register_activity"
+            tools:ignore="DuplicateActivity" />
+        <activity android:name=".wjh.login.view.MainActivity"
+            tools:ignore="DuplicateActivity" />
+>>>>>>> f85fbf26db22810c9dfe9aad96cd38d7540dea9f
+>>>>>>> ed5a82cb46866d2e5d926ba87063b1fa1cde2487
         <activity android:name=".wjh.searchResult.SearchResultActivity" />
-        <activity
-            android:name=".wjh.message.MessageContactActivity"
-            tools:ignore="Instantiatable" />
         <activity android:name=".wjh.allKind.view.AllKindActivity" />
         <activity android:name=".wjh.setInfo.view.SetUserInfo_activity" />
         <activity android:name=".dsl.services.ViewServiceActivity" />
@@ -42,7 +63,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".zsl.activity.ProductDetailsActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

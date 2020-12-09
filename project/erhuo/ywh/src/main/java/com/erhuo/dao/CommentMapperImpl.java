@@ -58,6 +58,8 @@ public class CommentMapperImpl extends SqlSessionDaoSupport implements CommentMa
 
     @Override
     public int reply(Comment comment) {
-        return 0;
+        CommentMapper commentMapper = getSqlSession().getMapper(CommentMapper.class);
+        int result = commentMapper.addCom(comment);
+        return result;
     }
 }

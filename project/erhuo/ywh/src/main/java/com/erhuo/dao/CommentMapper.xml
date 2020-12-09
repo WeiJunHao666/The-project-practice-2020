@@ -32,10 +32,8 @@
     </resultMap>
 
     <insert id="addCom" parameterType="comment" useGeneratedKeys="true" keyProperty="comId">
-        insert into comment(post_id,message,user_id) values (#{postId},#{message},#{userId})
+        insert into comment(post_id,message,user_id,last_id,last_user_id) values (#{postId},#{message},#{userId},#{lastId},#{lastUserId})
     </insert>
-
-
 
 
 </mapper>

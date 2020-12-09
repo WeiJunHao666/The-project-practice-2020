@@ -5,6 +5,6 @@ import org.apache.ibatis.annotations.Select;
 
 public interface UserMapper {
 
-    @Select("select * from user where user_id = #{userId}")
-    public User queryUserById(int userId);
+    @Select("select username,nickname,img from user where user_id = #{userId}")
+    public User queryById(int userId);
 }
