@@ -4,29 +4,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
     <RelativeLayout
-        android:id="@+id/my_page_head"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:background="#00000000"
-        android:elevation="10px">
-        <ImageView
-            android:id="@+id/my_page_set"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/set"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"/>
-    </RelativeLayout>
-    <com.example.erhuo2.zsl.view.MyScrollView
-        android:id="@+id/myScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <RelativeLayout
+            android:clickable="false"
+
+            android:enabled="false"
             android:id="@+id/my_page_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,12 +34,30 @@
                 android:orientation="vertical"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="70dp">
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textColor="#ffffff"
-                    android:textSize="30sp"/>
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:textColor="#ffffff"
+                        android:textSize="30sp"/>
+                    <LinearLayout
+                        android:layout_width="40dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="center"
+                        android:background="@drawable/zsl_mypage_btn">
+                        <ImageView
+                            android:id="@+id/my_page_usersex"
+                            android:src="@drawable/man"
+                            android:layout_width="18dp"
+                            android:layout_height="15dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
                 <TextView
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -66,81 +69,57 @@
             <TextView
                 android:id="@+id/my_page_introductory"
                 android:layout_below="@id/my_page_usermessage"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="30dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
                 android:text="还没有个人简介欧！"
                 android:textSize="20sp"
                 android:maxLines="1"
                 android:textColor="#ffffff"
-                android:maxEms="20"/>
+                android:maxEms="15"/>
+            <Button
+                android:id="@+id/my_page_edit"
+                android:layout_toRightOf="@+id/my_page_introductory"
+                android:layout_below="@id/my_page_usermessage"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:text="编辑资料"
+                android:layout_marginLeft="20dp"
+                android:textColor="#ffffff"
+                android:background="@drawable/zsl_mypage_btn"/>
 
-
-        </RelativeLayout>
-        <FrameLayout
-            android:id="@+id/frame"
-            android:layout_below="@id/my_page_user"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="9"
-            android:layout_marginTop="10dp">
-        </FrameLayout>
-
-        <RelativeLayout
-            android:id="@+id/rl_navigation01"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:layout_below="@id/frame">
-
-            <RadioGroup
-                android:id="@+id/radio"
+            <RelativeLayout
+                android:id="@+id/my_page_head"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:checkedButton="@+id/button01"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/my_one"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="80dp"
-
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="音乐" />
-
-                <RadioButton
-                    android:id="@+id/my_two"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="社区" />
-
-                <RadioButton
-                    android:id="@+id/my_three"
-                    android:layout_width="70dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="我的" />
-            </RadioGroup>
-
-        </RelativeLayout>
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:background="#00000000"
+                >
+                <ImageView
+                    android:id="@+id/my_page_set"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/set"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"/>
+            </RelativeLayout>
         </RelativeLayout>
 
-    </com.example.erhuo2.zsl.view.MyScrollView>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/my_page_tab"
+            android:layout_below="@+id/my_page_user"
+            android:layout_width="match_parent"
+            android:layout_marginTop="-10dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ll_cricle">
 
-    <RelativeLayout
-        android:id="@+id/rl_navigation02"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="60dp"
-        android:orientation="horizontal"></RelativeLayout>
-
-
-
+        </com.google.android.material.tabs.TabLayout>
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/my_page_pager"
+            android:layout_below="@+id/my_page_tab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        </RelativeLayout>
 </RelativeLayout>

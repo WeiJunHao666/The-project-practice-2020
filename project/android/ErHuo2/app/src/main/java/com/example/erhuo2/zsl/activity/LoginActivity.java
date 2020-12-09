@@ -37,13 +37,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        myPageFragment = new MyPageFragment();
-
-
-
-
-
-
         bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
@@ -90,122 +83,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-    }
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-
-        if(myPageFragment instanceof fOnFocusListenable) {
-            ((fOnFocusListenable) myPageFragment).onWindowFocusChanged(hasFocus);
-        }
-    }
-    public class MyPagetwo extends Fragment implements View.OnClickListener{
-        /**
-         * 定义一个布局
-         */
-        private LayoutInflater inflater;
-        //  private View rootView;// 缓存Fragment view
-        private Context loginActivity;
-        private MyOnePage myOnePage;
-        private MyTwoPage myTwoPage;
-        private MyThreePage myThreePage;
-        /**
-         * one、two RadioGroup 控件
-         */
-        private RadioGroup radioGroup;
-        protected RadioButton myOne, myTwo,myThree;
-
-        /**
-         * 加载页面
-         */
-        @Override
-        public void onActivityCreated(Bundle savedInstanceState) {
-            super.onActivityCreated(savedInstanceState);
-            loginActivity = getActivity();
-            inflater = LayoutInflater.from(getActivity());
-//      初始化控件和声明事件
-//        rootView = inflater.inflate(R.layout.two, null);
-            radioGroup = (RadioGroup) getActivity().findViewById(R.id.radio);
-            myOne = (RadioButton) getActivity().findViewById(R.id.my_one);
-            myTwo = (RadioButton) getActivity().findViewById(R.id.my_two);
-            myThree = (RadioButton) getActivity().findViewById(R.id.my_three);
-            //控件颜色
-            myOne.setTextColor(getResources().getColor(R.color.tomato));
-            myTwo.setTextColor(getResources().getColor(R.color.black));
-            myThree.setTextColor(getResources().getColor(R.color.black));
-            myOne.setOnClickListener(this);
-            myTwo.setOnClickListener(this);
-            myThree.setOnClickListener(this);
-
-            setDefaultFragment();
-        }
-        /**
-         * 设置默认的Fragment
-         */
-        private void setDefaultFragment()
-        {
-            FragmentManager fm = getFragmentManager();
-            FragmentTransaction transaction = fm.beginTransaction();
-            myOnePage = new MyOnePage();
-            transaction.add(R.id.frame, myOnePage).commit();
-        }
-
-        @Override
-        public void onClick(View v) {
-            FragmentManager fm = getFragmentManager();
-            // 开启Fragment事务
-            FragmentTransaction transaction = fm.beginTransaction();
-
-            switch (v.getId())
-            {
-                case R.id.my_one:
-                    if (myOnePage == null)
-                    {
-                        myTwoPage = new MyTwoPage();
-                        myThreePage = new MyThreePage();
-                    }
-                    // 使用当前Fragment的布局替代id_content的控件
-                    transaction.replace(R.id.frame, myOnePage);
-                    //控件颜色
-                    myOne.setTextColor(getResources().getColor(R.color.tomato));
-                    myTwo.setTextColor(getResources().getColor(R.color.black));
-                    myThree.setTextColor(getResources().getColor(R.color.black));
-                    break;
-                case R.id.my_two:
-                    if (myTwoPage == null)
-                    {
-                        myTwoPage = new MyTwoPage();
-                    }
-                    transaction.replace(R.id.frame, myTwoPage);
-                    //控件颜色
-                    myOne.setTextColor(getResources().getColor(R.color.black));
-                    myTwo.setTextColor(getResources().getColor(R.color.tomato));
-                    myThree.setTextColor(getResources().getColor(R.color.black));
-                    break;
-                case R.id.my_three:
-                    if (myThreePage == null)
-                    {
-                        myThreePage = new MyThreePage();
-                    }
-                    transaction.replace(R.id.frame, myThreePage);
-                    //控件颜色
-                    myOne.setTextColor(getResources().getColor(R.color.black));
-                    myTwo.setTextColor(getResources().getColor(R.color.black));
-                    myThree.setTextColor(getResources().getColor(R.color.tomato));
-                    break;
-
-            }
-            // transaction.addToBackStack();
-            // 事务提交
-            transaction.commit();
-        }
-
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-        {
-            return inflater.inflate(R.layout.my_page_fragment, null);
-
-        }
     }
 
 }
