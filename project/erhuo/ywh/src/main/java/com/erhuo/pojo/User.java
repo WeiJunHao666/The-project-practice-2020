@@ -10,14 +10,7 @@ import java.sql.Date;
 @AllArgsConstructor
 
 public class User {
-
-    private int userId;
-    private String username;
-    private String nickname;
-    private String phoneNum;
-    private String email;
-    private String password;
-    private String loginStatus;
-    private Date date;
-
+    private String userName;
+    private String nickName;
+    private String Img;
 }

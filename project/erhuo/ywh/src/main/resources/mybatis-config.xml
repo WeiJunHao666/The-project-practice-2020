@@ -6,6 +6,7 @@
     
     <settings>
         <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
     
     <typeAliases>
@@ -14,6 +15,7 @@
     
     <mappers>
         <mapper class="com.erhuo.dao.CommentMapper"/>
+        <mapper class="com.erhuo.dao.PostMapper"/>
         <mapper class="com.erhuo.dao.UserMapper"/>
     </mappers>
 </configuration>

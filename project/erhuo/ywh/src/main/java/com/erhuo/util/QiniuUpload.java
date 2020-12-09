@@ -14,14 +14,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
-/**
- *   类作用描述：上传图片到服务器
- *   创建时间：2018/12/1 17:54
- *   构造方法参数：
- *   修改时间：2018/12/1 17:54
- *   创建者：ZENG
- *   类全限定名称：com.hyxiaojingyu.common.QiniuUpload
- **/
 public class QiniuUpload {
 
     //设置好账号的ACCESS_KEY和SECRET_KEY
