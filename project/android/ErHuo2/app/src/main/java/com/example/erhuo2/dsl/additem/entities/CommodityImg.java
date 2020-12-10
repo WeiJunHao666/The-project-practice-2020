@@ -1,9 +1,15 @@
-package com.example.erhuo2.zsl.entities;
+package com.example.erhuo2.dsl.additem.entities;
 
-public class ProductImgEntity {
+public class CommodityImg {
     private int id;
     private int commodityId;
     private String img;
+
+    public CommodityImg(int id, int commodityId, String img) {
+        this.id = id;
+        this.commodityId = commodityId;
+        this.img = img;
+    }
 
     public int getId() {
         return id;

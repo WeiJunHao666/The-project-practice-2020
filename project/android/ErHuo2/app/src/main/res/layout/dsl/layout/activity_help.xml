@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD:project/android/ErHuo2/app/src/main/res/layout/dsl/layout/activity_help.xml
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
-=======
-    tools:context=".wjh.aboutUser.AboutUserActivity">
->>>>>>> 6a6797142c9d45df24f4dddca1995168575a808c:project/android/ErHuo2/app/src/main/res/layout/dsl/layout/activity_about_user.xml
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -62,7 +58,6 @@
         android:layout_marginTop="20dp"
         android:textSize="18sp"/>
     <TextView
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="        商品的退换可与卖家进行协商，有与“二货”主要是以出售二手商品为主，难免存在一些质量上的瑕疵，退换商品均可找商家进行商谈。"
