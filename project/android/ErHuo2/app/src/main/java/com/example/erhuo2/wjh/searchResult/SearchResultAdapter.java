@@ -1,57 +1,33 @@
 package com.example.erhuo2.wjh.searchResult;
 
+<<<<<<< HEAD
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
+=======
+>>>>>>> 1a99eda8b7105ddf6f9a4ca82a257fa441769e83
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.CustomTarget;
-import com.bumptech.glide.request.transition.Transition;
-import com.example.erhuo2.R;
-
 import java.util.ArrayList;
-
+import java.util.List;
 
 public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder> {
-
-    private Context context;
-    private View inflater;
-    private ArrayList<String> dataList = new ArrayList<>();
-
-    public SearchResultAdapter(Context context, ArrayList<String> dataList) {
-        this.context = context;
-        this.dataList = dataList;
-    }
-
-    //移除数据使用notifyItemRemoved
-    public void removeData(int position) {
-        dataList.remove(position);
-        notifyItemRemoved(position);
-    }
+    List<DataBean> list = new ArrayList<>();
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //创建ViewHolder，返回每一项的布局
-        inflater = LayoutInflater.from(context).inflate(R.layout.item_search_result,parent,false);
-        SearchResultAdapter.ViewHolder viewHolder = new SearchResultAdapter.ViewHolder(inflater);
-
-        return viewHolder;
+        return null;
     }
     @Override
+<<<<<<< HEAD
     public int getItemViewType(int position) {
         return position;
     }
@@ -60,22 +36,22 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     public void onBindViewHolder(@NonNull SearchResultAdapter.ViewHolder holder, int position) {
         holder.setData(dataList.get(position), position);
         Log.e("position", position+"");
+=======
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+>>>>>>> 1a99eda8b7105ddf6f9a4ca82a257fa441769e83
     }
 
     @Override
     public int getItemCount() {
-        return dataList!=null ? dataList.size() : 0;
+        return list!=null ? list.size() : 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
-        TextView textView;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = (ImageView) itemView.findViewById(R.id.goods_img);
-            textView = (TextView) itemView.findViewById(R.id.goods_title);
         }
+<<<<<<< HEAD
 
         public void setData(Object data, int position) {
             if (data != null) {
@@ -142,5 +118,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
             final float scale = context.getResources().getDisplayMetrics().density;
             return (int) (dpValue * scale + 0.5f);
         }
+=======
+>>>>>>> 1a99eda8b7105ddf6f9a4ca82a257fa441769e83
     }
 }

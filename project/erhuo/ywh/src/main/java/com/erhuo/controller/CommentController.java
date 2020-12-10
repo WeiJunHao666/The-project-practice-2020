@@ -27,7 +27,7 @@ public class CommentController {
 
     @RequestMapping("/getCom/{postId}/{userId}")
     public String getComment(@PathVariable int postId,@PathVariable int userId){
-        List<List<CommentLite>>  comList = commentService.getComment(postId,userId);
+        List<List<CommentLite>> comList = commentService.getComment(postId,userId);
         String str = JSON.toJSONString(comList);
         System.out.println(str);
         return str;
@@ -42,12 +42,14 @@ public class CommentController {
 
     @RequestMapping("/like/{userId}/{comId}")
     public void Like(@PathVariable int userId, @PathVariable int comId){
+        System.out.println(userId + " " + comId);
         commentService.like(userId, comId);
     }
 
-    @RequestMapping("/unlike{userId}/{comId}")
+    @RequestMapping("/unlike/{userId}/{comId}")
     public void unLike(@PathVariable int userId,@PathVariable int comId){
-        commentService.like(userId, comId);
+        System.out.println(userId + " " + comId);
+        commentService.unLike(userId, comId);
     }
 
     @RequestMapping(value = "/addCom",method = RequestMethod.POST)
@@ -71,10 +73,13 @@ public class CommentController {
         comment.setPostId(commentInfoToSer.getPostId());
         comment.setUserId(commentInfoToSer.getUserId());
         comment.setMessage(commentInfoToSer.getContent());
-        comment.setLastId(commentInfoToSer.getLastId());
+        comment.setLastId(commentInfoToSer.getLastComId());
+        comment.setLastUserId(commentInfoToSer.getLastUserId());
         String result = commentService.reply(comment);
         System.out.println(result);
         return result;
     }
+
+
 
 }

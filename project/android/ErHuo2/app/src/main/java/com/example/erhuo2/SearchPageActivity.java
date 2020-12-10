@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import com.example.erhuo2.wjh.searchResult.SearchResultActivity;
 
+import java.util.Date;
+
 public class SearchPageActivity extends Activity {
     private ImageView back;
     private EditText et_search;

@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:layout_width="match_parent"
+<<<<<<< HEAD
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+=======
+    android:layout_height="match_parent"
+>>>>>>> 1a99eda8b7105ddf6f9a4ca82a257fa441769e83
     android:orientation="vertical"
     android:layout_gravity="center"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/goods_img"
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:src="@drawable/b"
         app:riv_corner_radius_top_left="10dp"
         app:riv_corner_radius_top_right="10dp"/>
     <LinearLayout
         android:layout_width="match_parent"
+=======
+        android:src="@drawable/b"/>
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+>>>>>>> 1a99eda8b7105ddf6f9a4ca82a257fa441769e83
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/shape_corner_bottom"
@@ -46,5 +56,7 @@
 
         </LinearLayout>
     </LinearLayout>
+
+
 
 </LinearLayout>

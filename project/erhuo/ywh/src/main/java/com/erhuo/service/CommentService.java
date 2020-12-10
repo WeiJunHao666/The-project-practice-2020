@@ -52,8 +52,8 @@ public class CommentService {
     }
 
     public void unLike(int userId,int comId){
-        commentMapper.delLike(comId);
-        commentMapper.delUserLike(userId,comId);
+        System.out.println(commentMapper.delLike(comId));
+        System.out.println(commentMapper.delUserLike(userId,comId));
     }
 
     public String addCom(Comment comment1) {

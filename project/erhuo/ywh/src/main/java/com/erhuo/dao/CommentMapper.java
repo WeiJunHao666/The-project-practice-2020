@@ -27,7 +27,7 @@ public interface CommentMapper {
     @Update("update comment set like_num = like_num - 1 where com_id = #{comId}")
     public int delLike(int comId);
 
-    @Delete("delete form user_likecom where user_id = #{userId} and com_id = #{comId}")
+    @Delete("delete from user_likecom where user_id = #{userId} and com_id = #{comId}")
     public int delUserLike(@Param("userId") int userId, @Param("comId") int comId);
 
     int addCom(Comment comment1);

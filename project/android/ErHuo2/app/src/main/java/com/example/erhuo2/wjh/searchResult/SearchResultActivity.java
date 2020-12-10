@@ -11,18 +11,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+<<<<<<< HEAD
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+=======
+>>>>>>> 1a99eda8b7105ddf6f9a4ca82a257fa441769e83
 
 import com.example.erhuo2.R;
 import com.example.erhuo2.SearchPageActivity;
@@ -34,8 +37,6 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 
-import java.util.ArrayList;
-
 
 public class SearchResultActivity extends AppCompatActivity {
     private PopupWindow popupWindow;
@@ -43,6 +44,7 @@ public class SearchResultActivity extends AppCompatActivity {
     private ImageView back;
     private Button keyWord;
     private Button go;
+<<<<<<< HEAD
     private RecyclerView recyclerView;
     private SmartRefreshLayout refreshLayout;
     private SearchResultAdapter adapter;
@@ -52,14 +54,19 @@ public class SearchResultActivity extends AppCompatActivity {
             "http://qkl7o9qw8.hb-bkt.clouddn.com/zsl","http://qkl7o9qw8.hb-bkt.clouddn.com/dsl","http://qkl7o9qw8.hb-bkt.clouddn.com/zsl","http://qkl7o9qw8.hb-bkt.clouddn.com/wjh", "http://qkl7o9qw8.hb-bkt.clouddn.com/dsl"
             ,"http://qkl7o9qw8.hb-bkt.clouddn.com/dsl","http://qkl7o9qw8.hb-bkt.clouddn.com/dsl","http://qkl7o9qw8.hb-bkt.clouddn.com/dsl"};
     private ArrayList<String> list = new ArrayList<>();
+=======
+>>>>>>> 1a99eda8b7105ddf6f9a4ca82a257fa441769e83
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
         findViews();
         setListener();
+<<<<<<< HEAD
 //        init();
         setRecyclerView();
+=======
+>>>>>>> 1a99eda8b7105ddf6f9a4ca82a257fa441769e83
     }
 
     private void setListener() {
@@ -97,12 +104,16 @@ public class SearchResultActivity extends AppCompatActivity {
         back = findViewById(R.id.search_result_back);
         keyWord = findViewById(R.id.search_result_keyword);
         go = findViewById(R.id.search_result_go);
+<<<<<<< HEAD
         recyclerView = findViewById(R.id.recyclerView_search_result);
         refreshLayout = findViewById(R.id.search_result_refresh);
+=======
+>>>>>>> 1a99eda8b7105ddf6f9a4ca82a257fa441769e83
         Drawable drawable = getResources().getDrawable(R.drawable.search);
         drawable.setBounds(50, 0, 120, 70);// 第一0是距左边距离，第二0是距上边距离，60分别是长宽
         keyWord.setCompoundDrawables(drawable, null, null, null);// 只放左边
     }
+<<<<<<< HEAD
     private void init(){
         recyclerView.setHasFixedSize(true);
         final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
@@ -142,6 +153,8 @@ public class SearchResultActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new StaggeredDividerItemDecoration(this, 16, 2));
         recyclerView.setAdapter(adapter);
     }
+=======
+>>>>>>> 1a99eda8b7105ddf6f9a4ca82a257fa441769e83
 
     class MyOnClickListener implements View.OnClickListener{
 

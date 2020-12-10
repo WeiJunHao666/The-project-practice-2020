@@ -4,10 +4,10 @@ import com.erhuo.pojo.User;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 public class UserMapperImpl extends SqlSessionDaoSupport implements UserMapper {
-
-    public User queryUserById(int userId) {
+    @Override
+    public User queryById(int userId) {
         UserMapper userMapper = getSqlSession().getMapper(UserMapper.class);
-        User user = userMapper.queryUserById(userId);
+        User user = userMapper.queryById(userId);
         return user;
     }
 }
