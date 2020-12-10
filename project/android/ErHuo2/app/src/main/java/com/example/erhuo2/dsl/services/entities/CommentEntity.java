@@ -20,4 +20,8 @@ public class CommentEntity {
     private String content;
     private List<ReplyEntity> list = new ArrayList<>();
     private boolean isLike;
+
+
+
+
 }

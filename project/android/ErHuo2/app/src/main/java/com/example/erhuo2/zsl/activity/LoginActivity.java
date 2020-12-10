@@ -38,11 +38,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-<<<<<<< HEAD
+
         myPageFragment = new MyPageFragment();
 
-=======
->>>>>>> ed5a82cb46866d2e5d926ba87063b1fa1cde2487
+
         bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
