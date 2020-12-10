@@ -24,7 +24,6 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
 import com.example.erhuo2.R;
 import com.example.erhuo2.dsl.services.adapter.CommentAdapter;
 import com.example.erhuo2.dsl.services.entities.ComInfoEntity;
@@ -32,9 +31,7 @@ import com.example.erhuo2.dsl.services.entities.CommentEntity;
 import com.example.erhuo2.dsl.services.entities.CommentInfoToSer;
 import com.example.erhuo2.dsl.services.entities.MyEvent;
 import com.example.erhuo2.dsl.services.entities.ReplyEntity;
-import com.example.erhuo2.dsl.services.entities.ServiceEntity;
 import com.example.erhuo2.dsl.services.view.SquareImageView;
-import com.example.erhuo2.uploadUtils.DownloadFile;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jaren.lib.view.LikeView;
@@ -66,14 +63,14 @@ import okhttp3.Response;
 import static com.example.erhuo2.dsl.services.usefulimg.ConfigUtil.SERVER_ADDR;
 
 public class ViewServiceActivity extends AppCompatActivity {
-    private ServiceEntity viewService;
 
     private MyEvent toCom;
     private ImageView service_back;
     private ImageView service_more;
     private CircleImageView view_service_img;
     private TextView view_service_name;
-    private ArrayList<String> imgs = new ArrayList<>();
+    //private List<Bitmap> imgs = new ArrayList<>();
+    private ArrayList<Integer> imgs = new ArrayList<>();
     private GridLayout gridLayoutPost;
 
     private TextView shout_content;
@@ -116,7 +113,6 @@ public class ViewServiceActivity extends AppCompatActivity {
                     ca.notifyDataSetChanged();
                     Toast.makeText(getApplicationContext(), "评论成功！",
                             Toast.LENGTH_SHORT).show();
-                    service_discuss_content.setText("");
                     break;
                 case 3:
                     Log.e("dsl","33333333");
@@ -125,7 +121,6 @@ public class ViewServiceActivity extends AppCompatActivity {
                     ca.notifyDataSetChanged();
                     Toast.makeText(getApplicationContext(), "评论成功！",
                             Toast.LENGTH_SHORT).show();
-                    service_discuss_content.setText("");
                     break;
             }
         }
@@ -149,7 +144,6 @@ public class ViewServiceActivity extends AppCompatActivity {
         InputMethodManager inputManager =
                 (InputMethodManager) service_discuss_content.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.showSoftInput(service_discuss_content, 0);
-        service_discuss_content.setText("");
 
     };
 
@@ -165,19 +159,12 @@ public class ViewServiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_service);
 
+
         Intent request = getIntent();
-        int postId = request.getIntExtra("postId",0);
-        int userId = request.getIntExtra("userId",0);
         String name = request.getStringExtra("name");
         String img = request.getStringExtra("img");
         String content = request.getStringExtra("content");
-        imgs = request.getStringArrayListExtra("imgs");
-        String date = request.getStringExtra("date");
-        int pageview = request.getIntExtra("pageview",0);
-        boolean check = Boolean.getBoolean(request.getStringExtra("check"));
-        int prizes = request.getIntExtra("prizes",0);
-
-        viewService = new ServiceEntity(postId,userId,img,name,content,date,check,prizes,pageview,imgs);
+        imgs = request.getIntegerArrayListExtra("imgs");
 
         findView();
 
@@ -201,12 +188,32 @@ public class ViewServiceActivity extends AppCompatActivity {
         //评论
         addComment();
 
+
     }
 
     private void addComment() {
 
         //请求评论数据
-        getCommentData();
+        //getCommentData();
+
+        ReplyEntity r1 = new ReplyEntity(1,1,"杜世龙","张树林",12+"","llllll",true);
+        ReplyEntity r2 = new ReplyEntity(1,1,"韦俊豪","张树林",15+"","llllll",false);
+
+        List<ReplyEntity> l1 = new ArrayList<>();
+        l1.add(r1);
+        l1.add(r2);
+        CommentEntity c1 = new CommentEntity(1,1,"张树林",R.drawable.first,123+"","6666",l1,false);
+
+        List<ReplyEntity> l3 = new ArrayList<>();
+        l3.add(r1);
+        CommentEntity c2 = new CommentEntity(1,1,"张树林",R.drawable.first,0+"","777",l3,false);
+
+        List<ReplyEntity> l2 = new ArrayList<>();
+        CommentEntity c3 = new CommentEntity(1,1,"张树林",R.drawable.first,1+"","6888",l2,true);
+
+        commentList.add(c1);
+        commentList.add(c2);
+        commentList.add(c3);
 
         ca = new CommentAdapter(getApplicationContext(),commentList, R.layout.comment_list);
         service_comment_list.setAdapter(ca);
@@ -228,7 +235,7 @@ public class ViewServiceActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    String s = SERVER_ADDR+"comment/getCom/"+viewService.getPostId()+"/1";
+                    String s = SERVER_ADDR+"comment/getCom/1/1";
                     URL url = new URL(s);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
@@ -305,15 +312,18 @@ public class ViewServiceActivity extends AppCompatActivity {
     }
 
     private void viewPages() {
-        view_service_pageview.setText(viewService.getPageview()+" 次浏览");
-        view_num_thump.setText(viewService.getPrizes()+"");
-        if(viewService.isCheck()){
+        view_service_pageview.setText("123456 次浏览");
+        view_num_thump.setText("123");
+        if(status){
             view_service_thump.setCheckedWithoutAnimator(true);
         }else{
             view_service_thump.setCheckedWithoutAnimator(false);
         }
     }
 
+    private void getimgs() {
+
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void putimgs() {
@@ -335,9 +345,8 @@ public class ViewServiceActivity extends AppCompatActivity {
             layoutParams.columnSpec = columnSpec;
 
             layoutParams.setMargins(5, 5, 5, 5);
-            Glide.with(getApplicationContext())
-                    .load("http://qkl7o9qw8.hb-bkt.clouddn.com/"+imgs.get(i))
-                    .into(imageView);
+
+            imageView.setImageResource(imgs.get(i));
             gridLayoutPost.addView(imageView, layoutParams);
         }
     }
@@ -414,7 +423,7 @@ public class ViewServiceActivity extends AppCompatActivity {
                     break;
                 //提交评论
                 case R.id.service_discuss_submit:
-                    if(service_discuss_content.getText().toString().trim().equals("")){
+                    if(service_discuss_content.getText().equals("")){
                         Toast.makeText(getApplicationContext(), "评论内容不能为空！",
                                 Toast.LENGTH_SHORT).show();
                     }
@@ -422,7 +431,7 @@ public class ViewServiceActivity extends AppCompatActivity {
 
                     if(service_discuss_content.getHint().toString().equals("说点什么吧~")){
                         //评论
-                        sendComment();
+                        //sendComment();
 
                         String content = service_discuss_content.getText().toString();
                         List<ReplyEntity> list = new ArrayList<>();
@@ -431,11 +440,11 @@ public class ViewServiceActivity extends AppCompatActivity {
                         msg.what = 2;
                         msg.obj = s;
                         handler.sendMessage(msg);
-                        service_discuss_content.setText("");
+
 
                     }else{
                         //回复
-                        sendReply();
+                        //sendReply();
 
                         String content = service_discuss_content.getText().toString();
                         if(toCom.getAftPosition()!=-1){
@@ -459,7 +468,6 @@ public class ViewServiceActivity extends AppCompatActivity {
                         }
 
                         service_discuss_content.setHint("说点什么吧~");
-                        service_discuss_content.setText("");
                     }
                     break;
             }
@@ -545,7 +553,6 @@ public class ViewServiceActivity extends AppCompatActivity {
                 CommentInfoToSer c = new CommentInfoToSer(1,1,content);
                 Gson gson = new Gson();
                 String jsonStr = gson.toJson(c);
-                //1)
                 RequestBody requestBody = RequestBody.create(
                         MediaType.parse("text/plain;charset=utf-8"),
                         jsonStr);

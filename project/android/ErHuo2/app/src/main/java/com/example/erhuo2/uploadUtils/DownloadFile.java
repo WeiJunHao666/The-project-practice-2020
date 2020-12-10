@@ -15,8 +15,8 @@ public class DownloadFile {
     // 然后在空间设置->域名设置里，找到空间域名，
     // 通过http://空间域名/key的形式，拿到文件的url。
     public void clickDown(final ImageView img, String fileName){
-        String domain_name = "qkl7o9qw8.hb-bkt.clouddn.com";
-        String downUrl = "http://" + domain_name + "/" + fileName;
+//        String domain_name = "qkl7o9qw8.hb-bkt.clouddn.com";
+        String downUrl = fileName;
         Log.e("url", downUrl);
         AsyncHttpClient client = new SyncHttpClient();
         client.get(downUrl, new BinaryHttpResponseHandler() {

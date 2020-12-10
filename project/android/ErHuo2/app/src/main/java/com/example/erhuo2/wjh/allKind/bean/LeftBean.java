@@ -5,44 +5,40 @@ import java.util.List;
 
 public class LeftBean implements Serializable{
 
+    private String typeId;
+    private String typeName;
+    private List<RightBean> list;
+    private boolean chick;   //标识
 
-    private List<DatasBean> datas;
-
-    public List<DatasBean> getDatas() {
-        return datas;
+    public String getTypeId() {
+        return typeId;
     }
 
-    public void setDatas(List<DatasBean> datas) {
-        this.datas = datas;
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
     }
 
-    public static class DatasBean implements Serializable{
-        private String id;
-        private String showName;
-        private boolean chick;   //标识
+    public String getTypeName() {
+        return typeName;
+    }
 
-        public boolean isChick() {
-            return chick;
-        }
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
 
-        public void setChick(boolean chick) {
-            this.chick = chick;
-        }
+    public boolean isChick() {
+        return chick;
+    }
 
-        public String getId() {
-            return id;
-        }
+    public void setChick(boolean chick) {
+        this.chick = chick;
+    }
 
-        public void setId(String id) {
-            this.id = id;
-        }
+    public List<RightBean> getList() {
+        return list;
+    }
 
-        public String getShowName() {
-            return showName;
-        }
-
-        public void setShowName(String showName) {
-            this.showName = showName;
-        }
+    public void setList(List<RightBean> list) {
+        this.list = list;
     }
 }

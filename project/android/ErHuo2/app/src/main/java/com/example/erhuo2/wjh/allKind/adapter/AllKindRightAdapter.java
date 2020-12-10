@@ -15,18 +15,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.erhuo2.R;
 import com.example.erhuo2.wjh.allKind.bean.RightBean;
+import com.example.erhuo2.wjh.allKind.bean.TitleBean;
 
 import java.util.List;
 
 
 public class AllKindRightAdapter extends RecyclerView.Adapter<AllKindRightAdapter.ViewHolder> {
     private Context context;
-    private List<RightBean.DatasBean> list;
+    private List<RightBean> list2;
+    private List<TitleBean> list1;
     private View inflater;
 
-    public AllKindRightAdapter(Context context, List<RightBean.DatasBean> list){
+    public AllKindRightAdapter(Context context, List<TitleBean> list1, List<RightBean> list2){
         this.context = context;
-        this.list = list;
+        this.list1 = list1;
+        this.list2 = list2;
     }
     @NonNull
     @Override
@@ -40,9 +43,8 @@ public class AllKindRightAdapter extends RecyclerView.Adapter<AllKindRightAdapte
     @Override
     public void onBindViewHolder(@NonNull AllKindRightAdapter.ViewHolder holder, int position) {
         //将数据和控件绑定
-        holder.textView.setText(list.get(position).getTitle());
-        List<RightBean.DatasBean.ListBean> list1 = this.list.get(position).getList();
-        ChildAdapter childAdapter = new ChildAdapter(context, list1);
+        holder.textView.setText(list1.get(position).getTitle().toString());
+        ChildAdapter childAdapter = new ChildAdapter(context, list2);
         GridLayoutManager layoutManager = new GridLayoutManager(context, 3);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         holder.recyclerView.setLayoutManager(layoutManager);
@@ -55,7 +57,7 @@ public class AllKindRightAdapter extends RecyclerView.Adapter<AllKindRightAdapte
     @Override
     public int getItemCount() {
         //返回Item总条数
-        return list.size();
+        return list1.size();
     }
     //内部类，绑定控件
     class ViewHolder extends RecyclerView.ViewHolder{

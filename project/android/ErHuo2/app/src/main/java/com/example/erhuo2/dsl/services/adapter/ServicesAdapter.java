@@ -11,7 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.erhuo2.R;
 import com.example.erhuo2.dsl.services.ViewServiceActivity;
 import com.example.erhuo2.dsl.services.entities.ServiceEntity;
@@ -66,28 +65,18 @@ public class ServicesAdapter extends BaseAdapter {
         TextView num_pageviews = convertView.findViewById(R.id.num_pageviews);
         ImageView service_small_img = convertView.findViewById(R.id.service_small_img);
         TextView service_content = convertView.findViewById(R.id.service_content);
-        TextView service_time = convertView.findViewById(R.id.service_time);
 
-        service_time.setText(listServices.get(position).getDate());
-        Glide.with(context)
-                .load("http://"+listServices.get(position).getImg())
-                .into(service_img);
+        service_img.setImageResource(listServices.get(position).getImg());
         service_name.setText(listServices.get(position).getName());
-        final String img = listServices.get(position).getImg();
+        final int img = listServices.get(position).getImg();
         final String name = listServices.get(position).getName();
-        num_pageviews.setText(listServices.get(position).getPageview()+"");
-        if(listServices.get(position).getImgs().size()>0) {
-            Glide.with(context)
-                    .load("http://qkl7o9qw8.hb-bkt.clouddn.com/"+listServices.get(position).getImgs().get(0))
-                    .error(R.drawable.img_error)
-                    .into(service_small_img);
-        }
-        //d.clickDown(service_small_img,listServices.get(position).getImgs().get(0));
+        num_pageviews.setText("16481");
+        service_small_img.setImageResource(listServices.get(position).getImgs().get(0));
         service_content.setText(listServices.get(position).getContent());
 
         //点赞信息
         num_thump_up.setText(listServices.get(position).getPrizes()+"");
-        if(listServices.get(position).isCheck()){
+        if(listServices.get(position).getCheck()){
             service_thump_up.setCheckedWithoutAnimator(true);
         }else{
             service_thump_up.setCheckedWithoutAnimator(false);
@@ -102,11 +91,12 @@ public class ServicesAdapter extends BaseAdapter {
             @SuppressLint("ResourceType")
             @Override
             public void onClick(View v) {
+                Log.e("ddd",position+"");
                 switch (v.getId()) {
                     //点赞
                     case R.id.service_thump_up:
                         //点赞
-                        if(!listServices.get(position).isCheck()){
+                        if(!listServices.get(position).getCheck()){
                             service_thump_up.toggle();
                             listServices.get(position).setPrizes(Integer.parseInt(num_thump_up.getText().toString())+1);
                             num_thump_up.setText(listServices.get(position).getPrizes()+"");
@@ -128,16 +118,10 @@ public class ServicesAdapter extends BaseAdapter {
                     //评论跳转
                     case R.id.service_discuss:
                         Intent i = new Intent();
-                        i.putExtra("postId",listServices.get(position).getPostId());
-                        i.putExtra("userId",listServices.get(position).getUserId());
                         i.putExtra("name",name);
-                        i.putExtra("img",img);
-                        i.putStringArrayListExtra("imgs",listServices.get(position).getImgs());
+                        i.putExtra("img",""+img);
+                        i.putIntegerArrayListExtra("imgs",listServices.get(position).getImgs());
                         i.putExtra("content",listServices.get(position).getContent());
-                        i.putExtra("pageview",listServices.get(position).getPageview());
-                        i.putExtra("check",listServices.get(position).isCheck()+"");
-                        i.putExtra("date",listServices.get(position).getDate());
-                        i.putExtra("prizes",listServices.get(position).getPrizes());
                         i.setClass(context, ViewServiceActivity.class);
                         i.setFlags(i.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(i);

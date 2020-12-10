@@ -138,7 +138,7 @@ public class HomePageFragment extends Fragment {
         drawable.setBounds(10, 0, 70, 70);// 第一0是距左边距离，第二0是距上边距离，60分别是长宽
         kind.setCompoundDrawables(drawable, null, null, null);// 只放左边
     }
-    private void setOnClickListener(){
+    public void setOnClickListener(){
         MyClickListener listener = new MyClickListener();
         keyWord.setOnClickListener(listener);
         kind.setOnClickListener(listener);
@@ -185,7 +185,7 @@ public class HomePageFragment extends Fragment {
             }
         });
     }
-    private class MyClickListener implements View.OnClickListener{
+    class MyClickListener implements View.OnClickListener{
 
         @Override
         public void onClick(View view) {

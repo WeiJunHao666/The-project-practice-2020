@@ -7,26 +7,30 @@
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:background="#EEEEEE"></View>
-
-    <RelativeLayout
-        android:id="@+id/contentContainer"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottomBar" />
+        android:layout_above="@id/bottom_navigation_bar"/>
 
-    <!-- 参数详细解释 稍后会有 -->
-
-    <com.roughike.bottombar.BottomBar
-        android:id="@+id/bottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:background="#f2f2f2"
+    <com.ashokvarma.bottomnavigation.BottomNavigationBar
+        android:id="@+id/bottom_navigation_bar"
         android:layout_alignParentBottom="true"
-        app:bb_tabXmlResource="@xml/bottombar_menu"
-        app:bb_behavior="shifting"
-        app:bb_activeTabColor="@color/colorAccent"
-        app:bb_inActiveTabAlpha="0.3"
-        app:bb_inActiveTabColor="#000000"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"/>
+
+    <com.gjiazhe.multichoicescirclebutton.MultiChoicesCircleButton
+        android:id="@+id/multiChoicesCircleButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:mccb_collapseRadius="60dp"
+        app:mccb_expandRadius="120dp"
+        app:mccb_icon="@drawable/a"
+        app:mccb_text="Choose"
+        app:mccb_enableParallax="false"
+        android:layout_above="@id/bottom_navigation_bar"
+        app:mccb_buttonColor="#00000000"/>
 
 
 

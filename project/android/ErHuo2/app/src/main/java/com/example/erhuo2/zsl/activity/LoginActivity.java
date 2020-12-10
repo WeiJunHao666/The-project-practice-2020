@@ -1,92 +1,130 @@
 package com.example.erhuo2.zsl.activity;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
-import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 
+import com.ashokvarma.bottomnavigation.BottomNavigationBar;
+import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.example.erhuo2.FragmentAdapter;
 import com.example.erhuo2.R;
 import com.example.erhuo2.dsl.services.ServePageFragment;
 import com.example.erhuo2.wjh.message.MessageContactActivity;
 import com.example.erhuo2.zsl.page.HomePageFragment;
-import com.example.erhuo2.zsl.page.MyOnePage;
 import com.example.erhuo2.zsl.page.MyPageFragment;
-import com.example.erhuo2.zsl.page.MyThreePage;
-import com.example.erhuo2.zsl.page.MyTwoPage;
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.BottomBarTab;
-import com.roughike.bottombar.OnTabReselectListener;
-import com.roughike.bottombar.OnTabSelectListener;
+import com.gjiazhe.multichoicescirclebutton.MultiChoicesCircleButton;
 
-public class LoginActivity extends AppCompatActivity {
-    private BottomBar bottomBar;
+import java.util.ArrayList;
+import java.util.List;
 
-    private BottomBarTab nearby;
-    private MyPageFragment myPageFragment;
+public class LoginActivity extends AppCompatActivity{
+    private BottomNavigationBar bottomNavigationBar;
+    private ViewPager viewPager;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+<<<<<<< HEAD
 
         myPageFragment = new MyPageFragment();
 
 
         bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+=======
+
+        bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
+        viewPager = findViewById(R.id.view_pager);
+
+        final List<Fragment> fragments = new ArrayList<>();
+        fragments.add(new HomePageFragment());
+        fragments.add(new ServePageFragment());
+        fragments.add(new MessageContactActivity());
+        fragments.add(new MyPageFragment());
+        FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager(),fragments);
+        viewPager.setAdapter(adapter);
+
+        MultiChoicesCircleButton.Item item1 = new MultiChoicesCircleButton.Item("Like", getResources().getDrawable(R.drawable.inhome), 30);
+
+        MultiChoicesCircleButton.Item item2 = new MultiChoicesCircleButton.Item("Message", getResources().getDrawable(R.drawable.inquan), 90);
+
+        MultiChoicesCircleButton.Item item3 = new MultiChoicesCircleButton.Item("Tag", getResources().getDrawable(R.drawable.inchat), 150);
+
+        List<MultiChoicesCircleButton.Item> buttonItems = new ArrayList<>();
+        buttonItems.add(item1);
+        buttonItems.add(item2);
+        buttonItems.add(item3);
+
+        MultiChoicesCircleButton multiChoicesCircleButton = (MultiChoicesCircleButton) findViewById(R.id.multiChoicesCircleButton);
+        multiChoicesCircleButton.setButtonItems(buttonItems);
+
+        multiChoicesCircleButton.setOnSelectedItemListener(new MultiChoicesCircleButton.OnSelectedItemListener() {
+>>>>>>> 6a6797142c9d45df24f4dddca1995168575a808c
             @Override
-            public void onTabSelected(@IdRes int tabId) {
-                Object ob=null;
-                switch (tabId){
-                    case R.id.tab_home:
-                        // 选择指定 id 的标签
-                        nearby = bottomBar.getTabWithId(R.id.tab_my);
-//                        nearby.setBadgeCount(5);
-                        ob  = new HomePageFragment();
-                        break;
-                    case R.id.tab_service:
-                        // 选择指定 id 的标签
-                        nearby = bottomBar.getTabWithId(R.id.tab_my);
-                        //nearby.setBadgeCount(5);
-                        ob  = new ServePageFragment();
-                        break;
-                    case R.id.tab_message:
-                        // 选择指定 id 的标签
-                        nearby = bottomBar.getTabWithId(R.id.tab_my);
-                        //nearby.setBadgeCount(5);
-                        ob  = new MessageContactActivity();
-                        break;
-                    case R.id.tab_my:
-                        // 选择指定 id 的标签
-                        nearby = bottomBar.getTabWithId(R.id.tab_my);
-                        //nearby.setBadgeCount(5);
-                        ob  = new MyPageFragment();
-                        break;
-                }
-                getSupportFragmentManager().beginTransaction().replace(R.id.contentContainer,(Fragment) ob).commit();
+            public void onSelected(MultiChoicesCircleButton.Item item, int index) {
+                // Do something
             }
         });
 
-        bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
+        multiChoicesCircleButton.setOnHoverItemListener(new MultiChoicesCircleButton.OnHoverItemListener(){
             @Override
-            public void onTabReSelected(@IdRes int tabId) {
-                if (tabId == R.id.tab_home) {
-                    // 已经选择了这个标签，又点击一次。即重选。
-                    nearby.removeBadge();
-                }
+            public void onHovered(MultiChoicesCircleButton.Item item, int index) {
+                // Do something
             }
         });
 
+
+        bottomNavigationBar
+                .setMode(BottomNavigationBar.MODE_FIXED)
+                .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_DEFAULT)
+                .addItem(new BottomNavigationItem(R.drawable.inhome, "主页").
+                        setInactiveIconResource(R.drawable.home))
+                .addItem(new BottomNavigationItem(R.drawable.inquan, "圈子")
+                        .setInactiveIconResource(R.drawable.quanzi))
+                .addItem(new BottomNavigationItem(R.drawable.inchat, "聊天")
+                        .setInactiveIconResource(R.drawable.chat))
+                .addItem(new BottomNavigationItem(R.drawable.inmine, "我的")
+                        .setInactiveIconResource(R.drawable.mine))
+                .setFirstSelectedPosition(0)
+                .setActiveColor("#111111") //选中颜色
+                .initialise();
+
+        bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(int position) {
+                viewPager.setCurrentItem(position);
+            }
+
+            @Override
+            public void onTabUnselected(int position) {
+
+            }
+
+            @Override
+            public void onTabReselected(int position) {
+
+            }
+        });
+        // ViewPager 滑动事件监听
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                //将滑动到的页面对应的 menu 设置为选中状态
+                bottomNavigationBar.selectTab(i);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
     }
-
 }
