@@ -1,23 +1,11 @@
 package com.example.erhuo2.zsl.activity;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-<<<<<<< HEAD
 import androidx.viewpager.widget.ViewPager;
-=======
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
->>>>>>> 1a99eda8b7105ddf6f9a4ca82a257fa441769e83
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -26,38 +14,20 @@ import com.example.erhuo2.R;
 import com.example.erhuo2.dsl.services.ServePageFragment;
 import com.example.erhuo2.wjh.message.MessageContactActivity;
 import com.example.erhuo2.zsl.page.HomePageFragment;
-import com.example.erhuo2.zsl.page.MyOnePage;
 import com.example.erhuo2.zsl.page.MyPageFragment;
-<<<<<<< HEAD
 import com.gjiazhe.multichoicescirclebutton.MultiChoicesCircleButton;
-=======
-import com.example.erhuo2.zsl.page.MyThreePage;
-import com.example.erhuo2.zsl.page.MyTwoPage;
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.BottomBarTab;
-import com.roughike.bottombar.OnTabReselectListener;
-import com.roughike.bottombar.OnTabSelectListener;
->>>>>>> 1a99eda8b7105ddf6f9a4ca82a257fa441769e83
 
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
 public class LoginActivity extends AppCompatActivity{
     private BottomNavigationBar bottomNavigationBar;
     private ViewPager viewPager;
-=======
-    private BottomBarTab nearby;
-    private MyPageFragment myPageFragment;
->>>>>>> 1a99eda8b7105ddf6f9a4ca82a257fa441769e83
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-<<<<<<< HEAD
-        myPageFragment = new MyPageFragment();
 
-<<<<<<< HEAD
         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
         viewPager = findViewById(R.id.view_pager);
 
@@ -84,12 +54,6 @@ public class LoginActivity extends AppCompatActivity{
         multiChoicesCircleButton.setButtonItems(buttonItems);
 
         multiChoicesCircleButton.setOnSelectedItemListener(new MultiChoicesCircleButton.OnSelectedItemListener() {
-=======
-=======
->>>>>>> ed5a82cb46866d2e5d926ba87063b1fa1cde2487
-        bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
->>>>>>> 1a99eda8b7105ddf6f9a4ca82a257fa441769e83
             @Override
             public void onSelected(MultiChoicesCircleButton.Item item, int index) {
                 // Do something
@@ -122,7 +86,6 @@ public class LoginActivity extends AppCompatActivity{
         bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position) {
-
                 viewPager.setCurrentItem(position);
             }
 
@@ -141,7 +104,6 @@ public class LoginActivity extends AppCompatActivity{
             @Override
             public void onPageScrolled(int i, float v, int i1) {
 
-<<<<<<< HEAD
             }
 
             @Override
@@ -155,8 +117,5 @@ public class LoginActivity extends AppCompatActivity{
 
             }
         });
-=======
->>>>>>> 1a99eda8b7105ddf6f9a4ca82a257fa441769e83
     }
-
 }

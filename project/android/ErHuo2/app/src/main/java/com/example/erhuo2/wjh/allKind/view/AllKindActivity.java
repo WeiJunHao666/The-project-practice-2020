@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +31,6 @@ public class AllKindActivity extends AppCompatActivity implements AllKindLeftAda
     private RecyclerView recyclerView2;
     private AllKindLeftAdapter adapter;
     private AllKindRightAdapter adapter2;
-<<<<<<< HEAD
     private List<LeftBean> list;
     private List<TitleBean>list2 = new ArrayList<>();
     private List<RightBean> list3;
@@ -67,34 +65,15 @@ public class AllKindActivity extends AppCompatActivity implements AllKindLeftAda
             }
         }
     };
-=======
-    private List<LeftBean.DatasBean> list;
-    private List<RightBean.DatasBean> list2;
-    private ImageView back;
->>>>>>> 1a99eda8b7105ddf6f9a4ca82a257fa441769e83
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_kind);
         recyclerView = findViewById(R.id.recyclerView_left);
         recyclerView2 = findViewById(R.id.recyclerView_right);
-<<<<<<< HEAD
         //initData();
         presenter = new KindPresenter(this);
         presenter.showRight(ConfigUtil.ALLKIND);
-=======
-        back = findViewById(R.id.all_kind_back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (view.getId()){
-                    case R.id.all_kind_back:
-                        onBackPressed();
-                }
-            }
-        });
-        initData();
->>>>>>> 1a99eda8b7105ddf6f9a4ca82a257fa441769e83
     }
     private void initData() {
         String []name = {"美容护肤"};
