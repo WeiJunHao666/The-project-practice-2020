@@ -77,7 +77,7 @@ public class HomePageFragment extends Fragment {
 
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.home_page_fragment, container, false);
-        downLoadProduct("http://10.7.88.15:8081/erhuol/advertisement/all");
+        upKeyValue("http://10.7.88.15:8081/erhuol/advertisement/all");
         //downloadAdcertising("http://192.168.2.104:8081/erhuol/advertisement/all");
 
 //        RightBean rightBean = new Gson().fromJson(str, RightBean.class);
@@ -234,7 +234,7 @@ public class HomePageFragment extends Fragment {
         dataSource.add(s9);
         dataSource.add(s10);
     }
-    private void downLoadProduct(final String s){
+    private void upKeyValue(final String s){
         new Thread(){
             @Override
             public void run() {

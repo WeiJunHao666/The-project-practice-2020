@@ -19,34 +19,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-<<<<<<< HEAD
-        <activity android:name=".zsl.activity.ChangePasswordActivity"></activity>
-        <activity android:name=".zsl.activity.AboutUsActivity" />
-        <activity android:name=".zsl.activity.CustomerSeviceActivity" />
-        <activity android:name=".zsl.activity.HelpActivity" />
-        <activity android:name=".zsl.activity.PrivacyActivity" />
-        <activity android:name=".zsl.activity.AccountSettingActivity" />
-        <activity android:name=".zsl.activity.EditActivity" />
-        <activity android:name=".zsl.activity.SettingActivity" />
-        <activity android:name=".dsl.services.CreateServiceActivity" />
-        <activity android:name=".wjh.register.view.Register_activity" />
-        <activity android:name=".wjh.login.view.MainActivity" />
-        <activity android:name=".dsl.additem.AddItemActivity" /> <!-- <activity android:name=".dsl.services.CreateServiceActivity" -->
-        <!-- tools:ignore="DuplicateActivity" /> -->
-        <!-- <activity android:name=".wjh.register.view.Register_activity" -->
-        <!-- tools:ignore="DuplicateActivity" /> -->
-        <!-- <activity android:name=".wjh.login.view.MainActivity" -->
-        <!-- tools:ignore="DuplicateActivity" /> -->
-        <activity android:name=".zsl.activity.ProductDetailsActivity" />
-
-
-
-=======
         <activity android:name=".wjh.aboutUser.AboutUserActivity"></activity>
         <activity android:name=".dsl.services.CreateServiceActivity" />
         <activity android:name=".wjh.register.view.Register_activity" />
         <activity android:name=".wjh.login.view.MainActivity"></activity>
->>>>>>> 6a6797142c9d45df24f4dddca1995168575a808c
         <activity android:name=".wjh.searchResult.SearchResultActivity" />
         <activity
             android:name=".wjh.message.MessageContactActivity"

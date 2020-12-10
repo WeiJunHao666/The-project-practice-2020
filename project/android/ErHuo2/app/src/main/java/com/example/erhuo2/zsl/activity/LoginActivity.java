@@ -28,12 +28,6 @@ public class LoginActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        myPageFragment = new MyPageFragment();
-
-
-        bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
-
         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
         viewPager = findViewById(R.id.view_pager);
 
@@ -60,7 +54,6 @@ public class LoginActivity extends AppCompatActivity{
         multiChoicesCircleButton.setButtonItems(buttonItems);
 
         multiChoicesCircleButton.setOnSelectedItemListener(new MultiChoicesCircleButton.OnSelectedItemListener() {
->>>>>>> 6a6797142c9d45df24f4dddca1995168575a808c
             @Override
             public void onSelected(MultiChoicesCircleButton.Item item, int index) {
                 // Do something
