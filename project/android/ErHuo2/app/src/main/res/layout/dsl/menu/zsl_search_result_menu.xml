@@ -4,7 +4,7 @@
         android:icon="@drawable/home"
         android:title="主页"/>
     <item android:id="@+id/go_service"
-        android:icon="@drawable/service"
+        android:icon="@drawable/quanzi"
         android:title="圈子"/>
     <item android:id="@+id/go_chat"
         android:icon="@drawable/chat"

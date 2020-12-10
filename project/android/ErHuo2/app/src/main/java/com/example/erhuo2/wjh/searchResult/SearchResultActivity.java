@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -29,6 +30,9 @@ import com.example.erhuo2.dsl.services.ServePageFragment;
 import com.example.erhuo2.wjh.message.MessageContactActivity;
 import com.example.erhuo2.zsl.page.HomePageFragment;
 import com.example.erhuo2.zsl.page.MyPageFragment;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 
 import java.util.ArrayList;
 
@@ -40,10 +44,13 @@ public class SearchResultActivity extends AppCompatActivity {
     private Button keyWord;
     private Button go;
     private RecyclerView recyclerView;
+    private SmartRefreshLayout refreshLayout;
     private SearchResultAdapter adapter;
     private String []img = {"http://qkl7o9qw8.hb-bkt.clouddn.com/dsl", "http://qkl7o9qw8.hb-bkt.clouddn.com/wjh", "http://qkl7o9qw8.hb-bkt.clouddn.com/wjh",
             "http://qkl7o9qw8.hb-bkt.clouddn.com/dsl", "http://qkl7o9qw8.hb-bkt.clouddn.com/wjh", "http://qkl7o9qw8.hb-bkt.clouddn.com/zsl", "http://qkl7o9qw8.hb-bkt.clouddn.com/wjh",
-            "http://qkl7o9qw8.hb-bkt.clouddn.com/dsl", "http://qkl7o9qw8.hb-bkt.clouddn.com/wjh", "http://qkl7o9qw8.hb-bkt.clouddn.com/dsl"};
+            "http://qkl7o9qw8.hb-bkt.clouddn.com/dsl", "http://qkl7o9qw8.hb-bkt.clouddn.com/dsl","http://qkl7o9qw8.hb-bkt.clouddn.com/dsl","http://qkl7o9qw8.hb-bkt.clouddn.com/dsl","http://qkl7o9qw8.hb-bkt.clouddn.com/wjh",
+            "http://qkl7o9qw8.hb-bkt.clouddn.com/zsl","http://qkl7o9qw8.hb-bkt.clouddn.com/dsl","http://qkl7o9qw8.hb-bkt.clouddn.com/zsl","http://qkl7o9qw8.hb-bkt.clouddn.com/wjh", "http://qkl7o9qw8.hb-bkt.clouddn.com/dsl"
+            ,"http://qkl7o9qw8.hb-bkt.clouddn.com/dsl","http://qkl7o9qw8.hb-bkt.clouddn.com/dsl","http://qkl7o9qw8.hb-bkt.clouddn.com/dsl"};
     private ArrayList<String> list = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +58,8 @@ public class SearchResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_results);
         findViews();
         setListener();
-        init();
+//        init();
+        setRecyclerView();
     }
 
     private void setListener() {
@@ -59,6 +67,29 @@ public class SearchResultActivity extends AppCompatActivity {
         search_choose.setOnClickListener(listener);
         back.setOnClickListener(listener);
         go.setOnClickListener(listener);
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+
+                        if(list.size()<40) {
+                            String []str = {"http://qkl7o9qw8.hb-bkt.clouddn.com/dsl",
+                            "http://qkl7o9qw8.hb-bkt.clouddn.com/zsl","http://qkl7o9qw8.hb-bkt.clouddn.com/wjh"
+                            ,"http://qkl7o9qw8.hb-bkt.clouddn.com/dsl", "http://qkl7o9qw8.hb-bkt.clouddn.com/wjh",
+                                    "http://qkl7o9qw8.hb-bkt.clouddn.com/dsl", "http://qkl7o9qw8.hb-bkt.clouddn.com/wjh",
+                                    "http://qkl7o9qw8.hb-bkt.clouddn.com/dsl", "http://qkl7o9qw8.hb-bkt.clouddn.com/wjh",
+                                    "http://qkl7o9qw8.hb-bkt.clouddn.com/dsl", "http://qkl7o9qw8.hb-bkt.clouddn.com/wjh"};
+                            for(int i=0; i<11; i++){
+                                list.add(img[i]);
+                            }
+                            adapter = new SearchResultAdapter(getApplicationContext(), list);
+                            recyclerView.setAdapter(adapter);
+                            refreshLayout.finishLoadMore();
+                        }else{
+                            //通知没有更多数据可加载
+                            refreshLayout.finishLoadMoreWithNoMoreData();
+                        }
+            }
+        });
     }
 
     private void findViews() {
@@ -67,35 +98,48 @@ public class SearchResultActivity extends AppCompatActivity {
         keyWord = findViewById(R.id.search_result_keyword);
         go = findViewById(R.id.search_result_go);
         recyclerView = findViewById(R.id.recyclerView_search_result);
+        refreshLayout = findViewById(R.id.search_result_refresh);
         Drawable drawable = getResources().getDrawable(R.drawable.search);
         drawable.setBounds(50, 0, 120, 70);// 第一0是距左边距离，第二0是距上边距离，60分别是长宽
         keyWord.setCompoundDrawables(drawable, null, null, null);// 只放左边
     }
     private void init(){
         recyclerView.setHasFixedSize(true);
-        recyclerView.setItemAnimator(null);
         final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         //防止Item切换
         layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         recyclerView.setLayoutManager(layoutManager);
-        final int spanCount = 2;
-        recyclerView.addItemDecoration(new StaggeredDividerItemDecoration(this, 16, spanCount));
+        recyclerView.addItemDecoration(new StaggeredDividerItemDecoration(this, 16, 2));
         //解决底部滚动到顶部时，顶部item上方偶尔会出现一大片间隔的问题
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                int[] first = new int[spanCount];
+                int[] first = new int[2];
                 layoutManager.findFirstCompletelyVisibleItemPositions(first);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && (first[0] == 1 || first[1] == 1)) {
                     layoutManager.invalidateSpanAssignments();
                 }
             }
         });
-        for(int i=0; i<9; i++){
+        for(int i=0; i<20; i++){
             list.add(img[i]);
         }
         adapter = new SearchResultAdapter(this, list);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+    }
+    private void setRecyclerView(){
+        for(int i=0; i<20; i++){
+            list.add(img[i]);
+        }
+        adapter = new SearchResultAdapter(this, list);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        //防止Item切换
+        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+        //设置列之间的间隔
+        recyclerView.addItemDecoration(new StaggeredDividerItemDecoration(this, 16, 2));
         recyclerView.setAdapter(adapter);
     }
 
@@ -120,6 +164,8 @@ public class SearchResultActivity extends AppCompatActivity {
             }
         }
     }
+
+    //
     private void showPopupMenu(View view) {
         // View当前PopupMenu显示的相对View的位置
         PopupMenu popupMenu = new PopupMenu(this, view);
@@ -162,6 +208,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
         popupMenu.show();
     }
+    //
     private void showAnimation() {
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View vPopupWindow = inflater.inflate(R.layout.popupwindow_choose, null, false);//引入弹窗布局

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
-import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,10 +51,15 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 
         return viewHolder;
     }
-
     @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+        @Override
     public void onBindViewHolder(@NonNull SearchResultAdapter.ViewHolder holder, int position) {
         holder.setData(dataList.get(position), position);
+        Log.e("position", position+"");
     }
 
     @Override
@@ -89,7 +94,9 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
                                 LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) imageView.getLayoutParams();//获取你要填充图片的布局的layoutParam
                                 layoutParams.height = (int) (((float) resource.getHeight()) / resource.getWidth() * getScreenWidth(context) / 2 );
                                 //因为是2列,所以宽度是屏幕的一半,高度是根据bitmap的高/宽*屏幕宽的一半
-                                layoutParams.width =  getScreenWidth(context) / 2;//这个是布局的宽度
+                                final float scale = context.getResources().getDisplayMetrics().density;
+                                int width =  dip2px(context, 36);
+                                layoutParams.width =  (getScreenWidth(context)-width)/ 2;//这个是布局的宽度
                                 imageView.setLayoutParams(layoutParams);//容器的宽高设置好了
                                 resource = zoomImg(resource, layoutParams.width, layoutParams.height);
                                 // 然后在改变一下bitmap的宽高
@@ -102,7 +109,6 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
                             }
                         });
             }
-
         }
         //改变bitmap尺寸的方法
         public Bitmap zoomImg(Bitmap bm, int newWidth, int newHeight) {
@@ -125,23 +131,16 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         {
             WindowManager wm = (WindowManager) context
                     .getSystemService(Context.WINDOW_SERVICE);
-            DisplayMetrics outMetrics = new DisplayMetrics();
-            wm.getDefaultDisplay().getMetrics(outMetrics);
-            return outMetrics.widthPixels;
+            int width = wm.getDefaultDisplay().getWidth();
+            return width;
         }
-
-
-
-//        public void down(final String id){
-//            new Thread(){
-//                @Override
-//                public void run() {
-//                    super.run();
-//                    DownloadFile downloadFile = new DownloadFile();
-//                    downloadFile.clickDown(imageView, id);
-//                }
-//            }.start();
-//        }
-
+        //
+        /**
+         * 根据手机的分辨率从 dip 的单位 转成为 px(像素)
+         */
+        public int dip2px(Context context, float dpValue) {
+            final float scale = context.getResources().getDisplayMetrics().density;
+            return (int) (dpValue * scale + 0.5f);
+        }
     }
 }

@@ -18,11 +18,11 @@ import java.util.List;
 
 public class AllKindLeftAdapter extends RecyclerView.Adapter<AllKindLeftAdapter.ViewHolder> {
     private Context context;
-    private List<LeftBean.DatasBean> list;
+    private List<LeftBean> list;
     private View inflater;
     private OnSelectorListener mSelectorListener;
 
-    public AllKindLeftAdapter(Context context, List<LeftBean.DatasBean> list){
+    public AllKindLeftAdapter(Context context, List<LeftBean> list){
         this.context = context;
         this.list = list;
     }
@@ -40,7 +40,7 @@ public class AllKindLeftAdapter extends RecyclerView.Adapter<AllKindLeftAdapter.
     public void onBindViewHolder(@NonNull final AllKindLeftAdapter.ViewHolder holder, final int position) {
         //将数据和控件绑定
         holder.itemView.setId(position);
-        holder.textView.setText(list.get(position).getShowName());
+        holder.textView.setText(list.get(position).getTypeName());
         holder.setIsRecyclable(false);
         if (list.get(position).isChick()) {
             holder.itemView.setBackgroundResource(R.drawable.background_choose);

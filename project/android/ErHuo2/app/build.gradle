@@ -81,4 +81,9 @@ dependencies {
     compile 'com.makeramen:roundedimageview:2.3.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
 
+    //wjh:底部导航栏
+    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.2.0'
+    //wjh:底部加号
+    implementation 'com.gjiazhe:MultiChoicesCircleButton:1.0'
+
 }
