@@ -58,6 +58,7 @@
         android:layout_marginTop="20dp"
         android:textSize="18sp"/>
     <TextView
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="        商品的退换可与卖家进行协商，有与“二货”主要是以出售二手商品为主，难免存在一些质量上的瑕疵，退换商品均可找商家进行商谈。"

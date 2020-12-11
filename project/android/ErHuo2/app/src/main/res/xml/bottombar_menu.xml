@@ -11,7 +11,7 @@
     <tab
         id="@+id/tab_service"
         title="社区"
-        icon="@drawable/quanzi"
+        icon="@drawable/service"
         />
 <!--        barColorWhenSelected="#e48801"-->
 

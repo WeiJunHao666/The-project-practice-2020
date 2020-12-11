@@ -1,50 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_gravity="center"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/goods_img"
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/b"
-        app:riv_corner_radius_top_left="10dp"
-        app:riv_corner_radius_top_right="10dp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
+        android:src="@drawable/b"/>
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/shape_corner_bottom"
-        >
-        <TextView
-            android:id="@+id/goods_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:maxLines="2"
-            android:text="闲置男士手表 阿玛尼男表 手表腕表 三眼款六针"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:text="这是一首简单的小情歌"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/holo_red_dark"
-                android:textStyle="bold"
-                android:text="￥148"
-                android:textSize="18sp"
-                android:layout_marginRight="10dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="40人想要"/>
-
-        </LinearLayout>
-    </LinearLayout>
 
 </LinearLayout>

@@ -5,4 +5,8 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="tomato">#FF6347</color> <!--西红柿色 -->
     <color name="gainsboro">#DCDCDC</color> <!--淡灰色 -->
+    <color name="black">#000000</color>
+    <color name="gray">#EEEEEE</color>
+    <color name="back_gray">#FFFFFF</color>
+
 </resources>

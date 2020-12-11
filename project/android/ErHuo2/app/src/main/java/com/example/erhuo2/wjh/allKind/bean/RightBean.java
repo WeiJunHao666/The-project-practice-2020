@@ -1,51 +1,69 @@
 package com.example.erhuo2.wjh.allKind.bean;
 
+import android.widget.ImageView;
+
 import java.io.Serializable;
+import java.util.List;
 
 public class RightBean implements Serializable{
-    //        private String title;
-    private boolean chick;   //标识
-    private int typeId;
-    private String typeName;
-    private String img;
+    private List<DatasBean> datas;
 
-    public int getTypeId() {
-        return typeId;
+    public List<DatasBean> getDatas() {
+        return datas;
     }
 
-    public void setTypeId(int typeId) {
-        this.typeId = typeId;
+    public void setDatas(List<DatasBean> datas) {
+        this.datas = datas;
     }
 
-    public String getTypeName() {
-        return typeName;
-    }
+    public static class DatasBean implements Serializable {
+        private String title;
+        private List<ListBean> list;
+        private boolean chick;   //标识
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
-    }
+        public boolean isChick() {
+            return chick;
+        }
 
-    public String getImg() {
-        return img;
-    }
+        public void setChick(boolean chick) {
+            this.chick = chick;
+        }
 
-    public void setImg(String img) {
-        this.img = img;
-    }
+        public String getTitle() {
+            return title;
+        }
 
-    public boolean isChick() {
-        return chick;
-    }
+        public void setTitle(String title) {
+            this.title = title;
+        }
 
-    public void setChick(boolean chick) {
-        this.chick = chick;
-    }
+        public void setList(List<ListBean> list){
+            this.list = list;
+        }
 
-//        public String getTitle() {
-//            return title;
-//        }
-//
-//        public void setTitle(String title) {
-//            this.title = title;
-//        }
+        public List<ListBean> getList(){
+            return list;
+        }
+
+        public static class ListBean implements Serializable{
+
+            private ImageView img;
+            private String name;
+
+            public void setImg(ImageView img){
+                this.img = img;
+            }
+            public ImageView getImg(){
+                return img;
+            }
+            public void setName(String name){
+                this.name = name;
+            }
+            public String getName(){
+                return name;
+            }
+
+        }
+
+    }
 }

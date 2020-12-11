@@ -3,6 +3,8 @@ package com.example.erhuo2.zsl.page;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import com.example.erhuo2.R;
 import com.example.erhuo2.SearchPageActivity;
 import com.example.erhuo2.wjh.allKind.view.AllKindActivity;
+import com.example.erhuo2.zsl.activity.PrivacyActivity;
 import com.example.erhuo2.zsl.activity.ProductDetailsActivity;
 import com.example.erhuo2.zsl.adapter.ProductAdapter;
 import com.example.erhuo2.zsl.entities.AdvertisingEntity;
@@ -61,23 +64,22 @@ public class HomePageFragment extends Fragment {
     private MyGridView gridView;
     private SmartRefreshLayout refresh_layout;
     private String str;
-    private List<AdvertisingEntity> advertisingEntity;
     private ProductAdapter productAdapter;
     private List<ProductEntity> dataSource = new ArrayList<>();
-
-//    private Handler handler = new Handler(){
-//        public void handleMessage(Message message){
-//            switch (message.what){
-//                case 1:
-//                    gridView.setAdapter(productAdapter);
-//            }
-//        }
-//    };
+    private List<ProductEntity> list = new ArrayList<>();
+    private Handler handler = new Handler(){
+        public void handleMessage(Message message){
+            switch (message.what){
+                case 1:
+                    gridView.setAdapter(productAdapter);
+            }
+        }
+    };
 
 
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.home_page_fragment, container, false);
-        downLoadProduct("http://10.7.88.15:8081/erhuol/advertisement/all");
+        upKeyValue("http://10.7.89.236:8081/erhuol/commodity/all"+"?page=0");
         //downloadAdcertising("http://192.168.2.104:8081/erhuol/advertisement/all");
 
 //        RightBean rightBean = new Gson().fromJson(str, RightBean.class);
@@ -96,19 +98,18 @@ public class HomePageFragment extends Fragment {
         getData();
 
         setOnClickListener();
-        productAdapter = new ProductAdapter(getActivity().getApplicationContext(),dataSource, R.layout.home_page_item);
-        gridView.setAdapter(productAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Intent intent = new Intent(getActivity().getApplicationContext(), ProductDetailsActivity.class);
-                intent.putExtra("Img",dataSource.get(i).getImg());
-                intent.putExtra("describe",dataSource.get(i).getDescribe());
-                intent.putExtra("price",dataSource.get(i).getPrice());
-                intent.putExtra("seller",dataSource.get(i).getSeller());
-                intent.putExtra("position",dataSource.get(i).getPosition());
+                String id = dataSource.get(i).getId()+"";
+                intent.putExtra("id",id);
+
+                Log.e("zsl",dataSource.get(i).getId()+"");
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.activity_in_left,
+                        R.anim.activity_out_left);
             }
         });
 
@@ -116,6 +117,7 @@ public class HomePageFragment extends Fragment {
         //设置图片加载器
         banner.setImageLoader(new GlideImageLoader());
         //设置图片集合
+        banner.setDelayTime(3000);//设置轮播时间3秒切换下一图
         banner.setImages(images);
         //banner设置方法全部调用完毕时最后调用
         banner.start();
@@ -138,7 +140,7 @@ public class HomePageFragment extends Fragment {
         drawable.setBounds(10, 0, 70, 70);// 第一0是距左边距离，第二0是距上边距离，60分别是长宽
         kind.setCompoundDrawables(drawable, null, null, null);// 只放左边
     }
-    public void setOnClickListener(){
+    private void setOnClickListener(){
         MyClickListener listener = new MyClickListener();
         keyWord.setOnClickListener(listener);
         kind.setOnClickListener(listener);
@@ -165,16 +167,14 @@ public class HomePageFragment extends Fragment {
         refresh_layout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                int page = dataSource.size();
+                if(page%20==0) {
 
-                if(dataSource.size()<20) {
-                    ProductEntity a = new ProductEntity(R.drawable.dd,"水门水门水门水门水门水门水门水门水门水门水门水门","1000","322宿舍","河北师范大学");
-                    dataSource.add(a);
-                    dataSource.add(a);
-                    dataSource.add(a);
-                    dataSource.add(a);
-                    dataSource.add(a);
-                    dataSource.add(a);
+                    getMoreProduct("http://10.7.89.236:8081/erhuol/commodity/all"+"?page="+page/20);
                     //通知加载数据完毕
+                    for(int i=0;i<list.size();i++){
+                        dataSource.add(list.get(i));
+                    }
                     productAdapter = new ProductAdapter(getActivity().getApplicationContext(),dataSource, R.layout.home_page_item);
                     gridView.setAdapter(productAdapter);
                     refresh_layout.finishLoadMore();
@@ -185,7 +185,7 @@ public class HomePageFragment extends Fragment {
             }
         });
     }
-    class MyClickListener implements View.OnClickListener{
+    private class MyClickListener implements View.OnClickListener{
 
         @Override
         public void onClick(View view) {
@@ -212,29 +212,9 @@ public class HomePageFragment extends Fragment {
         }
     }
     public void getData(){
-        ProductEntity s1 = new ProductEntity(R.drawable.product1,"飞科吹风机FH6232大功率可折","49.9","322宿舍","河北师范大学");
-        ProductEntity s2 = new ProductEntity(R.drawable.product2,"优衣库 女装 弹力棉质两翻领T恤（长袖）","79","322宿舍","河北师范大学");
-        ProductEntity s3 = new ProductEntity(R.drawable.product3,"飞科毛衣服起球修剪充电式衣物剃打刮 ","59","322宿舍","河北师范大学");
-        ProductEntity s4 = new ProductEntity(R.drawable.product4,"雅丽黛佳眉笔纤细持久防水不易脱色晕染","47","322宿舍","河北师范大学");
-        ProductEntity s5 = new ProductEntity(R.drawable.product5,"恒源祥护膝盖保护套保暖老寒腿男女漆","29","322宿舍","河北师范大学");
-        ProductEntity s6 = new ProductEntity(R.drawable.product6,"Skechers斯凯奇冬秋","329","322宿舍","河北师范大学");
-        ProductEntity s7 = new ProductEntity(R.drawable.product7,"全新Dior迪奥烈焰蓝金唇","350","322宿舍","河北师范大学");
-        ProductEntity s8 = new ProductEntity(R.drawable.product8,"小米手环5智能心率检测蓝牙男女同款运动计","179","322宿舍","河北师范大学");
-        ProductEntity s9 = new ProductEntity(R.drawable.product9,"Innisfree/诗悦风吟火","210","322宿舍","河北师范大学");
-        ProductEntity s10 = new ProductEntity(R.drawable.product10,"小米充电宝移动电源10000毫安快充超薄","79","322宿舍","河北师范大学");
 
-        dataSource.add(s1);
-        dataSource.add(s2);
-        dataSource.add(s3);
-        dataSource.add(s4);
-        dataSource.add(s5);
-        dataSource.add(s6);
-        dataSource.add(s7);
-        dataSource.add(s8);
-        dataSource.add(s9);
-        dataSource.add(s10);
     }
-    private void downLoadProduct(final String s){
+    private void upKeyValue(final String s){
         new Thread(){
             @Override
             public void run() {
@@ -255,8 +235,12 @@ public class HomePageFragment extends Fragment {
                     //读取字符信息
                     str = reader.readLine();
                     Log.e("zsl",str+"");
-                    advertisingEntity = new Gson().fromJson(str,new TypeToken<List<AdvertisingEntity>>(){}.getType());
-                    Log.e("zsl",advertisingEntity.get(0).getId()+"");
+                    dataSource = new Gson().fromJson(str,new TypeToken<List<ProductEntity>>(){}.getType());
+                    Log.e("zsl",dataSource.get(0).getId()+"");
+                    productAdapter = new ProductAdapter(getActivity().getApplicationContext(),dataSource, R.layout.home_page_item);
+                    Message message = new Message();
+                    message.what = 1;
+                    handler.sendMessage(message);
                     //关闭流
                     reader.close();
                     in.close();
@@ -277,7 +261,50 @@ public class HomePageFragment extends Fragment {
                 }
             }
         }.start();
-
+    }
+    private void getMoreProduct(final String s){
+        new Thread(){
+            @Override
+            public void run() {
+                URL url = null;
+                try {
+                    url = new URL(s);
+                    Log.e("kk", s);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    //设置网络请求的方式为POST
+                    conn.setRequestMethod("POST");
+                    //获取网络输出流
+                    OutputStream out = conn.getOutputStream();
+                    //必须获取网络输入流，保证客户端和服务端建立连接
+                    InputStream in = conn.getInputStream();
+                    //使用字符流读取
+                    BufferedReader reader = new BufferedReader(
+                            new InputStreamReader(in, "utf-8"));
+                    //读取字符信息
+                    str = reader.readLine();
+                    Log.e("zsl",str+"");
+                    list = new Gson().fromJson(str,new TypeToken<List<ProductEntity>>(){}.getType());
+                    Log.e("zsl",list.get(0).getId()+"");
+                    //关闭流
+                    reader.close();
+                    in.close();
+                    out.close();
+//                    if(flag.equals("usernameError")){
+//                        loginListener.onFailure("请输入正确的用户名");
+//                    }else if(flag.equals("passwordError")){
+//                        loginListener.onFailure("密码错误");
+//                    }else{
+//                        loginListener.onSuccess(flag);
+//                    }
+                } catch (MalformedURLException | ProtocolException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 //      private void downloadAdcertising(final String s){
 //          new Thread() {
