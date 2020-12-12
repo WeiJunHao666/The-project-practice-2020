@@ -31,6 +31,14 @@
         where user_id=#{userId}
     </update>
 
+    <select id="findUserById" resultMap="user" flushCache="true">
+        select img,nickname,sex from user where user_id=#{id}
+    </select>
+
+    <update id="updatePassword">
+        update user set password = #{newPassword} where username=#{username} and password=#{oldPassword}
+    </update>
+
     <resultMap id="user" type="user">
         <result column="user_id" property="userId"/>
         <result column="last_login" property="date"/>

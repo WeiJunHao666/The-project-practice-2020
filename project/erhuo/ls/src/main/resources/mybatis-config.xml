@@ -20,5 +20,6 @@
         <mapper class="com.erhuo.dao.AdvertisementMapper"/>
         <mapper class="com.erhuo.dao.CommodityMapper"/>
         <mapper class="com.erhuo.dao.CommodityImgMapper"/>
+        <mapper class="com.erhuo.dao.TypeMapper"/>
     </mappers>
 </configuration>

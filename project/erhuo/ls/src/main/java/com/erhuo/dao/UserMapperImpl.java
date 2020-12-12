@@ -46,4 +46,16 @@ public class UserMapperImpl extends SqlSessionDaoSupport implements UserMapper {
         userMapper.updateUser(user);
     }
 
+    @Override
+    public User findUserById(int id) {
+        UserMapper userMapper = getSqlSession().getMapper(UserMapper.class);
+        User user = userMapper.findUserById(id);
+        return user;
+    }
+
+    @Override
+    public void updatePassword(String username, String oldPassword, String newPassword) {
+        getSqlSession().getMapper(UserMapper.class).updatePassword(username,oldPassword,newPassword);
+    }
+
 }

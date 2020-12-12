@@ -20,4 +20,10 @@ public interface UserMapper {
     public int checkUserByUsername(String username);
 
     public void updateUser(User user);
+
+    public User findUserById(@Param("id") int id);
+
+    public void updatePassword(@Param("username") String username,
+                               @Param("oldPassword") String oldPassword,
+                               @Param("newPassword") String newPassword);
 }

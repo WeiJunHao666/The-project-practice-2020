@@ -4,10 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.erhuo.dao.CommodityImgMapper">
 
-    <select id="findImgById" resultType="commodityImg" parameterType="int">
+    <select id="findImgById" resultType="commodityImg" parameterType="int" flushCache="true">
         select * from commodity_img where commodity_id=#{commodityId}
     </select>
 
+    <insert id="addImg" parameterType="commodityImg">
+        insert into commodity_img (commodity_id,img) values (#{commodityId},#{img})
+    </insert>
 
     <resultMap id="commodityImg" type="commodityImg">
         <result property="commodityId" column="commodity_id"/>

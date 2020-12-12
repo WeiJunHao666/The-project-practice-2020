@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface CommodityImgMapper {
     public List<CommodityImg> findImgById(@Param("commodityId") int id);
+
+    public void addImg(CommodityImg commodityImg);
 }

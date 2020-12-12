@@ -12,4 +12,10 @@ public class CommodityImgMapperImpl extends SqlSessionDaoSupport implements Comm
         List<CommodityImg> img = commodityImgMapper.findImgById(id);
         return img;
     }
+
+    @Override
+    public void addImg(CommodityImg commodityImg) {
+        CommodityImgMapper commodityImgMapper = getSqlSession().getMapper(CommodityImgMapper.class);
+        commodityImgMapper.addImg(commodityImg);
+    }
 }

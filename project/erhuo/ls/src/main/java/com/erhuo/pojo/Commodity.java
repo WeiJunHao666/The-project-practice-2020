@@ -7,12 +7,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
-@ToString
 public class Commodity {
     private int id;
-    private String userId;
+    private int userId;
+    private User user;
     private float value;
     private int discount;
     private String describe;

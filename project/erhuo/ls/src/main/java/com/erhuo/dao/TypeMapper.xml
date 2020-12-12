@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.erhuo.dao.TypeMapper">
+
+    <select id="findSuperTypeAll" resultMap="superType">
+        select type_id,type_name from commodity_type where parent_id is Null
+    </select>
+
+    <select id="findSubTypeById" resultMap="subType" parameterType="int">
+        select type_id,type_name,type_img from commodity_type where  parent_id=#{id}
+    </select>
+
+    <resultMap id="subType" type="subType">
+        <result property="typeId" column="type_id"/>
+        <result property="typeName" column="type_name"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="img" column="type_img"/>
+    </resultMap>
+
+    <resultMap id="superType" type="superType">
+        <result property="typeId" column="type_id"/>
+        <result property="typeName" column="type_name"/>
+    </resultMap>
+
+
+</mapper>
+

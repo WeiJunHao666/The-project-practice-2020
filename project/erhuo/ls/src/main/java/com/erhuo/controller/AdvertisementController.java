@@ -21,9 +21,7 @@ public class AdvertisementController {
     @RequestMapping(value = "/all",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public String getAdvertisementAll(){
-        List<Advertisement> list = advertisementService.queryAdvertisementAll();
-        String s = JSON.toJSONString(list);
-        System.out.println(s);
+        String s = advertisementService.queryAdvertisementAll();
         return s;
     }
 

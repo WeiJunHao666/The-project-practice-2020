@@ -31,21 +31,19 @@ public class UserController {
     @ResponseBody
     public String logon(String username,String password) {
         String logon = userService.logon(username, password);
-
+        if(logon.equals("ok")) return userService.login(username, password);
         return logon;
     }
 
-//    @RequestMapping(value="/update",consumes = "application/json")
     @RequestMapping("/update")
     @ResponseBody
     public void updateUser(@RequestBody User user) {
-//        User user = new User();
-//        user.setNickname(nickname);
-//        user.setUserId(userId);
-//        System.out.println(user);
-////        System.out.println(str);
-//        User user = JSON.parseObject(str, User.class);
-        System.out.println(user);
         userService.updateUser(user);
+    }
+
+    @RequestMapping("/updatePassword")
+    @ResponseBody
+    public String updatePassword(String username,String oldPassword,String newPassword) {
+        return userService.updatePassword(username,oldPassword,newPassword);
     }
 }

@@ -4,17 +4,51 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.erhuo.dao.CommodityMapper">
 
-    <select id="findAll" resultMap="commodity">
-        select * from commodity
+    <select id="findAll" resultMap="commodity" parameterType="int" flushCache="true">
+        select commodity.*,nickname,img from commodity inner join user on commodity.user_id=user.user_id order by id DESC limit #{st},#{ed}
     </select>
 
-    <select id="findCommodityById" resultMap="commodity" parameterType="int">
-        select * from commodity where id=#{id}
+    <select id="findCommodityById" resultMap="commodity" parameterType="int"  flushCache="true">
+        select commodity.*,nickname,img,sex from commodity inner join user on commodity.user_id=user.user_id where id=#{id} order by id DESC
     </select>
 
-    <select id="findCommodityByName" resultMap="commodity" parameterType="String">
-        select * from commodity where commodity_describe like #{name}
+    <select id="findCommodityByName" resultMap="commodity" parameterType="String" flushCache="true">
+        select * from commodity where commodity_describe like #{name} order by id DESC
     </select>
+
+    <insert id="addCommodity" parameterType="commodity" useGeneratedKeys="true" keyProperty="id">
+        insert into commodity
+        (user_id,commodity_valeu,commodity_discount,commodity_describe,type_id,time,oldStandard)
+        values (#{userId},#{value},#{discount},#{describe},#{typeId},#{time},#{oldStandard})
+    </insert>
+
+    <select id="searchCommodityByType" resultMap="commodity" parameterType="int" flushCache="true">
+        select commodity.*,nickname,img from commodity inner join user on commodity.user_id=user.user_id where type_id=#{typeId} order by id DESC limit #{st},#{ed}
+    </select>
+
+    <select id="searchSimilarCommodityByType" resultMap="commodity" parameterType="int" flushCache="true">
+        select commodity.*,nickname,img from commodity inner join user on commodity.user_id=user.user_id where type_id=#{typeId} and id!=#{commodityId} order by id DESC limit #{st},#{ed}
+    </select>
+
+    <select id="searchNumberSome" resultType="int">
+        select id from commodity order by rand() limit 0,500;
+    </select>
+
+    <delete id="deleteCommodityById" >
+        delete from commodity where id = #{id} and user_id = (select user_id from user where username=#{username} and password=#{password})
+    </delete>
+
+    <insert id="store">
+        insert into store values (null,#{commodityId},#{sellerId},#{buyerId})
+    </insert>
+
+    <select id="getStore" resultType="String">
+        select count(*) from store where commodity_id=#{commodityId} and user_id_of_buyer=#{buyerId}
+    </select>
+
+    <delete id="deleteStore">
+        delete from store where commodity_id=#{commodityId} and user_id_of_buyer=#{buyerId}
+    </delete>
 
     <resultMap id="commodity" type="commodity">
         <result property="userId" column="user_id"/>
@@ -22,6 +56,10 @@
         <result property="discount" column="commodity_discount"/>
         <result property="describe" column="commodity_describe"/>
         <result property="typeId" column="type_id"/>
+        <result property="user.nickname" column="nickname"/>
+        <result property="user.img" column="img"/>
+        <result property="user.userId" column="user_id"/>
+        <result property="user.sex" column="sex"/>
     </resultMap>
 
 

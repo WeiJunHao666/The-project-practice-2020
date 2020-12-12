@@ -21,6 +21,7 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+
     <!--    静态资源开房-->
     <mvc:default-servlet-handler/>
 
