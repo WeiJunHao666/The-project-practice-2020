@@ -4,4 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.erhuo.dao.UserMapper">
 
+    <select id="queryUsersByName" resultType="com.erhuo.pojo.User" parameterType="java.util.List">
+        select user.nickname,user.img,user.username from user where username in
+        <foreach collection="list" item="username" open="(" close=")" separator=",">
+            #{username}
+        </foreach>
+    </select>
+
 </mapper>

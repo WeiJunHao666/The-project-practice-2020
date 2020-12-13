@@ -16,7 +16,7 @@ public interface PostMapper {
     @Select("select * from post limit #{startIndex},5")
     public List<Post> queryAll(int startIndex);
 
-    @Select("select * from user_like_post where user_id = #{userId}")
+    @Select("select post_id from user_like_post where user_id = #{userId}")
     List<Integer> getUserLike(int userId);
 
     @Select("select img from post_image where post_id = #{postId}")
@@ -34,4 +34,6 @@ public interface PostMapper {
     @Delete("delete from user_like_post where post_id = #{postId} and user_id = #{userId}")
     int delUserLike(@Param("postId") int postId,@Param("userId") int userId);
 
+    @Update("update post set view_num = view_num + 1 where post_id = #{postId}")
+    int addView(int postId);
 }

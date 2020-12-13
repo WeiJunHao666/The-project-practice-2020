@@ -5,7 +5,7 @@
 <mapper namespace="com.erhuo.dao.CommentMapper">
 
     <select id="queryLastIdNotNull" parameterType="Integer" resultMap="comment">
-        SELECT comment.*,user.username comuser,u.username lastuser
+        SELECT comment.*,user.nickname comuser,u.nickname lastuser
         FROM comment LEFT JOIN user
         ON comment.`user_id` = user.`user_id`
         LEFT JOIN user u
@@ -14,11 +14,9 @@
     </select>
 
     <select id="queryLastIdNull" parameterType="Integer" resultMap="comment">
-        SELECT comment.*,user.username comuser,u.username lastuser
+        SELECT comment.*,user.nickname comuser,user.img userimg
         FROM comment LEFT JOIN user
         ON comment.`user_id` = user.`user_id`
-        LEFT JOIN user u
-        ON comment.`last_user_id` = u.`user_id`
         WHERE last_id IS NULL
     </select>
 

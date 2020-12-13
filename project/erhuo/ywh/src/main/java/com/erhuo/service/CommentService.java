@@ -1,9 +1,12 @@
 package com.erhuo.service;
 
 import com.erhuo.dao.CommentMapper;
+import com.erhuo.dao.PostMapper;
 import com.erhuo.pojo.Comment;
 import com.erhuo.pojo.CommentLite;
 import com.erhuo.util.CommentUtil;
+import org.apache.ibatis.annotations.Update;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,12 +16,16 @@ import java.util.List;
 public class CommentService {
 
     private CommentMapper commentMapper;
+    @Autowired
+    private PostMapper postMapper;
 
     public void setCommentMapper(CommentMapper commentMapper) {
         this.commentMapper = commentMapper;
     }
 
     public List<List<CommentLite>>  getComment(int postId,int userId) {
+        postMapper.addView(postId);
+
         List<Comment> firstComment = commentMapper.queryLastIdNull(postId);
         List<Comment> thencomment = commentMapper.queryLastIdNotNull(postId);
         List<Integer> likeList = commentMapper.queryLikeCom(userId);

@@ -22,4 +22,5 @@ public class Comment {
     private String comUser;
     private List<Comment> nextComments = new ArrayList<Comment>();
     private int likeNum;
+    private String userImg;
 }

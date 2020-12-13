@@ -51,11 +51,7 @@ public class PostController {
 
     @RequestMapping("/unlike/{postId}/{userId}")
     public void unLike(@PathVariable int postId,@PathVariable int userId){
-
+        postService.unLike(postId, userId);
     }
 
-    @RequestMapping("/view/{postId}")
-    public String view(@PathVariable("postId") int postId){
-
-    }
 }

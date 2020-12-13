@@ -10,7 +10,7 @@ import java.sql.Date;
 @AllArgsConstructor
 
 public class User {
-    private String userName;
-    private String nickName;
+    private String username;
+    private String nickname;
     private String Img;
 }

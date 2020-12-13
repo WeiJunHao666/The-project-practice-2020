@@ -46,7 +46,7 @@ public class PostService {
             List<String> imgList = postMapper.getPostImage(post.getPostId());
             post.setImgs(imgList);
             User user = userMapper.queryById(post.getUserId());
-            post.setUserName(user.getUserName());
+            post.setUserName(user.getNickname());
             post.setUserImg(user.getImg());
         }
         return postList;
@@ -61,4 +61,5 @@ public class PostService {
         postMapper.subLike(postId);
         postMapper.delUserLike(postId,userId);
     }
+
 }

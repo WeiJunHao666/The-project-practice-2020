@@ -13,4 +13,5 @@ public class CommentLite {
     private String comUser;
     private int LikeNum;
     private Boolean isLike;
+    private String userImg;
 }

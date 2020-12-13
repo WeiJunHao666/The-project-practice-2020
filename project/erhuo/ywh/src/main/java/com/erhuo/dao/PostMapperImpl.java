@@ -67,4 +67,10 @@ public class PostMapperImpl extends SqlSessionDaoSupport implements PostMapper {
         PostMapper postMapper = getSqlSession().getMapper(PostMapper.class);
         return postMapper.delUserLike(postId,userId);
     }
+
+    @Override
+    public int addView(int postId) {
+        PostMapper postMapper = getSqlSession().getMapper(PostMapper.class);
+        return postMapper.addView(postId);
+    }
 }

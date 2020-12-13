@@ -51,6 +51,7 @@ public class CommentUtil {
             commentLite.setMessage(node.getMessage());
             commentLite.setUserId(node.getUserId());
             commentLite.setLikeNum(node.getLikeNum());
+            commentLite.setUserImg(node.getUserImg());
             if(likeList.contains(node.getComId())){
                 commentLite.setIsLike(true);
             }

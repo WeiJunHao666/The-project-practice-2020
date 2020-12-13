@@ -10,20 +10,22 @@
     <list default="true" id="faee4034-7e33-4a03-98ec-633278c6d8ad" name="Default Changelist" comment="&quot;ywh&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ywh/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/controller/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/CommentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/CommentMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/controller/PostController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/CommentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/CommentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/CommentMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/CommentMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/PostMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/PostMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/PostMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/PostMapperImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/UserMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/UserMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/UserMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/UserMapperImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/pojo/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/pojo/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/pojo/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/pojo/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/pojo/CommentLite.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/pojo/CommentLite.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/pojo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/pojo/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/service/CommentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/util/QiniuUpload.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/util/QiniuUpload.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/service/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/util/CommentUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/util/CommentUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/websocket/WebSocketService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ywh/src/main/resources/mybatis-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/resources/mybatis-config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/resources/spring-dao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/resources/spring-dao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ywh/src/main/webapp/chat2.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ywh/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/webapp/index.jsp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -64,7 +66,7 @@
         <item name="@59.110.115.182" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="erhuo: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="post: table" type="285a2a93:MysqlImplModel$Table" />
+        <item name="user: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -110,7 +112,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/pojo" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/ywh/src/main/resources" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2045977" />
@@ -124,11 +126,11 @@
       <recent name="com.erhuo.controller" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\The-project-practice-2020\project\erhuo\ywh\src\main\resources" />
       <recent name="E:\The-project-practice-2020\project\erhuo\ywh\src\main\java\com\erhuo\pojo" />
       <recent name="E:\The-project-practice-2020\project\erhuo\ywh\src\main\java\com\erhuo\util" />
       <recent name="E:\IntelliJ IDEA 2019.2.4\IDEA_code\erhuo\ls\src\main\webapp\WEB-INF" />
       <recent name="E:\IntelliJ IDEA 2019.2.4\IDEA_code\erhuo\ls\src\main\resources" />
-      <recent name="E:\IntelliJ IDEA 2019.2.4\IDEA_code\erhuo\ywh\src\main\java\com\erhuo\util" />
     </key>
   </component>
   <component name="RunDashboard">
