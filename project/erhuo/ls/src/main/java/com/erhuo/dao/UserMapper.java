@@ -1,10 +1,12 @@
 package com.erhuo.dao;
 
+import com.erhuo.pojo.School;
 import com.erhuo.pojo.User;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.Date;
+import java.util.List;
 
 public interface UserMapper {
 
@@ -26,4 +28,12 @@ public interface UserMapper {
     public void updatePassword(@Param("username") String username,
                                @Param("oldPassword") String oldPassword,
                                @Param("newPassword") String newPassword);
+
+    public List<School> map(@Param("school") String school);
+
+    public List<School> city();
+
+    public String findNicknameByUsername(@Param("username") String username);
+
+    public User seller(@Param("userId") int userId);
 }

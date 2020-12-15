@@ -10,9 +10,9 @@ import java.util.List;
 public class CommodityMapperImpl extends SqlSessionDaoSupport implements CommodityMapper {
 
     @Override
-    public List<Commodity> findAll(int st,int ed) {
+    public List<Commodity> findAll(int st,int ed,String city) {
         CommodityMapper commodityMapper = getSqlSession().getMapper(CommodityMapper.class);
-        List<Commodity> all = commodityMapper.findAll(st,ed);
+        List<Commodity> all = commodityMapper.findAll(st,ed,city);
         return all;
     }
 
@@ -24,9 +24,9 @@ public class CommodityMapperImpl extends SqlSessionDaoSupport implements Commodi
     }
 
     @Override
-    public List<Commodity> findCommodityByName(String name) {
+    public List<Commodity> findCommodityByName(String name,String city) {
         CommodityMapper commodityMapper = getSqlSession().getMapper(CommodityMapper.class);
-        List<Commodity> list = commodityMapper.findCommodityByName(name);
+        List<Commodity> list = commodityMapper.findCommodityByName(name, city);
         return list;
     }
 
@@ -37,16 +37,16 @@ public class CommodityMapperImpl extends SqlSessionDaoSupport implements Commodi
     }
 
     @Override
-    public List<Commodity> searchCommodityByType(int typeId,int st,int ed) {
+    public List<Commodity> searchCommodityByType(int typeId,int st,int ed,String city) {
         CommodityMapper commodityMapper = getSqlSession().getMapper(CommodityMapper.class);
-        List<Commodity> list = commodityMapper.searchCommodityByType(typeId,st,ed);
+        List<Commodity> list = commodityMapper.searchCommodityByType(typeId,st,ed,city);
         return list;
     }
 
     @Override
-    public List<Commodity> searchSimilarCommodityByType(int typeId,int st,int ed,int commodityId) {
+    public List<Commodity> searchSimilarCommodityByType(int typeId,int st,int ed,int commodityId,String city) {
         CommodityMapper commodityMapper = getSqlSession().getMapper(CommodityMapper.class);
-        List<Commodity> list = commodityMapper.searchSimilarCommodityByType(typeId,st,ed,commodityId);
+        List<Commodity> list = commodityMapper.searchSimilarCommodityByType(typeId,st,ed,commodityId,city);
         return list;
     }
 
@@ -77,5 +77,26 @@ public class CommodityMapperImpl extends SqlSessionDaoSupport implements Commodi
     @Override
     public void deleteStore(int buyerId, int commodityId) {
         getSqlSession().getMapper(CommodityMapper.class).deleteStore(buyerId,commodityId);
+    }
+
+    @Override
+    public List<Commodity> screenCommodity(String name, Integer typeId,
+                                           Integer minValue, Integer maxValue,
+                                           Long nowTime, Integer time, Integer oldOrNew,
+                                           Integer st,Integer ed,Integer order,String city) {
+        return getSqlSession().getMapper(CommodityMapper.class).screenCommodity(name, typeId,
+                                                                            minValue, maxValue,
+                                                                            nowTime, time,
+                                                                            oldOrNew, st, ed, order,city);
+    }
+
+    @Override
+    public List<Commodity> myCommodity(int userId, int st, int ed) {
+        return getSqlSession().getMapper(CommodityMapper.class).myCommodity(userId,st,ed);
+    }
+
+    @Override
+    public List<Commodity> myStore(int userId, int st, int ed) {
+        return getSqlSession().getMapper(CommodityMapper.class).myStore(userId,st,ed);
     }
 }

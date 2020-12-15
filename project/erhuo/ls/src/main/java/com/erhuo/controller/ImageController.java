@@ -13,7 +13,6 @@ public class ImageController {
     @RequestMapping("/token")
     @ResponseBody
     public String getToken(){
-        System.out.println(QiniuUpload.getUpToken());
         return QiniuUpload.getUpToken();
     }
 }

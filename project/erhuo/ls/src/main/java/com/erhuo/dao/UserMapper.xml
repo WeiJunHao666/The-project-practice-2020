@@ -5,7 +5,7 @@
 
     <!-- 登录-->
     <select id="login" resultMap="user">
-        select user_id,username,phoneNum,email,password,nickname,img,address from user WHERE username=#{username} and password=#{password}
+        select user_id,username,phoneNum,email,password,nickname,img,address,sex from user WHERE username=#{username} and password=#{password}
     </select>
     <!-- 将时间修改为最新登录时间-->
     <update id="updateDate">
@@ -13,7 +13,7 @@
     </update>
     <!-- 注册-->
     <insert id="logon">
-        insert into user (username,password) values (#{username},#{password})
+        insert into user (username,password,address,sex) values (#{username},#{password},'河北师范大学',1)
     </insert>
     <!-- 检测用户名是否存在-->
     <select id="checkUserByUsername" resultType="int">
@@ -22,12 +22,13 @@
     <!-- 更新用户信息-->
     <update id="updateUser" parameterType="user">
         update user
-        <set>
+        <trim prefix="SET" suffixOverrides=",">
             <if test="img!=null">img=#{img},</if>
             <if test="email!=null">email=#{email},</if>
-            <if test="nickname != null">nickname = #{nickname},</if>
-            <if test="phoneNum != null">phoneNum = #{phoneNum}</if>
-        </set>
+            <if test="nickname != null">nickname=#{nickname},</if>
+            <if test="phoneNum != null">phoneNum=#{phoneNum},</if>
+            <if test="address!=null">address=#{address}</if>
+        </trim>
         where user_id=#{userId}
     </update>
 
@@ -38,6 +39,24 @@
     <update id="updatePassword">
         update user set password = #{newPassword} where username=#{username} and password=#{oldPassword}
     </update>
+
+    <select id="map" resultType="school">
+        select * from address
+        where school like #{school}
+        order by school
+    </select>
+
+    <select id="city" resultType="school">
+        SELECT DISTINCT city FROM address ORDER BY city
+    </select>
+
+    <select id="findNicknameByUsername" resultType="String">
+        select nickname from user where username=#{username}
+    </select>
+
+    <select id="seller" resultMap="user">
+        select username,nickname,user.describe,sex,address,img from user where user_id=#{userId}
+    </select>
 
     <resultMap id="user" type="user">
         <result column="user_id" property="userId"/>

@@ -1,9 +1,11 @@
 package com.erhuo.dao;
 
+import com.erhuo.pojo.School;
 import com.erhuo.pojo.User;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import java.util.Date;
+import java.util.List;
 
 public class UserMapperImpl extends SqlSessionDaoSupport implements UserMapper {
 
@@ -42,7 +44,6 @@ public class UserMapperImpl extends SqlSessionDaoSupport implements UserMapper {
     @Override
     public void updateUser(User user) {
         UserMapper userMapper = getSqlSession().getMapper(UserMapper.class);
-        System.out.println(user);
         userMapper.updateUser(user);
     }
 
@@ -58,4 +59,23 @@ public class UserMapperImpl extends SqlSessionDaoSupport implements UserMapper {
         getSqlSession().getMapper(UserMapper.class).updatePassword(username,oldPassword,newPassword);
     }
 
+    @Override
+    public List<School> map(String school) {
+        return getSqlSession().getMapper(UserMapper.class).map(school);
+    }
+
+    @Override
+    public List<School> city() {
+        return getSqlSession().getMapper(UserMapper.class).city();
+    }
+
+    @Override
+    public String findNicknameByUsername(String username) {
+        return getSqlSession().getMapper(UserMapper.class).findNicknameByUsername(username);
+    }
+
+    @Override
+    public User seller(int userId) {
+        return getSqlSession().getMapper(UserMapper.class).seller(userId);
+    }
 }

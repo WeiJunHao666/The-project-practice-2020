@@ -4,30 +4,55 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.erhuo.dao.CommodityMapper">
 
-    <select id="findAll" resultMap="commodity" parameterType="int" flushCache="true">
-        select commodity.*,nickname,img from commodity inner join user on commodity.user_id=user.user_id order by id DESC limit #{st},#{ed}
+    <select id="findAll" resultMap="commodity" flushCache="true">
+        select commodity.*,nickname,img,address,time
+        from commodity inner join user
+        on commodity.user_id=user.user_id
+<!--        where #{city}=(select city from address where school=user.address)-->
+        order by id DESC limit #{st},#{ed}
     </select>
 
-    <select id="findCommodityById" resultMap="commodity" parameterType="int"  flushCache="true">
-        select commodity.*,nickname,img,sex from commodity inner join user on commodity.user_id=user.user_id where id=#{id} order by id DESC
+    <select id="findCommodityById" resultMap="commodity"   flushCache="true">
+        select commodity.*,username,nickname,img,sex,address,time
+        from commodity inner join user
+        on commodity.user_id=user.user_id
+        where id=#{id}
+        order by id DESC
     </select>
 
-    <select id="findCommodityByName" resultMap="commodity" parameterType="String" flushCache="true">
-        select * from commodity where commodity_describe like #{name} order by id DESC
+    <select id="findCommodityByName" resultMap="commodity" flushCache="true">
+        select commodity.*,nickname,img,address
+        from commodity inner join user
+        on commodity.user_id=user.user_id
+        where commodity_describe like #{name}
+        and (select city from address where school=user.address)=#{city}
+        order by id DESC
     </select>
 
     <insert id="addCommodity" parameterType="commodity" useGeneratedKeys="true" keyProperty="id">
         insert into commodity
-        (user_id,commodity_valeu,commodity_discount,commodity_describe,type_id,time,oldStandard)
+        (user_id,commodity_value,commodity_discount,commodity_describe,type_id,time,oldStandard)
         values (#{userId},#{value},#{discount},#{describe},#{typeId},#{time},#{oldStandard})
     </insert>
 
-    <select id="searchCommodityByType" resultMap="commodity" parameterType="int" flushCache="true">
-        select commodity.*,nickname,img from commodity inner join user on commodity.user_id=user.user_id where type_id=#{typeId} order by id DESC limit #{st},#{ed}
+    <select id="searchCommodityByType" resultMap="commodity"  flushCache="true">
+        select commodity.*,nickname,img,address
+        from commodity inner join user
+        on commodity.user_id=user.user_id
+        where type_id=#{typeId}
+        and (select city from address where school=user.address)=#{city}
+        order by id DESC
+        limit #{st},#{ed}
     </select>
 
-    <select id="searchSimilarCommodityByType" resultMap="commodity" parameterType="int" flushCache="true">
-        select commodity.*,nickname,img from commodity inner join user on commodity.user_id=user.user_id where type_id=#{typeId} and id!=#{commodityId} order by id DESC limit #{st},#{ed}
+    <select id="searchSimilarCommodityByType" resultMap="commodity" flushCache="true">
+        select commodity.*,nickname,img,address
+        from commodity inner join user
+        on commodity.user_id=user.user_id
+        where type_id=#{typeId} and id!=#{commodityId}
+        and (select city from address where school=user.address)=#{city}
+        order by id DESC
+        limit #{st},#{ed}
     </select>
 
     <select id="searchNumberSome" resultType="int">
@@ -35,7 +60,11 @@
     </select>
 
     <delete id="deleteCommodityById" >
-        delete from commodity where id = #{id} and user_id = (select user_id from user where username=#{username} and password=#{password})
+        delete from commodity
+        where id = #{id} and
+        user_id = (select user_id from user where username=#{username}
+        and password=#{password});
+        delete from commodity_img
     </delete>
 
     <insert id="store">
@@ -50,16 +79,75 @@
         delete from store where commodity_id=#{commodityId} and user_id_of_buyer=#{buyerId}
     </delete>
 
+    <select id="screenCommodity" resultMap="commodity">
+        select commodity.*,nickname,img,address from commodity inner join user on commodity.user_id=user.user_id
+        <trim prefix="WHERE" prefixOverrides="AND |OR">
+            <if test="name!=null">
+                AND commodity_describe like #{name}
+            </if>
+            <if test="typeId!=null">
+                AND type_id=#{typeId}
+            </if>
+            <if test="minValue!=null">
+                AND commodity_value &gt;= #{minValue}
+            </if>
+            <if test="maxValue!=null">
+                AND commodity_value &lt;= #{maxValue}
+            </if>
+            <if test="time!=null">
+                AND #{nowTime}-time &lt;= #{time}
+            </if>
+            <if test="oldOrNew!=null">
+                AND oldStandard=#{oldOrNew}
+            </if>
+            <if test="city!=null">
+                AND (select city from address where school=user.address)=#{city}
+            </if>
+        </trim>
+        <if test="order==0">
+            order by (SELECT COUNT(*) FROM store WHERE commodity_id=commodity.id)
+        </if>
+        <if test="order==1">
+            order by id DESC
+        </if>
+        <if test="order==2">
+            order by id ASC
+        </if>
+        <if test="order==3">
+            order by commodity_value DESC
+        </if>
+        <if test="order==4">
+            order by commodity_value ASC
+        </if>
+        limit #{st},#{ed}
+    </select>
+
+    <select id="myCommodity" resultMap="commodity">
+        select * from commodity where user_id=#{userId}
+        order by id DESC
+        limit #{st},#{ed}
+    </select>
+
+    <select id="myStore" resultMap="commodity">
+        select commodity.*,nickname,img from commodity inner join user on commodity.user_id=user.user_id
+        inner join store on store.commodity_id=commodity.id
+        where store.user_id_of_buyer=#{userId}
+        order by id DESC
+        limit #{st},#{ed}
+    </select>
+
     <resultMap id="commodity" type="commodity">
         <result property="userId" column="user_id"/>
         <result property="value" column="commodity_value"/>
         <result property="discount" column="commodity_discount"/>
         <result property="describe" column="commodity_describe"/>
         <result property="typeId" column="type_id"/>
+        <result property="user.username" column="username"/>
         <result property="user.nickname" column="nickname"/>
         <result property="user.img" column="img"/>
         <result property="user.userId" column="user_id"/>
         <result property="user.sex" column="sex"/>
+        <result property="user.address" column="address"/>
     </resultMap>
 
 

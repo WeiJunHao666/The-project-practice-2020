@@ -6,6 +6,7 @@ import com.erhuo.dao.CommodityMapper;
 import com.erhuo.dao.UserMapper;
 import com.erhuo.pojo.Commodity;
 import com.erhuo.pojo.CommodityImg;
+import com.erhuo.pojo.Enum;
 import com.erhuo.pojo.User;
 import com.erhuo.util.JedisUtil;
 import com.erhuo.util.VariableName;
@@ -28,11 +29,11 @@ public class CommodityService {
     @Autowired
     private UserMapper userMapper;
     // 主页商品数据 分页显示
-    public String findAll(int page){
+    public String findAll(int page,String city){
         int st,ed;
         st = page * 20;
         ed = (page + 1) * 20;
-        List<Commodity> all = commodityMapper.findAll(st, ed);
+        List<Commodity> all = commodityMapper.findAll(st, ed, city);
         for (Commodity commodity : all) {
             //获取商品图片
             List<CommodityImg> img = commodityImgMapper.findImgById(commodity.getId());
@@ -46,9 +47,9 @@ public class CommodityService {
         return JSON.toJSONString(all);
     }
     //根据id查询商品 用于商品详情页 同时搜出相似商品
-    public List<Commodity> findCommodityById(int id) {
+    public List<Commodity> findCommodityById(int id,String city) {
         Commodity commodity = commodityMapper.findCommodityById(id);
-        List<Commodity> list = commodityMapper.searchSimilarCommodityByType(commodity.getTypeId(),0,6,commodity.getId());
+        List<Commodity> list = commodityMapper.searchSimilarCommodityByType(commodity.getTypeId(),0,6,commodity.getId(),city);
         list.add(0,commodity);
         for (Commodity commodity1 : list) {
             int commodityId = commodity1.getId();
@@ -63,8 +64,8 @@ public class CommodityService {
         return list;
     }
     // 查询商品
-    public List<Commodity> findCommodityByName(String name) {
-        List<Commodity> list = commodityMapper.findCommodityByName(name);
+    public List<Commodity> findCommodityByName(String name,String city) {
+        List<Commodity> list = commodityMapper.findCommodityByName(name,city);
         for (Commodity commodity : list) {
             int id = commodity.getId();
             List<CommodityImg> img = commodityImgMapper.findImgById(id);
@@ -81,14 +82,15 @@ public class CommodityService {
         commodity.setTime(new Date().getTime());
         commodityMapper.addCommodity(commodity);
         int id = commodity.getId();
+        // 添加图片
         for (CommodityImg commodityImg : commodity.getImg()) {
             commodityImg.setCommodityId(id);
             commodityImgMapper.addImg(commodityImg);
         }
     }
     // 按类型查询商品
-    public List<Commodity> searchCommodityByType(int typeId,int page) {
-        List<Commodity> list = commodityMapper.searchCommodityByType(typeId,page*20,(page+1)*20);
+    public List<Commodity> searchCommodityByType(int typeId,int page,String city) {
+        List<Commodity> list = commodityMapper.searchCommodityByType(typeId,page*20,(page+1)*20,city);
         System.out.println(list);
         for (Commodity commodity : list) {
             int id = commodity.getId();
@@ -109,6 +111,7 @@ public class CommodityService {
     // 删除商品
     public void deleteCommodityById(int id,String username,String password) {
         commodityMapper.deleteCommodityById(id,username,password);
+        // TODO: 该商品图片的删除
     }
 
     public void store(int buyerId,int sellerId,int commodityId) {
@@ -121,5 +124,55 @@ public class CommodityService {
 
     public void deleteStore(int buyerId,int commodityId) {
         commodityMapper.deleteStore(buyerId,commodityId);
+    }
+
+    public String screenCommodity(Enum screenEnum) {
+        String name = screenEnum.getName()==null?null:"%"+screenEnum.getName()+"%";
+        Integer typeId = screenEnum.getTypeId();
+        Integer minValue = screenEnum.getValue()==null?null:screenEnum.getValue()==0?0:screenEnum.getValue()==1?300:1000;
+        Integer maxValue = screenEnum.getValue()==null?null:screenEnum.getValue()==0?300:screenEnum.getValue()==1?1000:1000000000;
+        Integer st = screenEnum.getPage()*20;
+        Integer ed = (screenEnum.getPage()+1)*20;
+        Long nowTime = new Date().getTime();
+        String city = screenEnum.getCity();
+        Integer time = screenEnum.getTime()==null?null:screenEnum.getTime()==0?1000*60*60*24:screenEnum.getTime()==1?1000*60*60*24*7:1000*60*60*24*30;
+        List<Commodity> list = commodityMapper.screenCommodity(name,typeId,
+                                                            minValue,maxValue,nowTime,time,screenEnum.getOldOrNew(),
+                                                            st,ed,screenEnum.getOrder(),city);
+        for (Commodity commodity : list) {
+            commodity.setImg(commodityImgMapper.findImgById(commodity.getId()));
+            for (CommodityImg commodityImg : commodity.getImg()) {
+                commodityImg.setImg(VariableName.domain+"/"+commodityImg.getImg());
+            }
+            commodity.getUser().setImg(VariableName.domain+"/"+commodity.getUser().getImg());
+        }
+        return JSON.toJSONString(list);
+    }
+
+    public String myCommodity(int userId,int page) {
+        int st = page*20;
+        int ed =(page+1)*20;
+        List<Commodity> list = commodityMapper.myCommodity(userId,st,ed);
+        for (Commodity commodity : list) {
+            commodity.setImg(commodityImgMapper.findImgById(commodity.getId()));
+            for (CommodityImg commodityImg : commodity.getImg()) {
+                commodityImg.setImg(VariableName.domain + "/" + commodityImg.getImg());
+            }
+        }
+        return JSON.toJSONString(list);
+    }
+
+    public String myStore(int userId,int page) {
+        int st = page*20;
+        int ed = (page+1)*20;
+        List<Commodity> list = commodityMapper.myStore(userId,st,ed);
+        for (Commodity commodity : list) {
+            commodity.setImg(commodityImgMapper.findImgById(commodity.getId()));
+            for (CommodityImg commodityImg : commodity.getImg()) {
+                commodityImg.setImg(VariableName.domain + "/" + commodityImg.getImg());
+            }
+            commodity.getUser().setImg(VariableName.domain + "/" +commodity.getUser().getImg());
+        }
+        return JSON.toJSONString(list);
     }
 }
