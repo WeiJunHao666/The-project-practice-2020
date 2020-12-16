@@ -24,8 +24,6 @@ public class PostController {
     @RequestMapping("/addPost")
     public String addPost(@RequestBody String postJSON){
         ServiceToSer serviceToSer = JSON.parseObject(postJSON,ServiceToSer.class);
-        System.out.println(postJSON);
-        System.out.println(serviceToSer.toString());
         Post post = new Post();
         post.setUserId(serviceToSer.getUserId());
         post.setImgs(serviceToSer.getImgs());
@@ -40,7 +38,6 @@ public class PostController {
     public String getAll(@PathVariable int pageIndex,@PathVariable int userId){
         List<Post> postList = postService.getAll(pageIndex,userId);
         String str = JSON.toJSONString(postList);
-        System.out.println(str);
         return str;
     }
 
@@ -52,6 +49,12 @@ public class PostController {
     @RequestMapping("/unlike/{postId}/{userId}")
     public void unLike(@PathVariable int postId,@PathVariable int userId){
         postService.unLike(postId, userId);
+    }
+
+    @RequestMapping("/{pageIndex}/{userId}")
+    public String getPostByUser(@PathVariable int pageIndex,@PathVariable int userId){
+        List<Post> postList = postService.getPostByUser(pageIndex,userId);
+        return JSON.toJSONString(postList);
     }
 
 }

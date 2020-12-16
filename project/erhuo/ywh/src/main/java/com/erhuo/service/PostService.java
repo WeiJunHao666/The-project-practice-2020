@@ -8,6 +8,7 @@ import com.erhuo.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,6 @@ public class PostService {
 
     public int addPost(Post post){
         int postId = postMapper.addPost(post);
-        System.out.println(postId);
         List<PostImg> postImgList = new ArrayList<>();
         for (String img : post.getImgs()) {
             PostImg postImg = new PostImg();
@@ -62,4 +62,12 @@ public class PostService {
         postMapper.delUserLike(postId,userId);
     }
 
+    public List<Post> getPostByUser(int pageIndex, int userId) {
+        List<Post> postList = postMapper.getPostByUser((pageIndex - 1 ) * 20,userId);
+        for (Post post : postList) {
+            List<String> imgList = postMapper.getPostImage(post.getPostId());
+            post.setImgs(imgList);
+        }
+        return postList;
+    }
 }

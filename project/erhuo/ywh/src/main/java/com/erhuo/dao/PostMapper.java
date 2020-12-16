@@ -13,7 +13,7 @@ public interface PostMapper {
 
     public int addPostImg(@Param("postImgList") List<PostImg> postImgList);
 
-    @Select("select * from post limit #{startIndex},5")
+    @Select("select * from post order by post_id desc limit #{startIndex},5")
     public List<Post> queryAll(int startIndex);
 
     @Select("select post_id from user_like_post where user_id = #{userId}")
@@ -36,4 +36,7 @@ public interface PostMapper {
 
     @Update("update post set view_num = view_num + 1 where post_id = #{postId}")
     int addView(int postId);
+
+    @Select("select * from post where user_id = #{userId} order by post_id desc limit #{startIndex},20")
+    List<Post> getPostByUser(@Param("startIndex") int startIndex,@Param("userId") int userId);
 }

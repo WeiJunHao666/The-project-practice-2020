@@ -29,7 +29,6 @@ public class CommentService {
         List<Comment> firstComment = commentMapper.queryLastIdNull(postId);
         List<Comment> thencomment = commentMapper.queryLastIdNotNull(postId);
         List<Integer> likeList = commentMapper.queryLikeCom(userId);
-        System.out.println(likeList);
         List<Comment> comments = CommentUtil.addAllNode(firstComment, thencomment);
         List<CommentLite> comList = new ArrayList<CommentLite>();
         CommentUtil.getLite(comments,comList,likeList);
@@ -59,20 +58,19 @@ public class CommentService {
     }
 
     public void unLike(int userId,int comId){
-        System.out.println(commentMapper.delLike(comId));
-        System.out.println(commentMapper.delUserLike(userId,comId));
+        commentMapper.delLike(comId);
+        commentMapper.delUserLike(userId,comId);
     }
 
     public String addCom(Comment comment1) {
         int result = commentMapper.addCom(comment1);
         int comId = comment1.getComId();
-        System.out.println("comId:" + comId);
         String data = comId + "&" + result;
         return data;
     }
 
-    public String reply(Comment comment) {
+    public int reply(Comment comment) {
         int result = commentMapper.reply(comment);
-        return null;
+        return comment.getComId();
     }
 }

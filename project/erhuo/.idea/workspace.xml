@@ -7,26 +7,20 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="faee4034-7e33-4a03-98ec-633278c6d8ad" name="Default Changelist" comment="&quot;ywh&quot;">
+    <list default="true" id="faee4034-7e33-4a03-98ec-633278c6d8ad" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ywh/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/controller/CommentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/controller/PostController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/CommentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/CommentMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/PostMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/PostMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/PostMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/PostMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/UserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/UserMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/UserMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/pojo/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/pojo/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/pojo/CommentLite.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/pojo/CommentLite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/pojo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/pojo/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/service/CommentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/service/PostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/util/CommentUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/util/CommentUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/websocket/WebSocketService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/util/QiniuUpload.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/util/VariableName.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ywh/src/main/resources/mybatis-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/resources/mybatis-config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/webapp/chat2.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ywh/src/main/resources/spring-mvc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/resources/spring-mvc.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,24 +43,6 @@
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
         <item name="@59.110.115.182" type="feb32156:DbDataSourceImpl" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="@59.110.115.182" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="@59.110.115.182" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="erhuo: schema" type="76f4a085:MysqlImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="@59.110.115.182" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="erhuo: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="user: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
     </expand>
     <select />

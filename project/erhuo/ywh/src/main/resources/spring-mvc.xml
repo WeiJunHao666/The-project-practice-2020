@@ -12,7 +12,6 @@
 
     <!--注解驱动-->
     <mvc:annotation-driven/>
-
     <context:component-scan base-package="com.erhuo.controller"/>
 
         <!--视图解析器-->

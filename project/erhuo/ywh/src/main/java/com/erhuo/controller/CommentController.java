@@ -42,32 +42,28 @@ public class CommentController {
 
     @RequestMapping("/like/{userId}/{comId}")
     public void Like(@PathVariable int userId, @PathVariable int comId){
-        System.out.println(userId + " " + comId);
         commentService.like(userId, comId);
     }
 
     @RequestMapping("/unlike/{userId}/{comId}")
     public void unLike(@PathVariable int userId,@PathVariable int comId){
-        System.out.println(userId + " " + comId);
         commentService.unLike(userId, comId);
     }
 
     @RequestMapping(value = "/addCom",method = RequestMethod.POST)
     public String addCom(@RequestBody String comment) throws IOException, JSONException {
-        System.out.println(comment);
         CommentInfoToSer commentInfoToSer = JSON.parseObject(comment,CommentInfoToSer.class);
+        System.out.println(comment);
         Comment comment1 = new Comment();
         comment1.setPostId(commentInfoToSer.getPostId());
         comment1.setUserId(commentInfoToSer.getUserId());
         comment1.setMessage(commentInfoToSer.getContent());
         String result = commentService.addCom(comment1);
-        System.out.println(result);
         return result;
     }
 
     @RequestMapping(value = "/reply",method = RequestMethod.POST)
     public String reply(@RequestBody String reply){
-        System.out.println(reply);
         CommentInfoToSer commentInfoToSer = JSON.parseObject(reply,CommentInfoToSer.class);
         Comment comment = new Comment();
         comment.setPostId(commentInfoToSer.getPostId());
@@ -75,9 +71,9 @@ public class CommentController {
         comment.setMessage(commentInfoToSer.getContent());
         comment.setLastId(commentInfoToSer.getLastComId());
         comment.setLastUserId(commentInfoToSer.getLastUserId());
-        String result = commentService.reply(comment);
-        System.out.println(result);
-        return result;
+        int comId = commentService.reply(comment);
+        System.out.println(comId);
+        return comId + "";
     }
 
 
