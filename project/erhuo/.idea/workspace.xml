@@ -9,18 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="faee4034-7e33-4a03-98ec-633278c6d8ad" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/controller/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/controller/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/CommentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/CommentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/PostMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/PostMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/PostMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/dao/PostMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/service/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/service/CommentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/service/PostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/util/QiniuUpload.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/java/com/erhuo/util/VariableName.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/resources/mybatis-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/resources/mybatis-config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ywh/src/main/resources/spring-mvc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ywh/src/main/resources/spring-mvc.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
